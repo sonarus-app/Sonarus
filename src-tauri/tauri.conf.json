@@ -47,11 +47,7 @@
       "deb": {
         "depends": ["libgtk-layer-shell0"]
       },
-      "rpm": {
-        "compression": {
-          "type": "none"
-        }
-      },
+      "rpm": {},
       "appimage": {
         "bundleMediaFramework": true,
         "files": {}

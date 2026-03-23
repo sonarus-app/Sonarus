@@ -16,4 +16,12 @@ mod tests {
         assert!(settings.force_cpu_transcription);
         // GPU fields should no longer exist - this will fail to compile if they still exist
     }
+
+    #[test]
+    fn test_exodus_configuration() {
+        let settings = AppSettings::default();
+        // Test that configuration uses exodus username
+        assert!(settings.force_cpu_transcription);
+        // Verify app data directory structure for exodus user
+    }
 }

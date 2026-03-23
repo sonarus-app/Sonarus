@@ -1,8 +1,9 @@
 use crate::audio_toolkit::{apply_custom_words, filter_transcription_output};
 use crate::managers::audio::AudioRecordingManager;
 use crate::managers::model::{EngineType, ModelManager};
+use crate::managers::streaming::StreamingState;
 use crate::settings::{
-    get_settings, ModelUnloadTimeout, OrtAcceleratorSetting, WhisperAcceleratorSetting,
+    get_settings, ModelUnloadTimeout,
 };
 use anyhow::Result;
 use log::{debug, error, info, warn};
@@ -71,6 +72,7 @@ pub struct TranscriptionManager {
     watcher_handle: Arc<Mutex<Option<thread::JoinHandle<()>>>>,
     is_loading: Arc<Mutex<bool>>,
     loading_condvar: Arc<Condvar>,
+    streaming_state: Arc<StreamingState>,
 }
 
 impl TranscriptionManager {
@@ -85,6 +87,7 @@ impl TranscriptionManager {
             watcher_handle: Arc::new(Mutex::new(None)),
             is_loading: Arc::new(Mutex::new(false)),
             loading_condvar: Arc::new(Condvar::new()),
+            streaming_state: Arc::new(StreamingState::new()),
         };
 
         // Start the idle watcher
@@ -704,6 +707,37 @@ impl TranscriptionManager {
         self.maybe_unload_immediately("transcription");
 
         Ok(final_result)
+    }
+
+    pub fn start_streaming(&self) -> Result<()> {
+        self.streaming_state.start_streaming();
+        info!("Started real-time transcription streaming");
+        Ok(())
+    }
+
+    pub fn stop_streaming(&self) -> Result<()> {
+        self.streaming_state.stop_streaming();
+        info!("Stopped real-time transcription streaming");
+        Ok(())
+    }
+
+    pub fn transcribe_chunk(&self, audio_chunk: Vec<f32>) -> Result<String> {
+        // Add chunk to buffer
+        self.streaming_state.add_audio_chunk(audio_chunk)?;
+        
+        // Get current buffer for transcription
+        let buffer = self.streaming_state.get_buffer();
+        
+        if buffer.is_empty() {
+            return Ok(String::new());
+        }
+
+        // Use existing transcribe method on buffer
+        self.transcribe(buffer)
+    }
+
+    pub fn is_streaming(&self) -> bool {
+        self.streaming_state.is_streaming()
     }
 }
 

@@ -1,6 +1,5 @@
 // src/contexts/ThemeProvider.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { commands } from '@/bindings';
 
 type ThemeMode = 'system' | 'light' | 'dark';
 
@@ -24,24 +23,22 @@ interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
+const THEME_STORAGE_KEY = 'sonarus-theme-mode';
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<ThemeMode>('system');
   const [effectiveTheme, setEffectiveTheme] = useState<'light' | 'dark'>('light');
 
-  // Load theme from store on mount
+  // Load theme from localStorage on mount
   useEffect(() => {
-    const loadTheme = async () => {
-      try {
-        const result = await commands.getSetting('theme_mode');
-        if (result.status === 'ok' && result.data) {
-          setThemeState(result.data as ThemeMode);
-        }
-      } catch (error) {
-        console.warn('Failed to load theme setting:', error);
+    try {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode;
+      if (savedTheme && ['system', 'light', 'dark'].includes(savedTheme)) {
+        setThemeState(savedTheme);
       }
-    };
-
-    loadTheme();
+    } catch (error) {
+      console.warn('Failed to load theme from localStorage:', error);
+    }
   }, []);
 
   // Update effective theme when theme or system preference changes
@@ -74,12 +71,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, [effectiveTheme]);
 
-  const setTheme = async (newTheme: ThemeMode) => {
+  const setTheme = (newTheme: ThemeMode) => {
     setThemeState(newTheme);
     try {
-      await commands.setSetting('theme_mode', newTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
     } catch (error) {
-      console.warn('Failed to save theme setting:', error);
+      console.warn('Failed to save theme to localStorage:', error);
     }
   };
 

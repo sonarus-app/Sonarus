@@ -153,6 +153,13 @@
     },
     "general": {
       "title": "General",
+      "theme": {
+        "title": "Theme",
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark",
+        "description": "Choose your preferred theme"
+      },
       "shortcut": {
         "title": "Handy Shortcuts",
         "description": "Configure keyboard shortcuts to trigger speech-to-text recording",

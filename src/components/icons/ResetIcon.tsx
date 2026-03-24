@@ -10,8 +10,8 @@ interface ResetIconProps {
 }
 
 const ResetIcon: React.FC<ResetIconProps> = ({
-  width = 20,
-  height = 20,
+  width = 16,
+  height = 16,
   className = "",
   animateOnHover = true,
 }) => {

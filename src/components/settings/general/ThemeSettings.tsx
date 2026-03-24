@@ -6,7 +6,7 @@ import ThemeToggle from "../ThemeToggle";
 export const ThemeSettings: React.FC = () => {
   return (
     <SettingsGroup title="Appearance">
-      <ThemeToggle />
+      <ThemeToggle grouped={true} descriptionMode="tooltip" />
     </SettingsGroup>
   );
 };

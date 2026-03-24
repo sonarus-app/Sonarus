@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ResetIcon from "../icons/ResetIcon";
 
 interface ResetButtonProps {
@@ -10,19 +10,40 @@ interface ResetButtonProps {
 }
 
 export const ResetButton: React.FC<ResetButtonProps> = React.memo(
-  ({ onClick, disabled = false, className = "", ariaLabel, children }) => (
-    <button
-      type="button"
-      aria-label={ariaLabel}
-      className={`p-1 rounded-md border border-transparent transition-all duration-150 ${
-        disabled
-          ? "opacity-50 cursor-not-allowed text-text/40"
-          : "hover:bg-logo-primary/30 active:bg-logo-primary/50 active:translate-y-[1px] hover:cursor-pointer hover:border-logo-primary text-text/80"
-      } ${className}`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children ?? <ResetIcon />}
-    </button>
-  ),
+  ({ onClick, disabled = false, className = "", ariaLabel, children }) => {
+    const [isAnimating, setIsAnimating] = useState(false);
+
+    const handleClick = async () => {
+      if (disabled) return;
+      
+      // Start animation
+      setIsAnimating(true);
+      
+      // Call the original onClick
+      await onClick();
+      
+      // Stop animation after a short delay
+      setTimeout(() => setIsAnimating(false), 500);
+    };
+
+    return (
+      <button
+        type="button"
+        aria-label={ariaLabel}
+        className={`p-1 rounded-md border border-transparent transition-all duration-150 ${
+          disabled
+            ? "opacity-50 cursor-not-allowed text-text-secondary"
+            : "hover:bg-logo-primary/30 active:bg-logo-primary/50 active:translate-y-px hover:cursor-pointer hover:border-logo-primary text-text-primary"
+        } ${className}`}
+        onClick={handleClick}
+        disabled={disabled}
+      >
+        {children ?? (
+          <div className={isAnimating ? "animate-spin" : ""}>
+            <ResetIcon />
+          </div>
+        )}
+      </button>
+    );
+  },
 );

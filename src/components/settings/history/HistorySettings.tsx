@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { readFile } from "@tauri-apps/plugin-fs";
-import { Check, Copy, FolderOpen, Star, Trash2 } from "lucide-react";
+import { Check, Copy, FolderOpen, RotateCcw, Star, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import {
@@ -14,7 +14,6 @@ import { useOsType } from "@/hooks/useOsType";
 import { formatDateTime } from "@/utils/dateFormat";
 import { AudioPlayer } from "../../ui/AudioPlayer";
 import { Button } from "../../ui/Button";
-import AnimatedRefreshButton from "../../icons/AnimatedRefreshButton";
 
 const IconButton: React.FC<{
   onClick: () => void;
@@ -386,15 +385,17 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
               fill={entry.saved ? "currentColor" : "none"}
             />
           </IconButton>
-          <AnimatedRefreshButton
-            direction="ccw"
+          <IconButton
             onClick={handleRetranscribe}
             disabled={retrying}
-            ariaLabel={t("settings.history.retranscribe")}
-            size={16}
-            isAnimating={retrying}
-            className="p-1.5"
-          />
+            title={t("settings.history.retranscribe")}
+          >
+            <RotateCcw
+              width={16}
+              height={16}
+              className={`hover:animate-spin transition-all duration-200 ${retrying ? "animate-spin" : ""}`}
+            />
+          </IconButton>
           <IconButton
             onClick={handleDeleteEntry}
             disabled={retrying}

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { RotateCw } from "lucide-react";
 
 export interface DropdownOption {
   value: string;
@@ -28,6 +29,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,6 +54,17 @@ export const Dropdown: React.FC<DropdownProps> = ({
     setIsOpen(false);
   };
 
+  const handleRefresh = async () => {
+    if (!onRefresh || disabled) return;
+    
+    setIsRefreshing(true);
+    try {
+      await onRefresh();
+    } finally {
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
+  };
+
   const handleToggle = () => {
     if (disabled) return;
     if (!isOpen && onRefresh) onRefresh();
@@ -60,31 +73,54 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      <button
-        type="button"
-        className={`px-2 py-1 text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 rounded-md min-w-[200px] text-start flex items-center justify-between transition-all duration-150 ${
-          disabled
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-logo-primary/10 cursor-pointer hover:border-logo-primary"
-        }`}
-        onClick={handleToggle}
-        disabled={disabled}
-      >
-        <span className="truncate">{selectedOption?.label || placeholder}</span>
-        <svg
-          className={`w-4 h-4 ms-2 transition-transform duration-200 ${isOpen ? "transform rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      <div className="flex items-center gap-1">
+        <button
+          type="button"
+          className={`px-2 py-1 text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 rounded-md min-w-[200px] text-start flex items-center justify-between transition-all duration-150 ${
+            disabled
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-logo-primary/10 cursor-pointer hover:border-logo-primary"
+          }`}
+          onClick={handleToggle}
+          disabled={disabled}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
+          <span className="truncate">{selectedOption?.label || placeholder}</span>
+          <svg
+            className={`w-4 h-4 ms-2 transition-transform duration-200 ${isOpen ? "transform rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        {onRefresh && (
+          <button
+            type="button"
+            className={`p-1 rounded-md border border-transparent transition-all duration-150 ${
+              disabled
+                ? "opacity-50 cursor-not-allowed text-text-secondary"
+                : "hover:bg-logo-primary/30 active:bg-logo-primary/50 active:translate-y-px hover:cursor-pointer hover:border-logo-primary text-text-primary"
+            }`}
+            onClick={handleRefresh}
+            disabled={disabled}
+            title="Refresh"
+          >
+            <div className={isRefreshing ? "animate-spin" : ""}>
+              <RotateCw 
+                width={16} 
+                height={16} 
+                className="hover:animate-spin transition-all duration-200" 
+              />
+            </div>
+          </button>
+        )}
+      </div>
       {isOpen && !disabled && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-mid-gray/80 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
           {options.length === 0 ? (

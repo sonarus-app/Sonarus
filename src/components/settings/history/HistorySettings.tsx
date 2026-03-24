@@ -393,7 +393,7 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             <RotateCcw
               width={16}
               height={16}
-              className={`hover:animate-spin transition-all duration-200 ${retrying ? "animate-spin" : ""}`}
+              className={`hover:-rotate-45 transition-transform duration-200 ${retrying ? "animate-spin" : ""}`}
             />
           </IconButton>
           <IconButton

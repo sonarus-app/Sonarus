@@ -19,7 +19,7 @@ const ResetIcon: React.FC<ResetIconProps> = ({
     <RotateCw 
       width={width}
       height={height}
-      className={`${className} ${animateOnHover ? "hover:animate-spin" : ""} transition-all duration-200`}
+      className={`${className} ${animateOnHover ? "hover:rotate-45" : ""} transition-transform duration-200`}
     />
   );
 };

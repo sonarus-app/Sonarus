@@ -1,0 +1,12 @@
+// src/components/settings/general/ThemeSettings.tsx
+import React from 'react';
+import { SettingsGroup } from "../../ui/SettingsGroup";
+import ThemeToggle from "../ThemeToggle";
+
+export const ThemeSettings: React.FC = () => {
+  return (
+    <SettingsGroup title="Appearance">
+      <ThemeToggle />
+    </SettingsGroup>
+  );
+};

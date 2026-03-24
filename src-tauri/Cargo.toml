@@ -1,6 +1,6 @@
 [package]
 name = "sonarus"
-version = "0.0.1"
+version = "1.0.0"
 description = "Sonarus - Real-time Speech-to-Text Application"
 authors = ["cjpais"]
 edition = "2021"

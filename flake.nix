@@ -1,9 +1,9 @@
 {
-  description = "Handy - A free, open source, and extensible speech-to-text application that works completely offline";
+  description = "Sonarus - A free, open source, and extensible speech-to-text application that works completely offline";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    handy.url = "github:exodus712/Sonarus-v2";
+    sonarus.url = "github:exodus712/Sonarus-v2";
 
     # bun2nix: generates per-package Nix fetchurl expressions from bun.lock,
     # replacing the old FOD approach where a single hash covered the entire

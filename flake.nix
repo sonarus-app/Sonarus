@@ -177,6 +177,9 @@
               cmake
               llvmPackages.libclang
               shaderc
+              # Tauri dependencies - use specific versions to match workspace
+              pkgs.nodejs_20
+              pkgs.cargo-tauri.hook
             ];
 
             preBuild = ''

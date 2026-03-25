@@ -211,7 +211,7 @@ export const ModelsSettings: React.FC = () => {
         <h1 className="text-xl font-semibold mb-2">
           {t("settings.models.title")}
         </h1>
-        <p className="text-sm text-text/60">
+        <p className="text-sm text-text-secondary">
           {t("settings.models.description")}
         </p>
       </div>
@@ -220,7 +220,7 @@ export const ModelsSettings: React.FC = () => {
           {/* Downloaded Models Section — header always visible so filter stays accessible */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-medium text-text/60">
+              <h2 className="text-sm font-medium text-text-secondary">
                 {t("settings.models.yourModels")}
               </h2>
               {/* Language filter dropdown */}
@@ -231,7 +231,7 @@ export const ModelsSettings: React.FC = () => {
                   className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                     languageFilter !== "all"
                       ? "bg-logo-primary/20 text-logo-primary"
-                      : "bg-mid-gray/10 text-text/60 hover:bg-mid-gray/20"
+                      : "bg-mid-gray/10 text-text-secondary hover:bg-mid-gray/20"
                   }`}
                 >
                   <Globe className="w-3.5 h-3.5" />
@@ -307,7 +307,7 @@ export const ModelsSettings: React.FC = () => {
                         </button>
                       ))}
                       {filteredLanguages.length === 0 && (
-                        <div className="px-3 py-2 text-sm text-text/50 text-center">
+                        <div className="px-3 py-2 text-sm text-text-secondary text-center">
                           {t("settings.general.language.noResults")}
                         </div>
                       )}
@@ -335,7 +335,7 @@ export const ModelsSettings: React.FC = () => {
           {/* Available Models Section */}
           {availableModels.length > 0 && (
             <div className="space-y-3">
-              <h2 className="text-sm font-medium text-text/60">
+              <h2 className="text-sm font-medium text-text-secondary">
                 {t("settings.models.availableModels")}
               </h2>
               {availableModels.map((model: ModelInfo) => (
@@ -356,7 +356,7 @@ export const ModelsSettings: React.FC = () => {
           )}
         </div>
       ) : (
-        <div className="text-center py-8 text-text/50">
+        <div className="text-center py-8 text-text-secondary">
           {t("settings.models.noModelsMatch")}
         </div>
       )}

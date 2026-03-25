@@ -1,8 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Cog, FlaskConical, History, Info, Sparkles, Cpu } from "lucide-react";
+import { FlaskConical, Sparkles } from "lucide-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
-import HandyHand from "./icons/HandyHand";
+import { CpuIcon } from "./ui/cpu";
+import { HistoryIcon } from "./ui/history";
+import { CogIcon } from "./ui/cog";
+import { CircleHelpIcon } from "./ui/circle-help";
+import { AudioLinesIcon } from "./ui/audio-lines";
 import { useSettings } from "../hooks/useSettings";
 import {
   GeneralSettings,
@@ -24,6 +28,27 @@ interface IconProps {
   [key: string]: any;
 }
 
+// Wrapper components to adapt animated icons to our interface
+const AnimatedAudioLinesIcon: React.FC<IconProps> = ({ size, className, ...props }) => (
+  <AudioLinesIcon size={typeof size === 'string' ? parseInt(size) : size} className={className} {...props} />
+);
+
+const AnimatedCpuIcon: React.FC<IconProps> = ({ size, className, ...props }) => (
+  <CpuIcon size={typeof size === 'string' ? parseInt(size) : size} className={className} {...props} />
+);
+
+const AnimatedCogIcon: React.FC<IconProps> = ({ size, className, ...props }) => (
+  <CogIcon size={typeof size === 'string' ? parseInt(size) : size} className={className} {...props} />
+);
+
+const AnimatedHistoryIcon: React.FC<IconProps> = ({ size, className, ...props }) => (
+  <HistoryIcon size={typeof size === 'string' ? parseInt(size) : size} className={className} {...props} />
+);
+
+const AnimatedCircleHelpIcon: React.FC<IconProps> = ({ size, className, ...props }) => (
+  <CircleHelpIcon size={typeof size === 'string' ? parseInt(size) : size} className={className} {...props} />
+);
+
 interface SectionConfig {
   labelKey: string;
   icon: React.ComponentType<IconProps>;
@@ -34,19 +59,19 @@ interface SectionConfig {
 export const SECTIONS_CONFIG = {
   general: {
     labelKey: "sidebar.general",
-    icon: HandyHand,
+    icon: AnimatedAudioLinesIcon,
     component: GeneralSettings,
     enabled: () => true,
   },
   models: {
     labelKey: "sidebar.models",
-    icon: Cpu,
+    icon: AnimatedCpuIcon,
     component: ModelsSettings,
     enabled: () => true,
   },
   advanced: {
     labelKey: "sidebar.advanced",
-    icon: Cog,
+    icon: AnimatedCogIcon,
     component: AdvancedSettings,
     enabled: () => true,
   },
@@ -58,7 +83,7 @@ export const SECTIONS_CONFIG = {
   },
   history: {
     labelKey: "sidebar.history",
-    icon: History,
+    icon: AnimatedHistoryIcon,
     component: HistorySettings,
     enabled: () => true,
   },
@@ -70,7 +95,7 @@ export const SECTIONS_CONFIG = {
   },
   about: {
     labelKey: "sidebar.about",
-    icon: Info,
+    icon: AnimatedCircleHelpIcon,
     component: AboutSettings,
     enabled: () => true,
   },
@@ -110,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
               onClick={() => onSectionChange(section.id)}
             >
-              <Icon width={24} height={24} className="shrink-0" />
+              <Icon size={24} className="shrink-0" />
               <p
                 className="text-sm font-medium truncate"
                 title={t(section.labelKey)}

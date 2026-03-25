@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Général",
+      "theme": {
+        "title": "Thème",
+        "system": "Système",
+        "light": "Clair",
+        "dark": "Sombre",
+        "description": "Choisissez votre thème préféré"
+      },
       "shortcut": {
         "title": "Raccourcis Handy",
         "description": "Configurer les raccourcis clavier pour déclencher l'enregistrement de la reconnaissance vocale",

@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Ogólne",
+      "theme": {
+        "title": "Motyw",
+        "system": "System",
+        "light": "Jasny",
+        "dark": "Ciemny",
+        "description": "Wybierz preferowany motyw"
+      },
       "shortcut": {
         "title": "Skróty Handy",
         "description": "Skonfiguruj skróty klawiaturowe do uruchamiania nagrywania mowy",

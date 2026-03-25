@@ -149,6 +149,13 @@
   "settings": {
     "general": {
       "title": "عام",
+      "theme": {
+        "title": "السمة",
+        "system": "النظام",
+        "light": "فاتح",
+        "dark": "داكن",
+        "description": "اختر السمة المفضلة لديك"
+      },
       "shortcut": {
         "title": "اختصارات Handy",
         "description": "إعداد اختصارات لوحة المفاتيح لبدء تسجيل التفريغ الصوتي",

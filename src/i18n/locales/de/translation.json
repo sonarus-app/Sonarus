@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Allgemein",
+      "theme": {
+        "title": "Design",
+        "system": "System",
+        "light": "Hell",
+        "dark": "Dunkel",
+        "description": "Wählen Sie Ihr bevorzugtes Design"
+      },
       "shortcut": {
         "title": "Handy-Tastenkürzel",
         "description": "Tastenkürzel für die Sprachaufnahme konfigurieren",

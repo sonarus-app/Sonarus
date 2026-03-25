@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Genel",
+      "theme": {
+        "title": "Tema",
+        "system": "Sistem",
+        "light": "Açık",
+        "dark": "Koyu",
+        "description": "Tercih ettiğiniz temayı seçin"
+      },
       "shortcut": {
         "title": "Handy Kısayolları",
         "description": "Sesle yazma kaydını başlatmak için klavye kısayollarını yapılandırın",

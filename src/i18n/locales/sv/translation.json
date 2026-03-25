@@ -153,6 +153,13 @@
     },
     "general": {
       "title": "Allmänt",
+      "theme": {
+        "title": "Tema",
+        "system": "System",
+        "light": "Ljust",
+        "dark": "Mörk",
+        "description": "Välj ditt föredragna tema"
+      },
       "shortcut": {
         "title": "Handy-kortkommandon",
         "description": "Konfigurera kortkommandon för att starta tal-till-text-inspelning",

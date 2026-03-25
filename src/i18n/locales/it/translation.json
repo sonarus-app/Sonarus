@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Generale",
+      "theme": {
+        "title": "Tema",
+        "system": "Sistema",
+        "light": "Chiaro",
+        "dark": "Scuro",
+        "description": "Scegli il tuo tema preferito"
+      },
       "shortcut": {
         "title": "Scorciatoie di Handy",
         "description": "Configura le scorciatoie per attivare la trascrizione vocale",

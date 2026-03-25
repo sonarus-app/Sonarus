@@ -170,7 +170,14 @@
       "availableModels": "Có sẵn để tải xuống"
     },
     "general": {
-      "title": "Chung",
+      "title": "Tổng quan",
+      "theme": {
+        "title": "Chủ đề",
+        "system": "Hệ thống",
+        "light": "Sáng",
+        "dark": "Tối",
+        "description": "Chọn chủ đề bạn thích"
+      },
       "shortcut": {
         "title": "Phím tắt Handy",
         "description": "Cấu hình phím tắt để kích hoạt ghi âm chuyển đổi giọng nói thành văn bản",

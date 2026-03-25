@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "General",
+      "theme": {
+        "title": "Tema",
+        "system": "Sistema",
+        "light": "Claro",
+        "dark": "Oscuro",
+        "description": "Elige tu tema preferido"
+      },
       "shortcut": {
         "title": "Atajos de Handy",
         "description": "Configura atajos de teclado para activar la grabación de voz a texto",

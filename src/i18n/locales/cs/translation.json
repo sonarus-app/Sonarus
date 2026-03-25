@@ -171,6 +171,13 @@
     },
     "general": {
       "title": "Obecné",
+      "theme": {
+        "title": "Motiv",
+        "system": "Systém",
+        "light": "Světlý",
+        "dark": "Tmavý",
+        "description": "Vyberte si preferovaný motiv"
+      },
       "shortcut": {
         "title": "Zkratky Handy",
         "description": "Nastavte klávesové zkratky pro spuštění nahrávání řeči na text",

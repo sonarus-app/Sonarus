@@ -46,7 +46,7 @@ pub async fn start_streaming_transcription(app: AppHandle) -> Result<(), String>
     let transcription_manager = app.state::<std::sync::Arc<TranscriptionManager>>();
     transcription_manager
         .start_streaming()
-        .map_err(|e| e.to_string())?;
+        .map_err(|e: anyhow::Error| e.to_string())?;
 
     // Emit streaming state changed event
     let event = StreamingStateChangedEvent {
@@ -69,7 +69,7 @@ pub async fn stop_streaming_transcription(app: AppHandle) -> Result<(), String> 
     let transcription_manager = app.state::<std::sync::Arc<TranscriptionManager>>();
     transcription_manager
         .stop_streaming()
-        .map_err(|e| e.to_string())?;
+        .map_err(|e: anyhow::Error| e.to_string())?;
 
     // Emit streaming state changed event
     let event = StreamingStateChangedEvent {
@@ -96,7 +96,7 @@ pub async fn transcribe_audio_chunk(
 
     let result = transcription_manager
         .transcribe_chunk(audio_chunk)
-        .map_err(|e| e.to_string())?;
+        .map_err(|e: anyhow::Error| e.to_string())?;
 
     // Emit partial transcription event
     let event = PartialTranscriptionEvent {

@@ -1,16 +1,14 @@
 # Sonarus
 
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/WVBeWsNXK4)
-
 **The speech-to-text tool you'll actually love using.**
 
-Sonarus is a premium speech-to-text desktop application that combines the power of the open-source Handy project with an extraordinary user experience. Press a shortcut, speak, and have your words appear in any text field — entirely offline and private.
+Sonarus is a premium speech-to-text desktop application that combines the power of the open-source Sonarus project with an extraordinary user experience. Press a shortcut, speak, and have your words appear in any text field — entirely offline and private.
 
 > _"Invisible until you need it. Extraordinary when you do."_
 
 ## Why Sonarus?
 
-Sonarus is a fork of the Handy project that bets on **experience over extensibility** as its primary value. Where Handy aims to be the most forkable speech-to-text tool, Sonarus aims to be the most finished one.
+Sonarus is a fork of the Sonarus project that bets on **experience over extensibility** as its primary value. Where Sonarus aims to be the most forkable speech-to-text tool, Sonarus aims to be the most finished one.
 
 ### The Premium Experience
 
@@ -18,7 +16,7 @@ Sonarus is a fork of the Handy project that bets on **experience over extensibil
 - **Privacy First**: All audio processing is local. No audio data leaves your device under any circumstance
 - **Keyboard-Driven**: Every interaction has a shortcut. Power users never need to touch the mouse
 - **Thoughtful UX**: Inspired by Superwhisper, Notion, Raycast, and Apple HIG
-- **Open Source**: Built on the foundation of Handy, preserving everything that makes it excellent
+- **Open Source**: Built on the foundation of Sonarus, preserving everything that makes it excellent
 
 ### What Makes Sonarus Different
 
@@ -39,7 +37,6 @@ The process is entirely local and enhanced:
 
 - **Voice Activity Detection**: Silence is filtered using Silero VAD
 - **Premium Models**: Choose from Whisper (Small/Medium/Turbo/Large) or Parakeet V3
-- **GPU Acceleration**: Metal on macOS, Vulkan on Windows/Linux
 - **Rich History**: Every transcription saved automatically with full-text search
 - **Sound Feedback**: Satisfying audio cues for every state transition
 
@@ -47,12 +44,11 @@ The process is entirely local and enhanced:
 
 ### Installation
 
-1. Download the latest release from the [releases page](https://github.com/exodus712/Sonarus-v2/releases) or [website](https://sonarus.computer)
-   - **macOS**: Also available via [Homebrew cask](https://formulae.brew.sh/cask/sonarus): `brew install --cask sonarus`
-   - **Windows**: Also available via [winget](https://github.com/microsoft/winget-pkgs): `winget install exodus712.Sonarus` \
-     **Note:** The Homebrew cask and winget package are not maintained by the Sonarus developers.
+1. Download the latest release from the [releases page](https://github.com/exodus7124712/Sonarus-v2/releases) (WIP)
+   - **macOS**: WIP
+   - **Windows**: WIP
 2. Install the application
-3. Launch Handy and grant necessary system permissions (microphone, accessibility)
+3. Launch Sonarus and grant necessary system permissions (microphone, accessibility)
 4. Configure your preferred keyboard shortcuts in Settings
 5. Start transcribing!
 
@@ -60,19 +56,11 @@ The process is entirely local and enhanced:
 
 For detailed build instructions including platform-specific requirements, see [BUILD.md](BUILD.md).
 
-## Integrations
-
-<a href="https://www.raycast.com/mattiacolombomc/handy" title="Install Handy Raycast Extension"><img src="https://www.raycast.com/mattiacolombomc/handy/install_button@2x.png?v=1.1" height="64" style="height: 64px;" alt="Install handy Raycast Extension" /></a>
-
-Control Handy from [Raycast](https://www.raycast.com) — start/stop recording, browse transcript history, manage dictionary, switch models and languages.
-
-[Source](https://github.com/mattiacolombomc/raycast-handy) · by [@mattiacolombomc](https://github.com/mattiacolombomc)
-
 ## Architecture
 
-Sonarus builds on the solid foundation of Handy, maintaining the same technical architecture while adding premium experience layers:
+Sonarus builds on the solid foundation of Sonarus, maintaining the same technical architecture while adding premium experience layers:
 
-### Core Foundation (Preserved from Handy)
+### Core Foundation (Preserved from Sonarus)
 
 - **Frontend**: React + TypeScript with Tailwind CSS for the settings UI
 - **Backend**: Rust for system integration, audio processing, and ML inference
@@ -94,47 +82,47 @@ Sonarus builds on the solid foundation of Handy, maintaining the same technical 
 
 ### Debug Mode
 
-Handy includes an advanced debug mode for development and troubleshooting. Access it by pressing:
+Sonarus includes an advanced debug mode for development and troubleshooting. Access it by pressing:
 
 - **macOS**: `Cmd+Shift+D`
 - **Windows/Linux**: `Ctrl+Shift+D`
 
 ### CLI Parameters
 
-Handy supports command-line flags for controlling a running instance and customizing startup behavior. These work on all platforms (macOS, Windows, Linux).
+Sonarus supports command-line flags for controlling a running instance and customizing startup behavior. These work on all platforms (macOS, Windows, Linux).
 
 **Remote control flags** (sent to an already-running instance via the single-instance plugin):
 
 ```bash
-handy --toggle-transcription    # Toggle recording on/off
-handy --toggle-post-process     # Toggle recording with post-processing on/off
-handy --cancel                  # Cancel the current operation
+Sonarus --toggle-transcription    # Toggle recording on/off
+Sonarus --toggle-post-process     # Toggle recording with post-processing on/off
+Sonarus --cancel                  # Cancel the current operation
 ```
 
 **Startup flags:**
 
 ```bash
-handy --start-hidden            # Start without showing the main window
-handy --no-tray                 # Start without the system tray icon
-handy --debug                   # Enable debug mode with verbose logging
-handy --help                    # Show all available flags
+Sonarus --start-hidden            # Start without showing the main window
+Sonarus --no-tray                 # Start without the system tray icon
+Sonarus --debug                   # Enable debug mode with verbose logging
+Sonarus --help                    # Show all available flags
 ```
 
 Flags can be combined for autostart scenarios:
 
 ```bash
-handy --start-hidden --no-tray
+Sonarus --start-hidden --no-tray
 ```
 
-> **macOS tip:** When Handy is installed as an app bundle, invoke the binary directly:
+> **macOS tip:** When Sonarus is installed as an app bundle, invoke the binary directly:
 >
 > ```bash
-> /Applications/Handy.app/Contents/MacOS/Handy --toggle-transcription
+> /Applications/Sonarus.app/Contents/MacOS/Sonarus --toggle-transcription
 > ```
 
 ## Known Issues & Current Limitations
 
-This project is actively being developed and has some [known issues](https://github.com/exodus712/Sonarus-v2/issues). We believe in transparency about the current state:
+This project is actively being developed and has some known issues. We believe in transparency about the current state:
 
 ### Major Issues (Help Wanted)
 
@@ -164,12 +152,12 @@ For reliable text input on Linux, install the appropriate tool for your display 
 - **Wayland**: Install `wtype` (preferred) or `dotool` for text input to work correctly
 - **dotool setup**: Requires adding your user to the `input` group: `sudo usermod -aG input $USER` (then log out and back in)
 
-Without these tools, Handy falls back to enigo which may have limited compatibility, especially on Wayland.
+Without these tools, Sonarus falls back to enigo which may have limited compatibility, especially on Wayland.
 
 **Other Notes:**
 
 - **Runtime library dependency (`libgtk-layer-shell.so.0`)**:
-  - Handy links `gtk-layer-shell` on Linux. If startup fails with `error while loading shared libraries: libgtk-layer-shell.so.0`, install the runtime package for your distro:
+  - Sonarus links `gtk-layer-shell` on Linux. If startup fails with `error while loading shared libraries: libgtk-layer-shell.so.0`, install the runtime package for your distro:
 
     | Distro        | Package to install    | Example command                        |
     | ------------- | --------------------- | -------------------------------------- |
@@ -179,30 +167,30 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
 
   - For building from source on Ubuntu/Debian, you may also need `libgtk-layer-shell-dev`.
 
-- The recording overlay is disabled by default on Linux (`Overlay Position: None`) because certain compositors treat it as the active window. When the overlay is visible it can steal focus, which prevents Handy from pasting back into the application that triggered transcription. If you enable the overlay anyway, be aware that clipboard-based pasting might fail or end up in the wrong window.
+- The recording overlay is disabled by default on Linux (`Overlay Position: None`) because certain compositors treat it as the active window. When the overlay is visible it can steal focus, which prevents Sonarus from pasting back into the application that triggered transcription. If you enable the overlay anyway, be aware that clipboard-based pasting might fail or end up in the wrong window.
 - If you are having trouble with the app, running with the environment variable `WEBKIT_DISABLE_DMABUF_RENDERER=1` may help
 - **Global keyboard shortcuts (Wayland):** On Wayland, system-level shortcuts must be configured through your desktop environment or window manager. Use the [CLI flags](#cli-parameters) as the command for your custom shortcut.
 
   **GNOME:**
   1. Open **Settings > Keyboard > Keyboard Shortcuts > Custom Shortcuts**
   2. Click the **+** button to add a new shortcut
-  3. Set the **Name** to `Toggle Handy Transcription`
-  4. Set the **Command** to `handy --toggle-transcription`
+  3. Set the **Name** to `Toggle Sonarus Transcription`
+  4. Set the **Command** to `Sonarus --toggle-transcription`
   5. Click **Set Shortcut** and press your desired key combination (e.g., `Super+O`)
 
   **KDE Plasma:**
   1. Open **System Settings > Shortcuts > Custom Shortcuts**
   2. Click **Edit > New > Global Shortcut > Command/URL**
-  3. Name it `Toggle Handy Transcription`
+  3. Name it `Toggle Sonarus Transcription`
   4. In the **Trigger** tab, set your desired key combination
-  5. In the **Action** tab, set the command to `handy --toggle-transcription`
+  5. In the **Action** tab, set the command to `Sonarus --toggle-transcription`
 
   **Sway / i3:**
 
   Add to your config file (`~/.config/sway/config` or `~/.config/i3/config`):
 
   ```ini
-  bindsym $mod+o exec handy --toggle-transcription
+  bindsym $mod+o exec Sonarus --toggle-transcription
   ```
 
   **Hyprland:**
@@ -210,21 +198,21 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
   Add to your config file (`~/.config/hypr/hyprland.conf`):
 
   ```ini
-  bind = $mainMod, O, exec, handy --toggle-transcription
+  bind = $mainMod, O, exec, Sonarus --toggle-transcription
   ```
 
-- You can also manage global shortcuts outside of Handy via Unix signals, which lets Wayland window managers or other hotkey daemons keep ownership of keybindings:
+- You can also manage global shortcuts outside of Sonarus via Unix signals, which lets Wayland window managers or other hotkey daemons keep ownership of keybindings:
 
   | Signal    | Action                                    | Example                |
   | --------- | ----------------------------------------- | ---------------------- |
-  | `SIGUSR2` | Toggle transcription                      | `pkill -USR2 -n handy` |
-  | `SIGUSR1` | Toggle transcription with post-processing | `pkill -USR1 -n handy` |
+  | `SIGUSR2` | Toggle transcription                      | `pkill -USR2 -n Sonarus` |
+  | `SIGUSR1` | Toggle transcription with post-processing | `pkill -USR1 -n Sonarus` |
 
   Example Sway config:
 
   ```ini
-  bindsym $mod+o exec pkill -USR2 -n handy
-  bindsym $mod+p exec pkill -USR1 -n handy
+  bindsym $mod+o exec pkill -USR2 -n Sonarus
+  bindsym $mod+p exec pkill -USR1 -n Sonarus
   ```
 
   `pkill` here simply delivers the signal—it does not terminate the process.
@@ -233,7 +221,7 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
 
 - **macOS**: 12 Monterey minimum (Intel + Apple Silicon)
 - **Windows**: Windows 10 x64 minimum
-- **Linux**: Inherited Handy support preserved but not a V1 priority
+- **Linux**: Inherited Sonarus support preserved but not a V1 priority
 
 ## System Requirements
 
@@ -250,14 +238,14 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
 - Intel i5/AMD Ryzen 5 or better
 - 8GB RAM minimum, 16GB recommended
 - Windows 10 x64 or later
-- Optional: NVIDIA/AMD GPU for acceleration
+- Optional: NVIDIA/AMD GPU for acceleration (WIP)
 
 ### Linux
 
 - Intel i5/AMD Ryzen 5 or better
 - 8GB RAM minimum
 - Ubuntu 22.04+ or equivalent
-- GPU acceleration available where supported
+- GPU acceleration available where supported (WIP)
 
 ## Roadmap & Active Development
 
@@ -276,7 +264,7 @@ We're actively working on several features and improvements. Contributions and f
 
 **Opt-in Analytics:**
 
-- Collect anonymous usage data to help improve Handy
+- Collect anonymous usage data to help improve Sonarus
 - Privacy-first approach with clear opt-in
 
 **Settings Refactoring:**
@@ -293,11 +281,11 @@ We're actively working on several features and improvements. Contributions and f
 
 ### Manual Model Installation (For Proxy Users or Network Restrictions)
 
-If you're behind a proxy, firewall, or in a restricted network environment where Handy cannot download models automatically, you can manually download and install them. The URLs are publicly accessible from any browser.
+If you're behind a proxy, firewall, or in a restricted network environment where Sonarus cannot download models automatically, you can manually download and install them. The URLs are publicly accessible from any browser.
 
 #### Step 1: Find Your App Data Directory
 
-1. Open Handy settings
+1. Open Sonarus settings
 2. Navigate to the **About** section
 3. Copy the "App Data Directory" path shown there, or use the shortcuts:
    - **macOS**: `Cmd+Shift+D` to open debug menu
@@ -305,9 +293,9 @@ If you're behind a proxy, firewall, or in a restricted network environment where
 
 The typical paths are:
 
-- **macOS**: `~/Library/Application Support/com.pais.sonarus/`
-- **Windows**: `C:\Users\{username}\AppData\Roaming\com.pais.sonarus\`
-- **Linux**: `~/.config/com.pais.sonarus/`
+- **macOS**: `~/Library/Application Support/com.exodus712.sonarus/`
+- **Windows**: `C:\Users\{username}\AppData\Roaming\com.exodus712.sonarus\`
+- **Linux**: `~/.config/com.exodus712.sonarus/`
 
 #### Step 2: Create Models Directory
 
@@ -315,27 +303,27 @@ Inside your app data directory, create a `models` folder if it doesn't already e
 
 ```bash
 # macOS/Linux
-mkdir -p ~/Library/Application\ Support/com.pais.handy/models
+mkdir -p ~/Library/Application\ Support/com.exodus712.Sonarus/models
 
 # Windows (PowerShell)
-New-Item -ItemType Directory -Force -Path "$env:APPDATA\com.pais.sonarus\models"
+New-Item -ItemType Directory -Force -Path "$env:APPDATA\com.exodus712.sonarus\models"
 ```
 
 #### Step 3: Download Model Files
 
-Download the models you want from below
+Download the models you want from below (will be providing our own blob storage soon)
 
 **Whisper Models (single .bin files):**
 
-- Small (487 MB): `https://blob.handy.computer/ggml-small.bin`
-- Medium (492 MB): `https://blob.handy.computer/whisper-medium-q4_1.bin`
-- Turbo (1600 MB): `https://blob.handy.computer/ggml-large-v3-turbo.bin`
-- Large (1100 MB): `https://blob.handy.computer/ggml-large-v3-q5_0.bin`
+- Small (487 MB): `https://blob.Sonarus.computer/ggml-small.bin`
+- Medium (492 MB): `https://blob.Sonarus.computer/whisper-medium-q4_1.bin`
+- Turbo (1600 MB): `https://blob.Sonarus.computer/ggml-large-v3-turbo.bin`
+- Large (1100 MB): `https://blob.Sonarus.computer/ggml-large-v3-q5_0.bin`
 
 **Parakeet Models (compressed archives):**
 
-- V2 (473 MB): `https://blob.handy.computer/parakeet-v2-int8.tar.gz`
-- V3 (478 MB): `https://blob.handy.computer/parakeet-v3-int8.tar.gz`
+- V2 (473 MB): `https://blob.Sonarus.computer/parakeet-v2-int8.tar.gz`
+- V3 (478 MB): `https://blob.Sonarus.computer/parakeet-v3-int8.tar.gz`
 
 #### Step 4: Install Models
 
@@ -375,24 +363,24 @@ Final structure should look like:
 
 - For Parakeet models, the extracted directory name **must** match exactly as shown above
 - Do not rename the `.bin` files for Whisper models—use the exact filenames from the download URLs
-- After placing the files, restart Handy to detect the new models
+- After placing the files, restart Sonarus to detect the new models
 
 #### Step 5: Verify Installation
 
-1. Restart Handy
+1. Restart Sonarus
 2. Open Settings → Models
 3. Your manually installed models should now appear as "Downloaded"
 4. Select the model you want to use and test transcription
 
 ### Custom Whisper Models
 
-Handy can auto-discover custom Whisper GGML models placed in the `models` directory. This is useful for users who want to use fine-tuned or community models not included in the default model list.
+Sonarus can auto-discover custom Whisper GGML models placed in the `models` directory. This is useful for users who want to use fine-tuned or community models not included in the default model list.
 
 **How to use:**
 
 1. Obtain a Whisper model in GGML `.bin` format (e.g., from [Hugging Face](https://huggingface.co/models?search=whisper%20ggml))
 2. Place the `.bin` file in your `models` directory (see paths above)
-3. Restart Handy to discover the new model
+3. Restart Sonarus to discover the new model
 4. The model will appear in the "Custom Models" section of the Models settings page
 
 **Important:**
@@ -403,36 +391,17 @@ Handy can auto-discover custom Whisper GGML models placed in the `models` direct
 
 ### How to Contribute
 
-1. **Check existing issues** at [github.com/cjpais/Handy/issues](https://github.com/cjpais/Handy/issues)
+1. **Check existing issues** at [github.com/exodus712/Sonarus-v2/issues](https://github.com/exodus712/Sonarus-v2/issues)
 2. **Fork the repository** and create a feature branch
 3. **Test thoroughly** on your target platform
 4. **Submit a pull request** with clear description of changes
-5. **Join the discussion** - reach out at [contact@handy.computer](mailto:contact@handy.computer)
 
 The goal is to create both a useful tool and a foundation for others to build upon—a well-patterned, simple codebase that serves the community.
 
-## Sponsors
-
-<div align="center">
-  We're grateful for the support of our sponsors who help make Handy possible:
-  <br><br>
-  <a href="https://wordcab.com">
-    <img src="sponsor-images/wordcab.png" alt="Wordcab" width="120" height="120">
-  </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/epicenter-so/epicenter">
-    <img src="sponsor-images/epicenter.png" alt="Epicenter" width="120" height="120">
-  </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://boltai.com?utm_source=handy">
-    <img src="sponsor-images/boltai.jpg" alt="Bolt AI" width="120" height="120">
-  </a>
-</div>
-
 ## Related Projects
 
-- **Sonarus CLI**: The original Python command-line version
-- **[handy.computer](https://handy.computer)** - Project website with demos and documentation
+- **Handy CLI**: The original Python command-line version
+- **[handy.computer](https://handy.computer)** - The original project's website with demos and documentation
 
 ## License
 
@@ -444,5 +413,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **whisper.cpp and ggml** for amazing cross-platform whisper inference/acceleration
 - **Silero** for great lightweight VAD
 - **Tauri** team for excellent Rust-based app framework
-- **Community contributors** helping make Handy better
-- **Handy** - The original project that serves as foundation and inspiration for Sonarus
+- **Community contributors** helping make Sonarus better
+- **Sonarus** - The original project that serves as foundation and inspiration for Sonarus

@@ -1,0 +1,3 @@
+bun run format:frontend
+bun run format:backend
+git add -A

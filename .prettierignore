@@ -18,3 +18,7 @@ src/bindings.ts
 # Misc
 .DS_Store
 *.log
+
+# Config files managed by other tools
+.cz.json
+.pre-commit-config.yaml

@@ -587,11 +587,22 @@ Function .onInit
 
 
   ; --- PORTABLE MODE --- Auto-detect portable mode during updates.
-  ; If the target directory already has a portable marker file, preserve
-  ; portable mode so the Tauri updater works without needing /PORTABLE.
+  ; Preserve portable installs that use either the current magic-string marker
+  ; or the legacy empty marker created by older Handy releases. Require Data/
+  ; for the legacy empty-marker case so stale scoop side-effect files do not
+  ; accidentally opt an updater run into portable mode.
   ${If} $PortableMode <> 1
+  ${AndIf} $UpdateMode = 1
   ${AndIf} ${FileExists} "$INSTDIR\portable"
-    StrCpy $PortableMode 1
+    FileOpen $1 "$INSTDIR\portable" r
+    FileRead $1 $2
+    FileClose $1
+    ${If} $2 == "Handy Portable Mode"
+      StrCpy $PortableMode 1
+    ${OrIf} $2 == ""
+    ${AndIf} ${FileExists} "$INSTDIR\Data"
+      StrCpy $PortableMode 1
+    ${EndIf}
   ${EndIf}
 
   !if "${INSTALLMODE}" == "both"

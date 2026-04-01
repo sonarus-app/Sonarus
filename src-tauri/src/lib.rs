@@ -319,8 +319,44 @@ pub fn run(cli_args: CliArgs) {
     // when the variable is unset
     let console_filter = build_console_filter();
 
+    // ============================================================================
+    // Command Registration - Organized by Domain
+    // ============================================================================
+    // Commands are grouped logically for maintainability:
+    // - App: Core application commands (window, settings, system)
+    // - Logging: File-based debug logging management
+    // - Settings: User preference management
+    // - Audio: Recording, devices, and audio feedback
+    // - Models: Model management and downloads
+    // - Transcription: Speech-to-text processing
+    // - History: Transcription history storage
+    // - Shortcuts: Keyboard shortcut management
+    // - Helpers: Utility commands
+    // ============================================================================
+
     let specta_builder = Builder::<tauri::Wry>::new()
         .commands(collect_commands![
+            // App Commands
+            trigger_update_check,
+            show_main_window_command,
+            commands::cancel_operation,
+            commands::get_app_dir_path,
+            commands::get_app_settings,
+            commands::get_default_settings,
+            commands::open_app_data_dir,
+            commands::initialize_enigo,
+            commands::initialize_shortcuts,
+            // Logging Commands
+            commands::logging::get_log_file_info,
+            commands::logging::get_recent_logs,
+            commands::logging::clear_logs,
+            commands::logging::export_logs,
+            commands::logging::search_logs,
+            commands::logging::get_all_log_files,
+            commands::get_log_dir_path,
+            commands::set_log_level,
+            commands::open_log_dir,
+            // Settings Commands (from shortcut module - to be refactored)
             shortcut::change_binding,
             shortcut::reset_binding,
             shortcut::change_ptt_setting,
@@ -366,31 +402,8 @@ pub fn run(cli_args: CliArgs) {
             shortcut::change_show_tray_icon_setting,
             shortcut::handy_keys::start_handy_keys_recording,
             shortcut::handy_keys::stop_handy_keys_recording,
-            trigger_update_check,
-            show_main_window_command,
-            commands::cancel_operation,
-            commands::get_app_dir_path,
-            commands::get_app_settings,
-            commands::get_default_settings,
-            commands::get_log_dir_path,
-            commands::set_log_level,
-            commands::open_recordings_folder,
-            commands::open_log_dir,
-            commands::open_app_data_dir,
             commands::check_apple_intelligence_available,
-            commands::initialize_enigo,
-            commands::initialize_shortcuts,
-            commands::models::get_available_models,
-            commands::models::get_model_info,
-            commands::models::download_model,
-            commands::models::delete_model,
-            commands::models::cancel_download,
-            commands::models::set_active_model,
-            commands::models::get_current_model,
-            commands::models::get_transcription_model_status,
-            commands::models::is_model_loading,
-            commands::models::has_any_models_available,
-            commands::models::has_any_models_or_downloads,
+            // Audio Commands
             commands::audio::update_microphone_mode,
             commands::audio::get_microphone_mode,
             commands::audio::get_windows_microphone_permission_status,
@@ -406,6 +419,20 @@ pub fn run(cli_args: CliArgs) {
             commands::audio::set_clamshell_microphone,
             commands::audio::get_clamshell_microphone,
             commands::audio::is_recording,
+            commands::open_recordings_folder,
+            // Model Commands
+            commands::models::get_available_models,
+            commands::models::get_model_info,
+            commands::models::download_model,
+            commands::models::delete_model,
+            commands::models::cancel_download,
+            commands::models::set_active_model,
+            commands::models::get_current_model,
+            commands::models::get_transcription_model_status,
+            commands::models::is_model_loading,
+            commands::models::has_any_models_available,
+            commands::models::has_any_models_or_downloads,
+            // Transcription Commands
             commands::transcription::set_model_unload_timeout,
             commands::transcription::get_model_load_status,
             commands::transcription::unload_model_manually,
@@ -413,6 +440,7 @@ pub fn run(cli_args: CliArgs) {
             commands::transcription::stop_streaming_transcription,
             commands::transcription::transcribe_audio_chunk,
             commands::transcription::is_streaming_active,
+            // History Commands
             commands::history::get_history_entries,
             commands::history::toggle_history_entry_saved,
             commands::history::get_audio_file_path,
@@ -420,6 +448,7 @@ pub fn run(cli_args: CliArgs) {
             commands::history::retry_history_entry_transcription,
             commands::history::update_history_limit,
             commands::history::update_recording_retention_period,
+            // Helper Commands
             helpers::clamshell::is_laptop,
         ])
         .events(collect_events![managers::history::HistoryUpdatePayload,]);

@@ -493,6 +493,10 @@
         "description": "Choose the keyboard shortcut backend.",
         "bindingsReset": "Keyboard shortcuts were incompatible and reset to defaults"
       },
+      "transcribingVisualizer": {
+        "title": "Transcribing Visualizer",
+        "description": "Choose the animation style for the transcribing state in the overlay."
+      },
       "paths": {
         "appData": "App Data:",
         "models": "Models:",

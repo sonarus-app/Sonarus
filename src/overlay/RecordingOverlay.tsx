@@ -10,6 +10,10 @@ import "./RecordingOverlay.css";
 import { commands } from "@/bindings";
 import i18n, { syncLanguageFromSettings } from "@/i18n";
 import { getLanguageDirection } from "@/lib/utils/rtl";
+import {
+  TranscribingVisualizer,
+  TranscribingVariant,
+} from "./TranscribingVisualizer";
 
 type OverlayState = "recording" | "transcribing" | "processing";
 
@@ -17,6 +21,8 @@ const RecordingOverlay: React.FC = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [state, setState] = useState<OverlayState>("recording");
+  const [transcribingVariant, setTranscribingVariant] =
+    useState<TranscribingVariant>("dots");
   const [levels, setLevels] = useState<number[]>(Array(16).fill(0));
   const smoothedLevelsRef = useRef<number[]>(Array(16).fill(0));
   const direction = getLanguageDirection(i18n.language);
@@ -51,11 +57,37 @@ const RecordingOverlay: React.FC = () => {
         setLevels(smoothed.slice(0, 9));
       });
 
+      // Listen for transcribing visualizer setting changes
+      const unlistenVisualizer = await listen<{ visualizer: string }>(
+        "transcribing-visualizer-changed",
+        (event) => {
+          const visualizer = event.payload.visualizer as TranscribingVariant;
+          if (["dots", "equalizer", "gradient"].includes(visualizer)) {
+            setTranscribingVariant(visualizer);
+          }
+        },
+      );
+
+      // Load initial visualizer setting
+      try {
+        const result = await commands.getAppSettings();
+        if (result.status === "ok" && result.data.transcribing_visualizer) {
+          const visualizer = result.data
+            .transcribing_visualizer as TranscribingVariant;
+          if (["dots", "equalizer", "gradient"].includes(visualizer)) {
+            setTranscribingVariant(visualizer);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load transcribing visualizer setting:", error);
+      }
+
       // Cleanup function
       return () => {
         unlistenShow();
         unlistenHide();
         unlistenLevel();
+        unlistenVisualizer();
       };
     };
 
@@ -94,7 +126,7 @@ const RecordingOverlay: React.FC = () => {
           </div>
         )}
         {state === "transcribing" && (
-          <div className="transcribing-text">{t("overlay.transcribing")}</div>
+          <TranscribingVisualizer variant={transcribingVariant} />
         )}
         {state === "processing" && (
           <div className="transcribing-text">{t("overlay.processing")}</div>

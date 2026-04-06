@@ -1086,3 +1086,35 @@ pub fn change_show_tray_icon_setting(app: AppHandle, enabled: bool) -> Result<()
 
     Ok(())
 }
+
+#[tauri::command]
+#[specta::specta]
+pub fn change_transcribing_visualizer_setting(
+    app: AppHandle,
+    visualizer: String,
+) -> Result<(), String> {
+    let mut settings = settings::get_settings(&app);
+    // Validate the visualizer value
+    let valid_visualizer = match visualizer.as_str() {
+        "dots" | "equalizer" | "gradient" => visualizer.clone(),
+        other => {
+            warn!(
+                "Invalid transcribing visualizer '{}', defaulting to dots",
+                other
+            );
+            "dots".to_string()
+        }
+    };
+    settings.transcribing_visualizer = valid_visualizer;
+    settings::write_settings(&app, settings);
+
+    // Emit event to notify overlay of visualizer change
+    let _ = app.emit(
+        "transcribing-visualizer-changed",
+        serde_json::json!({
+            "visualizer": visualizer
+        }),
+    );
+
+    Ok(())
+}

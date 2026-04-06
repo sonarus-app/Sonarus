@@ -254,6 +254,14 @@ impl SoundTheme {
     pub fn to_stop_path(&self) -> String {
         format!("resources/{}_stop.wav", self.as_str())
     }
+
+    pub fn to_complete_path(&self) -> String {
+        format!("resources/{}_complete.wav", self.as_str())
+    }
+
+    pub fn to_error_path(&self) -> String {
+        format!("resources/{}_error.wav", self.as_str())
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Type)]
@@ -366,6 +374,8 @@ pub struct AppSettings {
     pub force_cpu_transcription: bool,
     #[serde(default)]
     pub extra_recording_buffer_ms: u64,
+    #[serde(default = "default_transcribing_visualizer")]
+    pub transcribing_visualizer: String,
 }
 
 fn default_model() -> String {
@@ -572,6 +582,10 @@ fn default_post_process_prompts() -> Vec<LLMPrompt> {
     }]
 }
 
+fn default_transcribing_visualizer() -> String {
+    "dots".to_string()
+}
+
 fn default_typing_tool() -> TypingTool {
     TypingTool::Auto
 }
@@ -734,6 +748,7 @@ pub fn get_default_settings() -> AppSettings {
         custom_filler_words: None,
         force_cpu_transcription: true,
         extra_recording_buffer_ms: 0,
+        transcribing_visualizer: default_transcribing_visualizer(),
     }
 }
 

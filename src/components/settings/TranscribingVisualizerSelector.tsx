@@ -16,7 +16,8 @@ export const TranscribingVisualizerSelector: React.FC<
   TranscribingVisualizerSelectorProps
 > = ({ descriptionMode = "tooltip", grouped = false }) => {
   const { t } = useTranslation();
-  const { getSetting, isUpdating, refreshSettings } = useSettings();
+  const { getSetting, isUpdating, refreshSettings, updateSetting } =
+    useSettings();
   const currentVisualizer = getSetting("transcribing_visualizer") ?? "dots";
   const visualizerOptions: DropdownOption[] = [
     {
@@ -43,17 +44,7 @@ export const TranscribingVisualizerSelector: React.FC<
     if (value === currentVisualizer) return;
 
     try {
-      const result = await commands.changeTranscribingVisualizerSetting(value);
-
-      if (result.status === "error") {
-        console.error(
-          "Failed to update transcribing visualizer:",
-          result.error,
-        );
-        toast.error(String(result.error));
-        return;
-      }
-
+      await updateSetting("transcribing_visualizer", value as any);
       await refreshSettings();
     } catch (error) {
       console.error("Failed to update transcribing visualizer:", error);

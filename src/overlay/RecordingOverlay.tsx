@@ -68,6 +68,14 @@ const RecordingOverlay: React.FC = () => {
         },
       );
 
+      // Return cleanup function immediately after listener registration
+      const cleanup = () => {
+        unlistenShow();
+        unlistenHide();
+        unlistenLevel();
+        unlistenVisualizer();
+      };
+
       // Load initial visualizer setting
       try {
         const result = await commands.getAppSettings();
@@ -82,13 +90,7 @@ const RecordingOverlay: React.FC = () => {
         console.error("Failed to load transcribing visualizer setting:", error);
       }
 
-      // Cleanup function
-      return () => {
-        unlistenShow();
-        unlistenHide();
-        unlistenLevel();
-        unlistenVisualizer();
-      };
+      return cleanup;
     };
 
     let isDisposed = false;
@@ -103,9 +105,11 @@ const RecordingOverlay: React.FC = () => {
 
     return () => {
       isDisposed = true;
-      cleanupFn?.();
+      if (cleanupFn) {
+        cleanupFn();
+      }
     };
-  }, []);
+  }, [syncLanguageFromSettings]);
 
   const getIcon = () => {
     if (state === "recording") {

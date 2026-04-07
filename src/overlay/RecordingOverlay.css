@@ -58,7 +58,7 @@
   justify-content: center;
   gap: 3px;
   height: 24px;
-  margin-left: -2px;
+  margin-inline-start: -2px;
   margin-top: 1px;
 }
 
@@ -154,7 +154,7 @@
   justify-content: center;
   gap: 3px;
   height: 24px;
-  margin-left: -2px;
+  margin-inline-start: -2px;
 }
 
 .eq-bar-container {
@@ -227,7 +227,7 @@
 .transcribing-gradient {
   width: 48px;
   height: 20px;
-  margin-left: -2px;
+  margin-inline-start: -2px;
   position: relative;
   overflow: hidden;
   border-radius: 2px;
@@ -278,5 +278,14 @@
   50% {
     opacity: 1;
     transform: translateX(-50%) scaleY(1.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .eq-bar,
+  .transcribing-gradient {
+    animation: none !important;
+    animation-delay: 0 !important;
   }
 }

@@ -23,12 +23,14 @@ test.describe("Theme System", () => {
   test("should switch to dark theme when selected", async ({ page }) => {
     await page.goto("/");
 
-    // Navigate to settings
-    await page.click('[data-testid="settings-button"]');
-    await page.click('[data-testid="theme-section"]');
+    // Ensure we're on the general section (contains theme settings)
+    await page.click('[data-testid="sidebar-general"]');
 
-    // Select dark theme
-    await page.click('[data-testid="theme-dark"]');
+    // Open theme dropdown
+    await page.click('[data-testid="theme-dropdown"]');
+
+    // Select dark theme from dropdown
+    await page.click("text=Dark");
 
     // Verify dark theme is applied
     const html = page.locator("html");
@@ -42,10 +44,14 @@ test.describe("Theme System", () => {
   test("should switch to light theme when selected", async ({ page }) => {
     await page.goto("/");
 
-    // Navigate to settings and select light theme
-    await page.click('[data-testid="settings-button"]');
-    await page.click('[data-testid="theme-section"]');
-    await page.click('[data-testid="theme-light"]');
+    // Ensure we're on the general section (contains theme settings)
+    await page.click('[data-testid="sidebar-general"]');
+
+    // Open theme dropdown
+    await page.click('[data-testid="theme-dropdown"]');
+
+    // Select light theme from dropdown
+    await page.click("text=Light");
 
     // Verify light theme is applied
     const html = page.locator("html");

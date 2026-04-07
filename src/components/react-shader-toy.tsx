@@ -32,18 +32,18 @@ type UniformType = keyof Uniforms;
 function isMatrixType(t: string, v: number[] | number): v is number[] {
   return t.includes("Matrix") && Array.isArray(v);
 }
-function isVectorListType(t: string, v: number[] | number): v is number[] {
+function isVectorListType(t: string, v: number[] | number): v is Vector4 {
   return (
     t.includes("v") &&
     Array.isArray(v) &&
-    v.length > Number.parseInt(t.charAt(0))
+    v.length >= Number.parseInt(t.charAt(0))
   );
 }
 function isVectorType(t: string, v: number[] | number): v is Vector4 {
   return (
     !t.includes("v") &&
     Array.isArray(v) &&
-    v.length > Number.parseInt(t.charAt(0))
+    v.length >= Number.parseInt(t.charAt(0))
   );
 }
 const processUniform = <T extends UniformType>(
@@ -557,6 +557,7 @@ export function ReactShaderToy({
   const texturesArrRef = useRef<Texture[]>([]);
   const lastTimeRef = useRef(0);
   const resizeObserverRef = useRef<ResizeObserver | undefined>(undefined);
+  const drawSceneRef = useRef<(timestamp: number) => void>(() => {});
   const uniformsRef = useRef<
     Record<
       string,
@@ -857,12 +858,12 @@ export function ReactShaderToy({
         const currentUniform = propUniforms[name];
         if (!currentUniform) continue;
         if (uniformsRef.current[name]?.isNeeded) {
-          if (!shaderProgramRef.current) return;
+          if (!shaderProgramRef.current) continue;
           const customUniformLocation = gl.getUniformLocation(
             shaderProgramRef.current,
             name,
           );
-          if (!customUniformLocation) return;
+          if (!customUniformLocation) continue;
           processUniform(
             gl,
             customUniformLocation,
@@ -997,6 +998,8 @@ export function ReactShaderToy({
     }
   };
 
+  drawSceneRef.current = drawScene;
+
   const addEventListeners = () => {
     const options = { passive: true };
     if (uniformsRef.current.iMouse?.isNeeded && canvasRef.current) {
@@ -1023,7 +1026,7 @@ export function ReactShaderToy({
   };
 
   const removeEventListeners = () => {
-    const options = { passive: true } as EventListenerOptions;
+    const options = undefined;
     if (uniformsRef.current.iMouse?.isNeeded && canvasRef.current) {
       canvasRef.current.removeEventListener("mousemove", mouseMove, options);
       canvasRef.current.removeEventListener("mouseout", mouseUp, options);
@@ -1066,7 +1069,7 @@ export function ReactShaderToy({
         for (const entry of entries) {
           isVisibleRef.current = entry.isIntersecting;
           if (entry.isIntersecting) {
-            requestAnimationFrame(drawScene);
+            requestAnimationFrame(drawSceneRef.current);
           }
         }
       },

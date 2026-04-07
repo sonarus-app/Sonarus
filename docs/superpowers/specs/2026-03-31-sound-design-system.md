@@ -165,15 +165,25 @@ pub enum SoundType {
 
 ```rust
 pub enum SoundTheme {
-    Marimba,  // Legacy
-    Pop,      // Legacy
+    // Legacy themes (to be deprecated)
+    Marimba,  // Legacy - will be removed after migration
+    Pop,      // Legacy - will be removed after migration
+
+    // New themes (5 distinct sonic themes)
     Glass,    // NEW
     Wood,     // NEW
     Pulse,    // NEW
     Zen,      // NEW
     Spark,    // NEW
-    Custom,   // User-defined
+
+    Custom,   // User-defined - allows custom sound file selection
 }
+
+// Migration plan:
+// - Feature flag: use_new_sound_themes (default: false)
+// - When flag enabled: UI shows only Glass, Wood, Pulse, Zen, Spark, Custom
+// - Legacy users with Marimba/Pop auto-migrate to Glass
+// - Remove Marimba/Pop enum values after 2 release cycles
 ```
 
 ## Integration Points
@@ -210,4 +220,4 @@ pub enum SoundTheme {
 
 ---
 
-**Next Steps**: Implement sound generator script, extend enums, integrate with lifecycle, add UI.
+**Next Steps**: Implement sound generator script, extend enums, integrate with lifecycle, add SoundPicker UI to GeneralSettings (pending implementation).

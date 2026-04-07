@@ -1,6 +1,11 @@
 "use client";
 
-import React, { useMemo, type ComponentProps } from "react";
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  type ComponentProps,
+} from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { type LocalAudioTrack, type RemoteAudioTrack } from "livekit-client";
 import {
@@ -267,12 +272,19 @@ function AuraShader({
   className,
   ...props
 }: AuraShaderProps & ComponentProps<"div">) {
-  const resolvedThemeMode =
-    themeMode ??
-    (typeof window !== "undefined" &&
-    document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light");
+  const [resolvedThemeMode, setResolvedThemeMode] = useState<
+    "dark" | "light" | undefined
+  >(themeMode ?? undefined);
+
+  useEffect(() => {
+    if (themeMode) {
+      setResolvedThemeMode(themeMode);
+    } else {
+      setResolvedThemeMode(
+        document.documentElement.classList.contains("dark") ? "dark" : "light",
+      );
+    }
+  }, [themeMode]);
   const rgbColor = useMemo(() => hexToRgb(color, DEFAULT_COLOR), [color]);
 
   return (
@@ -300,18 +312,14 @@ function AuraShader({
           // Color variation across layers (0-1)
           uSpacing: { type: "1f", value: 0.5 },
           // Color palette offset - shifts colors along the gradient (0-1)
-          uColorShift: { type: "1f", value: colorShift },
-          // Color variation across layers (0-1)
-          uVariance: { type: "1f", value: 0.1 },
-          // Smoothing of the aurora (0-1)
-          uSmoothing: { type: "1f", value: 1.0 },
-          // Display mode: 0=dark background, 1=light background
-          uMode: {
+          uShift: { type: "1f", value: colorShift },
+          // Color
+          uColor: { type: "3fv", value: rgbColor },
+          // Light/dark mode
+          uLight: {
             type: "1f",
             value: resolvedThemeMode === "light" ? 1.0 : 0.0,
           },
-          // Color
-          uColor: { type: "3fv", value: rgbColor ?? [0, 0.7, 1] },
         }}
         onError={(error) => {
           console.error("Shader error:", error);

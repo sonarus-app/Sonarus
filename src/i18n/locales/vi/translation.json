@@ -419,6 +419,8 @@
     "history": {
       "title": "Lịch sử",
       "openFolder": "Mở thư mục ghi âm",
+      "searchPlaceholder": "Tìm kiếm lịch sử...",
+      "noSearchResults": "Không có mục lịch sử phù hợp",
       "loading": "Đang tải lịch sử...",
       "empty": "Chưa có bản ghi nào. Bắt đầu ghi âm để xây dựng lịch sử của bạn!",
       "copyToClipboard": "Sao chép bản ghi vào clipboard",

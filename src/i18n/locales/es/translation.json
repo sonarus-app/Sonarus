@@ -419,6 +419,8 @@
     "history": {
       "title": "Historial",
       "openFolder": "Abrir Carpeta de Grabaciones",
+      "searchPlaceholder": "Buscar en el historial...",
+      "noSearchResults": "No hay entradas del historial que coincidan",
       "loading": "Cargando historial...",
       "empty": "Aún no hay transcripciones. ¡Comienza a grabar para crear tu historial!",
       "copyToClipboard": "Copiar transcripción al portapapeles",

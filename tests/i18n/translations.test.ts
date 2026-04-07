@@ -7,6 +7,10 @@ type TranslationData = Record<string, unknown>;
 
 const localesDir = path.join(process.cwd(), "src", "i18n", "locales");
 const referenceLanguage = "en";
+const requiredHistorySearchKeys = [
+  ["settings", "history", "searchPlaceholder"],
+  ["settings", "history", "noSearchResults"],
+];
 
 function getAllKeyPaths(
   obj: TranslationData,
@@ -56,6 +60,27 @@ function loadTranslation(lang: string): TranslationData {
 }
 
 describe("translation locales", () => {
+  it("includes the required history search keys in English and every locale", () => {
+    const languages = fs
+      .readdirSync(localesDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
+
+    const missingByLanguage = languages
+      .map((lang) => {
+        const langData = loadTranslation(lang);
+        const missing = requiredHistorySearchKeys
+          .filter((keyPath) => !hasKeyPath(langData, keyPath))
+          .map((keyPath) => keyPath.join("."));
+
+        return { lang, missing };
+      })
+      .filter((result) => result.missing.length > 0);
+
+    expect(missingByLanguage).toEqual([]);
+  });
+
   it("keeps every non-English locale in sync with the English keys", () => {
     const referenceData = loadTranslation(referenceLanguage);
     const referenceKeyPaths = getAllKeyPaths(referenceData);

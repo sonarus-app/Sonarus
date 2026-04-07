@@ -419,6 +419,8 @@
     "history": {
       "title": "History",
       "openFolder": "Open Recordings Folder",
+      "searchPlaceholder": "Search history...",
+      "noSearchResults": "No matching history entries",
       "loading": "Loading history...",
       "empty": "No transcriptions yet. Start recording to build your history!",
       "copyToClipboard": "Copy transcription to clipboard",

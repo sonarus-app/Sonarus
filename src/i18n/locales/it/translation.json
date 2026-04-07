@@ -419,6 +419,8 @@
     "history": {
       "title": "Cronologia",
       "openFolder": "Apri la cartella delle registrazioni",
+      "searchPlaceholder": "Cerca nella cronologia...",
+      "noSearchResults": "Nessuna voce della cronologia corrispondente",
       "loading": "Caricamento cronologia...",
       "empty": "Non ci sono ancora trascrizioni. Comincia a registrare per costruire la tua cronologia!",
       "copyToClipboard": "Copia la trascrizione negli appunti",

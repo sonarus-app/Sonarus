@@ -419,6 +419,8 @@
     "history": {
       "title": "Historique",
       "openFolder": "Ouvrir le dossier des enregistrements",
+      "searchPlaceholder": "Rechercher dans l'historique...",
+      "noSearchResults": "Aucune entrée d'historique correspondante",
       "loading": "Chargement de l'historique...",
       "empty": "Pas encore de transcriptions. Commencez à enregistrer pour créer votre historique !",
       "copyToClipboard": "Copier la transcription dans le presse-papiers",

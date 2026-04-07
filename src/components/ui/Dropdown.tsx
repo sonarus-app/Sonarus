@@ -99,6 +99,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
               <button
                 key={option.value}
                 type="button"
+                data-testid={`${dataTestId}-option-${option.value}`}
                 className={`w-full px-2 py-1 text-sm text-start hover:bg-logo-primary/10 transition-colors duration-150 ${
                   selectedValue === option.value
                     ? "bg-logo-primary/20 font-semibold"

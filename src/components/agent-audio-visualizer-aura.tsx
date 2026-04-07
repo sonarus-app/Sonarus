@@ -227,7 +227,7 @@ interface AuraShaderProps {
   blur?: number;
 
   /**
-   * Color of the aura in hexidecimal format.
+   * Color of the aura in hexadecimal format.
    * @default '#1FD5F9'
    */
   color?: `#${string}`;
@@ -311,12 +311,16 @@ function AuraShader({
           uMix: { type: "1f", value: brightness },
           // Color variation across layers (0-1)
           uSpacing: { type: "1f", value: 0.5 },
+          // Turbulence variance between layers
+          uVariance: { type: "1f", value: 0.15 },
+          // Dynamic blur smoothing between iterations
+          uSmoothing: { type: "1f", value: 0.5 },
           // Color palette offset - shifts colors along the gradient (0-1)
-          uShift: { type: "1f", value: colorShift },
+          uColorShift: { type: "1f", value: colorShift },
           // Color
           uColor: { type: "3fv", value: rgbColor },
           // Light/dark mode
-          uLight: {
+          uMode: {
             type: "1f",
             value: resolvedThemeMode === "light" ? 1.0 : 0.0,
           },
@@ -338,11 +342,11 @@ AuraShader.displayName = "AuraShader";
 export const AgentAudioVisualizerAuraVariants = cva(["aspect-square"], {
   variants: {
     size: {
-      icon: "h-[24px] gap-[2px]",
-      sm: "h-[56px] gap-[4px]",
-      md: "h-[112px] gap-[8px]",
-      lg: "h-[224px] gap-[16px]",
-      xl: "h-[448px] gap-[32px]",
+      icon: "h-[24px]",
+      sm: "h-[56px]",
+      md: "h-[112px]",
+      lg: "h-[224px]",
+      xl: "h-[448px]",
     },
   },
   defaultVariants: {
@@ -362,7 +366,7 @@ export interface AgentAudioVisualizerAuraProps {
    */
   state?: AgentState;
   /**
-   * The color of the aura in hexidecimal format.
+   * The color of the aura in hexadecimal format.
    * @defaultValue '#1FD5F9'
    */
   color?: `#${string}`;

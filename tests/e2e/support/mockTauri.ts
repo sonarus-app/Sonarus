@@ -1,5 +1,39 @@
 import type { Page } from "@playwright/test";
 
+const mockedModels = [
+  {
+    id: "whisper-large-v3-turbo",
+    name: "Whisper Large v3 Turbo",
+    description: "Fast general-purpose English model",
+    filename: "whisper-large-v3-turbo.bin",
+    url: null,
+    sha256: null,
+    size_mb: 1510,
+    is_downloaded: true,
+    is_downloading: false,
+    partial_size: 0,
+    is_directory: false,
+    engine_type: "whisper",
+    accuracy_score: 4,
+    speed_score: 5,
+    supports_translation: true,
+    is_recommended: true,
+    supported_languages: ["en"],
+    supports_language_selection: true,
+    is_custom: false,
+  },
+];
+
+const mockedMicrophones = [
+  { index: "default", name: "Default", is_default: true },
+  { index: "mic-usb", name: "USB Microphone", is_default: false },
+];
+
+const mockedOutputDevices = [
+  { index: "default", name: "Default", is_default: true },
+  { index: "spk-usb", name: "USB Speakers", is_default: false },
+];
+
 const mockedSettings = {
   audio_feedback: false,
   audio_feedback_volume: 0.5,
@@ -9,9 +43,11 @@ const mockedSettings = {
       default_binding: "Ctrl+Shift+Space",
     },
   },
+  external_script_path: "",
   selected_microphone: "Default",
   selected_output_device: "Default",
   sound_theme: "marimba",
+  transcribing_visualizer: "dots",
 };
 
 export async function mockTauriBridge(page: Page): Promise<void> {
@@ -57,12 +93,13 @@ export async function mockTauriBridge(page: Page): Promise<void> {
               case "has_any_models_available":
                 return true;
               case "get_available_models":
-                return [];
+                return mockedModels;
               case "get_current_model":
-                return "";
+                return mockedModels[0].id;
               case "get_available_microphones":
+                return mockedMicrophones;
               case "get_available_output_devices":
-                return [];
+                return mockedOutputDevices;
               case "check_custom_sounds":
                 return { start: false, stop: false };
               case "plugin:event|listen":
@@ -72,7 +109,7 @@ export async function mockTauriBridge(page: Page): Promise<void> {
               case "plugin:os|locale":
                 return "en-US";
               default:
-                return null;
+                throw new Error(`Unmocked tauri command: ${cmd}`);
             }
           },
           transformCallback: (callback: unknown) => {

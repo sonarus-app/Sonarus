@@ -84,6 +84,9 @@ describe("translation locales", () => {
   it("keeps every non-English locale in sync with the English keys", () => {
     const referenceData = loadTranslation(referenceLanguage);
     const referenceKeyPaths = getAllKeyPaths(referenceData);
+    const referenceKeys = new Set(
+      referenceKeyPaths.map((keyPath) => keyPath.join(".")),
+    );
     const languages = fs
       .readdirSync(localesDir, { withFileTypes: true })
       .filter(
@@ -92,17 +95,23 @@ describe("translation locales", () => {
       .map((entry) => entry.name)
       .sort();
 
-    const missingByLanguage = languages
+    const driftByLanguage = languages
       .map((lang) => {
         const langData = loadTranslation(lang);
+        const langKeyPaths = getAllKeyPaths(langData);
         const missing = referenceKeyPaths
           .filter((keyPath) => !hasKeyPath(langData, keyPath))
           .map((keyPath) => keyPath.join("."));
+        const orphaned = langKeyPaths
+          .map((keyPath) => keyPath.join("."))
+          .filter((keyPath) => !referenceKeys.has(keyPath));
 
-        return { lang, missing };
+        return { lang, missing, orphaned };
       })
-      .filter((result) => result.missing.length > 0);
+      .filter(
+        (result) => result.missing.length > 0 || result.orphaned.length > 0,
+      );
 
-    expect(missingByLanguage).toEqual([]);
+    expect(driftByLanguage).toEqual([]);
   });
 });

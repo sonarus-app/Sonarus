@@ -37,7 +37,7 @@ test.describe("Theme System", () => {
     await page.getByTestId("theme-dropdown").click();
 
     // Select dark theme from dropdown
-    await page.getByRole("button", { name: "Dark", exact: true }).click();
+    await page.getByTestId("theme-dropdown-option-dark").click();
 
     // Verify dark theme is applied
     const html = page.locator("html");
@@ -60,7 +60,7 @@ test.describe("Theme System", () => {
     await page.getByTestId("theme-dropdown").click();
 
     // Select light theme from dropdown
-    await page.getByRole("button", { name: "Light", exact: true }).click();
+    await page.getByTestId("theme-dropdown-option-light").click();
 
     // Verify light theme is applied
     const html = page.locator("html");

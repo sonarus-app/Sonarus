@@ -28,23 +28,40 @@ const RecordingOverlay: React.FC = () => {
   const direction = getLanguageDirection(i18n.language);
 
   useEffect(() => {
+    let isDisposed = false;
+    const runIfMounted = (callback: () => void) => {
+      if (!isDisposed) {
+        callback();
+      }
+    };
+
     const setupEventListeners = async () => {
       // Listen for show-overlay event from Rust
       const unlistenShow = await listen("show-overlay", async (event) => {
         // Sync language from settings each time overlay is shown
         await syncLanguageFromSettings();
+        if (isDisposed) {
+          return;
+        }
         const overlayState = event.payload as OverlayState;
-        setState(overlayState);
-        setIsVisible(true);
+        runIfMounted(() => {
+          setState(overlayState);
+          setIsVisible(true);
+        });
       });
 
       // Listen for hide-overlay event from Rust
       const unlistenHide = await listen("hide-overlay", () => {
-        setIsVisible(false);
+        runIfMounted(() => {
+          setIsVisible(false);
+        });
       });
 
       // Listen for mic-level updates
       const unlistenLevel = await listen<number[]>("mic-level", (event) => {
+        if (isDisposed) {
+          return;
+        }
         const newLevels = event.payload as number[];
 
         // Apply smoothing to reduce jitter
@@ -54,50 +71,36 @@ const RecordingOverlay: React.FC = () => {
         });
 
         smoothedLevelsRef.current = smoothed;
-        setLevels(smoothed.slice(0, 9));
+        runIfMounted(() => {
+          setLevels(smoothed.slice(0, 9));
+        });
       });
 
       // Listen for transcribing visualizer setting changes
       const unlistenVisualizer = await listen<{ visualizer: string }>(
         "transcribing-visualizer-changed",
         (event) => {
+          if (isDisposed) {
+            return;
+          }
           const visualizer = event.payload.visualizer as TranscribingVariant;
           if (["dots", "equalizer", "gradient"].includes(visualizer)) {
-            setTranscribingVariant(visualizer);
+            runIfMounted(() => {
+              setTranscribingVariant(visualizer);
+            });
           }
         },
       );
 
-      // Return cleanup function immediately after listener registration
-      const cleanup = () => {
+      // Cleanup function
+      return () => {
         unlistenShow();
         unlistenHide();
         unlistenLevel();
         unlistenVisualizer();
       };
-
-      // Load initial visualizer setting
-      try {
-        const result = await commands.getAppSettings();
-        if (
-          !isDisposed &&
-          result.status === "ok" &&
-          result.data.transcribing_visualizer
-        ) {
-          const visualizer = result.data
-            .transcribing_visualizer as TranscribingVariant;
-          if (["dots", "equalizer", "gradient"].includes(visualizer)) {
-            setTranscribingVariant(visualizer);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to load transcribing visualizer setting:", error);
-      }
-
-      return cleanup;
     };
 
-    let isDisposed = false;
     let cleanupFn: (() => void) | undefined;
     setupEventListeners().then((fn) => {
       if (isDisposed) {
@@ -106,6 +109,32 @@ const RecordingOverlay: React.FC = () => {
       }
       cleanupFn = fn;
     });
+
+    // Load initial visualizer setting
+    void (async () => {
+      try {
+        const result = await commands.getAppSettings();
+        if (
+          !isDisposed &&
+          result.status === "ok" &&
+          result.data.transcribing_visualizer &&
+          ["dots", "equalizer", "gradient"].includes(
+            result.data.transcribing_visualizer,
+          )
+        ) {
+          setTranscribingVariant(
+            result.data.transcribing_visualizer as TranscribingVariant,
+          );
+        }
+      } catch (error) {
+        if (!isDisposed) {
+          console.error(
+            "Failed to load transcribing visualizer setting:",
+            error,
+          );
+        }
+      }
+    })();
 
     return () => {
       isDisposed = true;

@@ -493,6 +493,15 @@
         "description": "Choisissez le système des raccourcis clavier.",
         "bindingsReset": "Raccourcis clavier étaient incompatibles et ont été réinitialisés aux valeurs par défaut"
       },
+      "transcribingVisualizer": {
+        "title": "Visualiseur de transcription",
+        "description": "Choisissez le style d'animation pour l'état de transcription dans la superposition.",
+        "options": {
+          "dots": "Points (onde pulsée)",
+          "equalizer": "Micro égaliseur",
+          "gradient": "Aurore"
+        }
+      },
       "paths": {
         "appData": "Données de l'application :",
         "models": "Modèles :",

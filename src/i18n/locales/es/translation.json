@@ -493,6 +493,15 @@
         "description": "Elige el sistema que gestiona los atajos de teclado.",
         "bindingsReset": "Los atajos de teclado eran incompatibles y se restablecieron a los valores predeterminados"
       },
+      "transcribingVisualizer": {
+        "title": "Visualizador de transcripción",
+        "description": "Elige el estilo de animación para el estado de transcripción en la superposición.",
+        "options": {
+          "dots": "Puntos (onda pulsante)",
+          "equalizer": "Microecualizador",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Datos de la Aplicación:",
         "models": "Modelos:",

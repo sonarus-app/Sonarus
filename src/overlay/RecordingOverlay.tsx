@@ -79,7 +79,11 @@ const RecordingOverlay: React.FC = () => {
       // Load initial visualizer setting
       try {
         const result = await commands.getAppSettings();
-        if (result.status === "ok" && result.data.transcribing_visualizer) {
+        if (
+          !isDisposed &&
+          result.status === "ok" &&
+          result.data.transcribing_visualizer
+        ) {
           const visualizer = result.data
             .transcribing_visualizer as TranscribingVariant;
           if (["dots", "equalizer", "gradient"].includes(visualizer)) {

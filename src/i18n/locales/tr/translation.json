@@ -493,6 +493,15 @@
         "description": "Klavye kısayolları için kullanılacak altyapıyı seçin.",
         "bindingsReset": "Klavye kısayolları uyumsuzdu ve varsayılan ayarlara sıfırlandı"
       },
+      "transcribingVisualizer": {
+        "title": "Yazıya dökme görselleştiricisi",
+        "description": "Kaplamadaki yazıya dökme durumu için animasyon stilini seçin.",
+        "options": {
+          "dots": "Noktalar (Atımlı Dalga)",
+          "equalizer": "Mikro ekolayzır",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Uygulama Verileri:",
         "models": "Modeller:",

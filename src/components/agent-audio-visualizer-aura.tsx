@@ -346,7 +346,7 @@ export const AgentAudioVisualizerAuraVariants = cva(["aspect-square"], {
     },
   },
   defaultVariants: {
-    size: "md",
+    size: "lg",
   },
 });
 

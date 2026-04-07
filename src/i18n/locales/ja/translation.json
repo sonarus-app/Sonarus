@@ -493,6 +493,15 @@
         "description": "キーボードショートカットのバックエンドを選択してください。",
         "bindingsReset": "キーボードショートカットに互換性がなかったため、デフォルトにリセットされました"
       },
+      "transcribingVisualizer": {
+        "title": "文字起こしビジュアライザー",
+        "description": "オーバーレイの文字起こし状態で表示するアニメーションスタイルを選択します。",
+        "options": {
+          "dots": "ドット（パルスウェーブ）",
+          "equalizer": "マイクロイコライザー",
+          "gradient": "オーロラ"
+        }
+      },
       "paths": {
         "appData": "アプリデータ:",
         "models": "モデル:",

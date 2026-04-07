@@ -493,6 +493,15 @@
         "description": "Escolha o sistema responsável pelos atalhos de teclado.",
         "bindingsReset": "Os atalhos de teclado eram incompatíveis e foram redefinidos para os padrões"
       },
+      "transcribingVisualizer": {
+        "title": "Visualizador de transcrição",
+        "description": "Escolha o estilo de animação para o estado de transcrição na sobreposição.",
+        "options": {
+          "dots": "Pontos (onda pulsante)",
+          "equalizer": "Micro equalizador",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Dados do App:",
         "models": "Modelos:",

@@ -493,6 +493,15 @@
         "description": "Chọn hệ thống xử lý phím tắt.",
         "bindingsReset": "Các phím tắt không tương thích và đã được đặt lại về mặc định"
       },
+      "transcribingVisualizer": {
+        "title": "Trình hiển thị phiên âm",
+        "description": "Chọn kiểu hoạt ảnh cho trạng thái đang phiên âm trong lớp phủ.",
+        "options": {
+          "dots": "Các chấm (sóng xung)",
+          "equalizer": "Bộ cân bằng mini",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Dữ liệu ứng dụng:",
         "models": "Mô hình:",

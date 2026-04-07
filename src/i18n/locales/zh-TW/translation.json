@@ -493,6 +493,15 @@
         "description": "選擇鍵盤快捷鍵的後端",
         "bindingsReset": "鍵盤快捷鍵不相容，已重設為預設值"
       },
+      "transcribingVisualizer": {
+        "title": "轉錄視覺化器",
+        "description": "選擇覆蓋層中轉錄狀態的動畫樣式。",
+        "options": {
+          "dots": "圓點（脈衝波）",
+          "equalizer": "微型等化器",
+          "gradient": "極光"
+        }
+      },
       "paths": {
         "appData": "應用程式資料:",
         "models": "模型:",

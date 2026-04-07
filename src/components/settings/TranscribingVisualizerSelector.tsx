@@ -22,19 +22,19 @@ export const TranscribingVisualizerSelector: React.FC<
   const visualizerOptions: DropdownOption[] = [
     {
       value: "dots",
-      label: t("settings.advanced.transcribingVisualizer.options.dots", {
+      label: t("settings.debug.transcribingVisualizer.options.dots", {
         defaultValue: "Dots (Pulse Wave)",
       }),
     },
     {
       value: "equalizer",
-      label: t("settings.advanced.transcribingVisualizer.options.equalizer", {
+      label: t("settings.debug.transcribingVisualizer.options.equalizer", {
         defaultValue: "Micro Equalizer",
       }),
     },
     {
       value: "gradient",
-      label: t("settings.advanced.transcribingVisualizer.options.gradient", {
+      label: t("settings.debug.transcribingVisualizer.options.gradient", {
         defaultValue: "Aurora",
       }),
     },
@@ -54,8 +54,8 @@ export const TranscribingVisualizerSelector: React.FC<
 
   return (
     <SettingContainer
-      title={t("settings.advanced.transcribingVisualizer.title")}
-      description={t("settings.advanced.transcribingVisualizer.description")}
+      title={t("settings.debug.transcribingVisualizer.title")}
+      description={t("settings.debug.transcribingVisualizer.description")}
       descriptionMode={descriptionMode}
       grouped={grouped}
       layout="horizontal"

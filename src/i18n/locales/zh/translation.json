@@ -493,6 +493,15 @@
         "description": "选择键盘快捷键的后端。",
         "bindingsReset": "键盘快捷键不兼容，已重置为默认值"
       },
+      "transcribingVisualizer": {
+        "title": "转录可视化器",
+        "description": "选择覆盖层中转录状态的动画样式。",
+        "options": {
+          "dots": "圆点（脉冲波）",
+          "equalizer": "微型均衡器",
+          "gradient": "极光"
+        }
+      },
       "paths": {
         "appData": "应用数据:",
         "models": "模型:",

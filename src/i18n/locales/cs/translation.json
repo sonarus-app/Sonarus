@@ -493,6 +493,15 @@
         "description": "Zvolte backend pro klávesové zkratky.",
         "bindingsReset": "Klávesové zkratky byly nekompatibilní a byly obnoveny na výchozí hodnoty"
       },
+      "transcribingVisualizer": {
+        "title": "Vizualizér přepisu",
+        "description": "Vyberte styl animace pro stav přepisu v překryvném okně.",
+        "options": {
+          "dots": "Tečky (pulzní vlna)",
+          "equalizer": "Mikro ekvalizér",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Data aplikace:",
         "models": "Modely:",

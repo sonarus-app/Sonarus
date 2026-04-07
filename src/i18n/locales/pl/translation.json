@@ -493,6 +493,15 @@
         "description": "Wybierz backend dla skrótów klawiaturowych.",
         "bindingsReset": "Skróty klawiaturowe były niekompatybilne i zostały zresetowane do wartości domyślnych"
       },
+      "transcribingVisualizer": {
+        "title": "Wizualizator transkrypcji",
+        "description": "Wybierz styl animacji dla stanu transkrypcji w nakładce.",
+        "options": {
+          "dots": "Kropki (fala pulsacyjna)",
+          "equalizer": "Mikro korektor",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Dane aplikacji:",
         "models": "Modele:",

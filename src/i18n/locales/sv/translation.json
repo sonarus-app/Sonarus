@@ -493,6 +493,15 @@
         "description": "Välj tangentbordsgenvägens implementation.",
         "bindingsReset": "Kortkommandona var inkompatibla och återställdes till standardvärden"
       },
+      "transcribingVisualizer": {
+        "title": "Visualiserare för transkribering",
+        "description": "Välj animationsstil för transkriberingsläget i överlägget.",
+        "options": {
+          "dots": "Punkter (pulsvåg)",
+          "equalizer": "Mikro-equalizer",
+          "gradient": "Aurora"
+        }
+      },
       "paths": {
         "appData": "Appdata:",
         "models": "Modeller:",

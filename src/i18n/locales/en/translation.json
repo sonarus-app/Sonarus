@@ -495,7 +495,12 @@
       },
       "transcribingVisualizer": {
         "title": "Transcribing Visualizer",
-        "description": "Choose the animation style for the transcribing state in the overlay."
+        "description": "Choose the animation style for the transcribing state in the overlay.",
+        "options": {
+          "dots": "Dots (Pulse Wave)",
+          "equalizer": "Micro Equalizer",
+          "gradient": "Aurora"
+        }
       },
       "paths": {
         "appData": "App Data:",

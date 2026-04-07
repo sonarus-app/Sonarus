@@ -281,6 +281,71 @@ impl Default for TypingTool {
     }
 }
 
+#[derive(Serialize, Debug, Clone, Copy, PartialEq, Eq, Type)]
+#[serde(rename_all = "snake_case")]
+pub enum TranscribingVisualizer {
+    Dots,
+    Equalizer,
+    Gradient,
+}
+
+impl Default for TranscribingVisualizer {
+    fn default() -> Self {
+        Self::Dots
+    }
+}
+
+impl TranscribingVisualizer {
+    pub fn from_str(value: &str) -> Option<Self> {
+        match value {
+            "dots" => Some(Self::Dots),
+            "equalizer" => Some(Self::Equalizer),
+            "gradient" => Some(Self::Gradient),
+            _ => None,
+        }
+    }
+
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Self::Dots => "dots",
+            Self::Equalizer => "equalizer",
+            Self::Gradient => "gradient",
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for TranscribingVisualizer {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct TranscribingVisualizerVisitor;
+
+        impl<'de> Visitor<'de> for TranscribingVisualizerVisitor {
+            type Value = TranscribingVisualizer;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("a valid transcribing visualizer string")
+            }
+
+            fn visit_str<E: de::Error>(self, value: &str) -> Result<Self::Value, E> {
+                if let Some(visualizer) = TranscribingVisualizer::from_str(value) {
+                    return Ok(visualizer);
+                }
+
+                warn!(
+                    "Unknown transcribing visualizer '{}', defaulting to {}",
+                    value,
+                    TranscribingVisualizer::default().as_str()
+                );
+                Ok(TranscribingVisualizer::default())
+            }
+        }
+
+        deserializer.deserialize_str(TranscribingVisualizerVisitor)
+    }
+}
+
 /* still handy for composing the initial JSON in the store ------------- */
 #[derive(Serialize, Deserialize, Debug, Clone, Type)]
 pub struct AppSettings {
@@ -375,7 +440,7 @@ pub struct AppSettings {
     #[serde(default)]
     pub extra_recording_buffer_ms: u64,
     #[serde(default = "default_transcribing_visualizer")]
-    pub transcribing_visualizer: String,
+    pub transcribing_visualizer: TranscribingVisualizer,
 }
 
 fn default_model() -> String {
@@ -582,8 +647,8 @@ fn default_post_process_prompts() -> Vec<LLMPrompt> {
     }]
 }
 
-fn default_transcribing_visualizer() -> String {
-    "dots".to_string()
+fn default_transcribing_visualizer() -> TranscribingVisualizer {
+    TranscribingVisualizer::default()
 }
 
 fn default_typing_tool() -> TypingTool {
@@ -882,11 +947,23 @@ pub fn get_recording_retention_period(app: &AppHandle) -> RecordingRetentionPeri
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde_json::json;
 
     #[test]
     fn default_settings_disable_auto_submit() {
         let settings = get_default_settings();
         assert!(!settings.auto_submit);
         assert_eq!(settings.auto_submit_key, AutoSubmitKey::Enter);
+    }
+
+    #[test]
+    fn invalid_transcribing_visualizer_round_trips_to_default() {
+        let mut settings_value = serde_json::to_value(get_default_settings()).unwrap();
+        settings_value["transcribing_visualizer"] = json!("not-a-real-visualizer");
+
+        let settings: AppSettings = serde_json::from_value(settings_value).unwrap();
+        let serialized = serde_json::to_value(settings).unwrap();
+
+        assert_eq!(serialized["transcribing_visualizer"], json!("dots"));
     }
 }

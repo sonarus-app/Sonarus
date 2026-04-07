@@ -10,30 +10,10 @@ import {
 
 import { ReactShaderToy } from "@/components/react-shader-toy";
 import { useAgentAudioVisualizerAura } from "@/hooks/use-agent-audio-visualizer-aura";
+import { hexToRgb } from "@/lib/color-utils";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_COLOR = "#1FD5F9";
-
-function hexToRgb(hexColor: string) {
-  try {
-    const rgbColor = hexColor.match(
-      /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-    );
-
-    if (rgbColor) {
-      const [, r, g, b] = rgbColor;
-      const color = [r, g, b].map((c = "00") => parseInt(c, 16) / 255);
-
-      return color;
-    }
-  } catch (error) {
-    console.error(
-      `Invalid hex color '${hexColor}'.\nFalling back to default color '${DEFAULT_COLOR}'.`,
-    );
-  }
-
-  return hexToRgb(DEFAULT_COLOR);
-}
 
 const shaderSource = `
 const float TAU = 6.283185;
@@ -282,15 +262,18 @@ function AuraShader({
   color = DEFAULT_COLOR,
   colorShift = 1.0,
   brightness = 1.0,
-  themeMode = typeof window !== "undefined" &&
-  document.documentElement.classList.contains("dark")
-    ? "dark"
-    : "light",
+  themeMode,
   ref,
   className,
   ...props
 }: AuraShaderProps & ComponentProps<"div">) {
-  const rgbColor = useMemo(() => hexToRgb(color), [color]);
+  const resolvedThemeMode =
+    themeMode ??
+    (typeof window !== "undefined" &&
+    document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light");
+  const rgbColor = useMemo(() => hexToRgb(color, DEFAULT_COLOR), [color]);
 
   return (
     <div ref={ref} className={className} {...props}>
@@ -323,7 +306,10 @@ function AuraShader({
           // Smoothing of the aurora (0-1)
           uSmoothing: { type: "1f", value: 1.0 },
           // Display mode: 0=dark background, 1=light background
-          uMode: { type: "1f", value: themeMode === "light" ? 1.0 : 0.0 },
+          uMode: {
+            type: "1f",
+            value: resolvedThemeMode === "light" ? 1.0 : 0.0,
+          },
           // Color
           uColor: { type: "3fv", value: rgbColor ?? [0, 0.7, 1] },
         }}

@@ -124,7 +124,7 @@ Quick, bright, digitally-native sounds.
 
 ### File Structure
 
-```
+```text
 src-tauri/resources/
 ├── glass_start.wav
 ├── glass_stop.wav

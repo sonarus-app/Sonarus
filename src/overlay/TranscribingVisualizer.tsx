@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { AuroraFallback } from "./AuroraFallback";
 
 export type TranscribingVariant = "dots" | "equalizer" | "gradient";
@@ -8,69 +8,33 @@ interface TranscribingVisualizerProps {
 }
 
 // Original 8-dot pulse wave
-const DotsVisualizer: React.FC = () => (
+const DotsVisualizer: FC = () => (
   <div className="transcribing-dots">
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
-    <div className="dot" />
+    {Array.from({ length: 8 }).map((_, index) => (
+      <div key={index} className="dot" />
+    ))}
   </div>
 );
 
 // Center-line focused equalizer
-const EqualizerVisualizer: React.FC = () => (
+const EqualizerVisualizer: FC = () => (
   <div className="transcribing-equalizer">
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
-    <div className="eq-bar-container">
-      <div className="eq-bar" />
-    </div>
+    {Array.from({ length: 12 }).map((_, index) => (
+      <div key={index} className="eq-bar-container">
+        <div className="eq-bar" />
+      </div>
+    ))}
   </div>
 );
 
 // Aurora visualizer - CSS-based flowing energy effect
-const GradientVisualizer: React.FC = () => (
+const GradientVisualizer: FC = () => (
   <div className="transcribing-gradient">
     <AuroraFallback className="w-full h-full" />
   </div>
 );
 
-export const TranscribingVisualizer: React.FC<TranscribingVisualizerProps> = ({
+export const TranscribingVisualizer: FC<TranscribingVisualizerProps> = ({
   variant,
 }) => {
   switch (variant) {
@@ -84,10 +48,3 @@ export const TranscribingVisualizer: React.FC<TranscribingVisualizerProps> = ({
       return <DotsVisualizer />;
   }
 };
-
-// Small indicator showing current variant (for debugging)
-export const VariantIndicator: React.FC<{ variant: TranscribingVariant }> = ({
-  variant,
-}) => (
-  <div className="variant-indicator">{variant.charAt(0).toUpperCase()}</div>
-);

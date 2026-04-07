@@ -91,7 +91,20 @@ const RecordingOverlay: React.FC = () => {
       };
     };
 
-    setupEventListeners();
+    let isDisposed = false;
+    let cleanupFn: (() => void) | undefined;
+    setupEventListeners().then((fn) => {
+      if (isDisposed) {
+        fn();
+        return;
+      }
+      cleanupFn = fn;
+    });
+
+    return () => {
+      isDisposed = true;
+      cleanupFn?.();
+    };
   }, []);
 
   const getIcon = () => {

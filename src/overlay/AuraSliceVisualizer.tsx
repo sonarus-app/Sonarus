@@ -2,25 +2,10 @@
 
 import React, { useMemo, useEffect, useState } from "react";
 import { ReactShaderToy } from "@/components/react-shader-toy";
+import { hexToRgb } from "@/lib/color-utils";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_COLOR = "#ffe5ee";
-
-function hexToRgb(hexColor: string) {
-  try {
-    const rgbColor = hexColor.match(
-      /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-    );
-    if (rgbColor) {
-      const [, r, g, b] = rgbColor;
-      const color = [r, g, b].map((c = "00") => parseInt(c, 16) / 255);
-      return color;
-    }
-  } catch (error) {
-    console.error(`Invalid hex color '${hexColor}'. Falling back to default.`);
-  }
-  return hexToRgb(DEFAULT_COLOR);
-}
 
 // Modified shader that shows a horizontal slice through the circular aura
 const sliceShaderSource = `
@@ -193,7 +178,7 @@ export function AuraSliceShader({
   themeMode = "dark",
   className,
 }: AuraSliceShaderProps) {
-  const rgbColor = useMemo(() => hexToRgb(color), [color]);
+  const rgbColor = useMemo(() => hexToRgb(color, DEFAULT_COLOR), [color]);
   const dpr =
     typeof window !== "undefined" ? (window.devicePixelRatio ?? 1) : 1;
 
@@ -242,7 +227,6 @@ export function AuraSliceVisualizer({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    console.log("[AuraSliceVisualizer] Mounting...");
     setMounted(true);
   }, []);
 
@@ -251,8 +235,6 @@ export function AuraSliceVisualizer({
       <div className={cn("w-full h-full bg-white/20 rounded", className)} />
     );
   }
-
-  console.log("[AuraSliceVisualizer] Rendering shader with color:", color);
 
   return (
     <AuraSliceShader

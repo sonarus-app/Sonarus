@@ -5,12 +5,7 @@ import { Dropdown, type DropdownOption } from "../ui/Dropdown";
 import { useSettings } from "../../hooks/useSettings";
 import { commands } from "@/bindings";
 import { toast } from "sonner";
-
-const VISUALIZER_OPTIONS: DropdownOption[] = [
-  { value: "dots", label: "Dots (Pulse Wave)" },
-  { value: "equalizer", label: "Micro Equalizer" },
-  { value: "gradient", label: "Aurora" },
-];
+import type { TranscribingVariant } from "@/overlay/TranscribingVisualizer";
 
 interface TranscribingVisualizerSelectorProps {
   descriptionMode?: "tooltip" | "inline";
@@ -23,6 +18,26 @@ export const TranscribingVisualizerSelector: React.FC<
   const { t } = useTranslation();
   const { getSetting, isUpdating, refreshSettings } = useSettings();
   const currentVisualizer = getSetting("transcribing_visualizer") ?? "dots";
+  const visualizerOptions: DropdownOption[] = [
+    {
+      value: "dots",
+      label: t("settings.advanced.transcribingVisualizer.options.dots", {
+        defaultValue: "Dots (Pulse Wave)",
+      }),
+    },
+    {
+      value: "equalizer",
+      label: t("settings.advanced.transcribingVisualizer.options.equalizer", {
+        defaultValue: "Micro Equalizer",
+      }),
+    },
+    {
+      value: "gradient",
+      label: t("settings.advanced.transcribingVisualizer.options.gradient", {
+        defaultValue: "Aurora",
+      }),
+    },
+  ];
 
   const handleSelect = async (value: string) => {
     if (value === currentVisualizer) return;
@@ -55,8 +70,8 @@ export const TranscribingVisualizerSelector: React.FC<
       layout="horizontal"
     >
       <Dropdown
-        options={VISUALIZER_OPTIONS}
-        selectedValue={currentVisualizer}
+        options={visualizerOptions}
+        selectedValue={currentVisualizer as TranscribingVariant}
         onSelect={handleSelect}
         disabled={isUpdating("transcribing_visualizer")}
       />

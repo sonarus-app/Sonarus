@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { type LocalAudioTrack, type RemoteAudioTrack } from "livekit-client";
+import {
+  Track,
+  type LocalAudioTrack,
+  type RemoteAudioTrack,
+} from "livekit-client";
 import {
   type AnimationPlaybackControlsWithThen,
   type ValueAnimationTransition,
@@ -9,8 +13,8 @@ import {
 } from "motion/react";
 import {
   type AgentState,
-  type TrackReference,
   type TrackReferenceOrPlaceholder,
+  isTrackReference,
   useTrackVolume,
 } from "@livekit/components-react";
 
@@ -62,8 +66,13 @@ export function useAgentAudioVisualizerAura(
     useAnimatedValue(DEFAULT_FREQUENCY);
   const { value: brightness, animate: animateBrightness } =
     useAnimatedValue(DEFAULT_BRIGHTNESS);
+  const trackForVolume =
+    audioTrack instanceof Track || isTrackReference(audioTrack)
+      ? audioTrack
+      : undefined;
 
-  const volume = useTrackVolume(audioTrack as TrackReference, {
+  // LiveKit's hook accepts `undefined` and returns 0 until a concrete track is available.
+  const volume = useTrackVolume(trackForVolume, {
     fftSize: 512,
     smoothingTimeConstant: 0.55,
   });
@@ -116,15 +125,7 @@ export function useAgentAudioVisualizerAura(
     if (state === "speaking" && volume > 0 && !scaleMotionValue.isAnimating()) {
       animateScale(0.2 + 0.2 * volume, { duration: 0 });
     }
-  }, [
-    state,
-    volume,
-    scaleMotionValue,
-    animateScale,
-    animateAmplitude,
-    animateFrequency,
-    animateBrightness,
-  ]);
+  }, [state, volume, scaleMotionValue, animateScale]);
 
   return {
     speed,

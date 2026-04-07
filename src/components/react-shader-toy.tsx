@@ -24,6 +24,7 @@ const UNIFORM_RESOLUTION = "iResolution";
 const UNIFORM_CHANNEL = "iChannel";
 const UNIFORM_CHANNELRESOLUTION = "iChannelResolution";
 const UNIFORM_DEVICEORIENTATION = "iDeviceOrientation";
+const EMPTY_TEXTURES: TextureParams[] = [];
 
 type Vector4<T = number> = [T, T, T, T];
 type UniformType = keyof Uniforms;
@@ -436,6 +437,12 @@ export interface ReactShaderToyProps {
   /** Fragment shader GLSL code. */
   fs: string;
 
+  /**
+   * Optional key used to force WebGL teardown and re-initialization when shader
+   * inputs change outside of the built-in `fs`/`vs`/`textures` dependencies.
+   */
+  shaderKey?: string | number;
+
   /** Vertex shader GLSL code. */
   vs?: string;
 
@@ -516,8 +523,9 @@ export interface ReactShaderToyProps {
 
 export function ReactShaderToy({
   fs,
+  shaderKey,
   vs = BASIC_VS,
-  textures = [],
+  textures: propTextures,
   uniforms: propUniforms,
   clearColor = [0, 0, 0, 1],
   precision = "highp",
@@ -531,6 +539,7 @@ export function ReactShaderToy({
   animateWhenNotVisible = false,
   ...canvasProps
 }: ReactShaderToyProps & ComponentPropsWithoutRef<"canvas">) {
+  const textures = propTextures ?? EMPTY_TEXTURES;
   // Refs for WebGL state
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glRef = useRef<WebGLRenderingContext | null>(null);
@@ -706,8 +715,9 @@ export function ReactShaderToy({
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       onWarning?.(log(`Error compiling the shader:\n${shaderCodeAsText}`));
       const compilationLog = gl.getShaderInfoLog(shader);
-      gl.deleteShader(shader);
       onError?.(log(`Shader compiler log: ${compilationLog}`));
+      gl.deleteShader(shader);
+      return null;
     }
     return shader;
   };
@@ -931,11 +941,11 @@ export function ReactShaderToy({
     if (texturesArrRef.current.length > 0) {
       for (let index = 0; index < texturesArrRef.current.length; index++) {
         const texture = texturesArrRef.current[index];
-        if (!texture) return;
+        if (!texture) continue;
         const { isVideo, _webglTexture, source, flipY, isLoaded } = texture;
-        if (!isLoaded || !_webglTexture || !source) return;
+        if (!isLoaded || !_webglTexture || !source) continue;
         if (uniformsRef.current[`iChannel${index}`]?.isNeeded) {
-          if (!shaderProgramRef.current) return;
+          if (!shaderProgramRef.current) continue;
           const iChannel = gl.getUniformLocation(
             shaderProgramRef.current,
             `iChannel${index}`,
@@ -1064,7 +1074,6 @@ export function ReactShaderToy({
     );
     observer.observe(canvas);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animateWhenNotVisible]);
 
   // Main effect for initialization and cleanup
@@ -1112,8 +1121,7 @@ export function ReactShaderToy({
       cancelAnimationFrame(initFrameIdRef.current ?? 0);
       cancelAnimationFrame(animFrameIdRef.current ?? 0);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependency array to run only once on mount
+  }, [fs, shaderKey, textures, vs]);
 
   return (
     <canvas

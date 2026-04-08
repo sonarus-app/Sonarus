@@ -20,6 +20,7 @@ import { useSettings } from "../../../hooks/useSettings";
 import { KeyboardImplementationSelector } from "../debug/KeyboardImplementationSelector";
 import { AccelerationSelector } from "../AccelerationSelector";
 import { LazyStreamClose } from "../toggles/LazyStreamClose";
+import { TranscribingVisualizerSelector } from "../TranscribingVisualizerSelector";
 
 export const AdvancedSettings: React.FC = () => {
   const { t } = useTranslation();
@@ -66,6 +67,10 @@ export const AdvancedSettings: React.FC = () => {
           />
           <AccelerationSelector descriptionMode="tooltip" grouped={true} />
           <LazyStreamClose descriptionMode="tooltip" grouped={true} />
+          <TranscribingVisualizerSelector
+            descriptionMode="tooltip"
+            grouped={true}
+          />
         </SettingsGroup>
       )}
     </div>

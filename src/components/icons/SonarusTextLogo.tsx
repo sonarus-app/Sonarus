@@ -32,6 +32,7 @@ const SonarusTextLogo = ({
           letterSpacing: "-0.02em",
         }}
       >
+        {/* i18next-disable-line */}
         Sonarus
       </text>
     </svg>

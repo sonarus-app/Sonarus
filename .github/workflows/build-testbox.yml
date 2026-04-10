@@ -36,11 +36,6 @@ jobs:
         with:
           bun-version: 1.3.10
 
-      - name: Add bun to PATH
-        run: |
-          echo "export PATH=\"$HOME/.bun/bin:\$PATH\"" >> ~/.bashrc
-          echo "export PATH=\"$HOME/.bun/bin:\$PATH\"" >> ~/.bash_profile
-
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:

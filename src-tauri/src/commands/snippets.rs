@@ -53,10 +53,7 @@ pub async fn delete_snippet(
 
 #[tauri::command]
 #[specta::specta]
-pub async fn set_snippets_enabled(
-    app: AppHandle,
-    enabled: bool,
-) -> Result<(), String> {
+pub async fn set_snippets_enabled(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = crate::settings::get_settings(&app);
     settings.snippets_enabled = enabled;
     crate::settings::write_settings(&app, settings);

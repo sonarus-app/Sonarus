@@ -5,6 +5,7 @@ use rusqlite::{params, Connection, OptionalExtension};
 use rusqlite_migration::{Migrations, M};
 use serde::{Deserialize, Serialize};
 use specta::Type;
+use std::collections::HashMap;
 use std::path::PathBuf;
 use tauri::AppHandle;
 
@@ -57,12 +58,14 @@ impl SnippetManager {
 
         let version_before: i32 =
             conn.pragma_query_value(None, "user_version", |row| row.get(0))?;
-        debug!("Snippets database version before migration: {}", version_before);
+        debug!(
+            "Snippets database version before migration: {}",
+            version_before
+        );
 
         migrations.to_latest(&mut conn)?;
 
-        let version_after: i32 =
-            conn.pragma_query_value(None, "user_version", |row| row.get(0))?;
+        let version_after: i32 = conn.pragma_query_value(None, "user_version", |row| row.get(0))?;
 
         if version_after > version_before {
             info!(
@@ -70,7 +73,10 @@ impl SnippetManager {
                 version_before, version_after
             );
         } else {
-            debug!("Snippets database already at latest version {}", version_after);
+            debug!(
+                "Snippets database already at latest version {}",
+                version_after
+            );
         }
 
         Ok(())
@@ -209,35 +215,47 @@ impl SnippetManager {
     pub fn apply_expansions(&self, text: &str) -> Result<String> {
         let conn = self.get_connection()?;
         let mut stmt = conn.prepare(
-            "SELECT id, trigger, expansion, is_enabled, created_at, updated_at
+            "SELECT trigger, expansion
              FROM snippets
              WHERE is_enabled = 1
              ORDER BY LENGTH(trigger) DESC",
         )?;
 
-        let snippets: Vec<Snippet> = stmt
-            .query_map([], Self::map_snippet)?
-            .collect::<std::result::Result<Vec<_>, _>>()?;
+        let mut snippets_map = HashMap::new();
+        let mut triggers = Vec::new();
 
-        if snippets.is_empty() {
-            return Ok(text.to_string());
-        }
+        let rows = stmt.query_map([], |row| {
+            Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
+        })?;
 
-        let mut result = text.to_string();
-
-        for snippet in &snippets {
-            let escaped = regex::escape(&snippet.trigger);
-            let pattern = format!(r"(?i)\b{}\b", escaped);
-            match Regex::new(&pattern) {
-                Ok(re) => {
-                    result = re.replace_all(&result, snippet.expansion.as_str()).to_string();
-                }
-                Err(e) => {
-                    error!("Failed to compile regex for trigger '{}': {}", snippet.trigger, e);
-                }
+        for row in rows {
+            let (trigger, expansion) = row?;
+            let trigger_low = trigger.to_lowercase();
+            // In case of multiple snippets with same lowercase trigger, we use the first (longest) one.
+            if !snippets_map.contains_key(&trigger_low) {
+                triggers.push(regex::escape(&trigger));
+                snippets_map.insert(trigger_low, expansion);
             }
         }
 
-        Ok(result)
+        if triggers.is_empty() {
+            return Ok(text.to_string());
+        }
+
+        // Build a single regex that matches all triggers as whole words
+        let pattern = format!(r"(?i)\b({})\b", triggers.join("|"));
+        let re = Regex::new(&pattern)?;
+
+        // Replace all matches in a single pass.
+        // Using a closure avoids the template expansion of '$' characters in the expansion text.
+        let result = re.replace_all(text, |caps: &regex::Captures| {
+            let matched = caps[1].to_lowercase();
+            snippets_map
+                .get(&matched)
+                .cloned()
+                .unwrap_or_else(|| caps[0].to_string())
+        });
+
+        Ok(result.to_string())
     }
 }

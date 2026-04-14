@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../ui/Button";
-import { Textarea } from "../../ui/Textarea";
+import { Button } from "@/components/ui/Button";
+import { Textarea } from "@/components/ui/Textarea";
 import { type Snippet } from "@/bindings";
 
 const TRIGGER_MAX = 75;
@@ -25,10 +25,21 @@ export const SnippetFormModal: React.FC<SnippetFormModalProps> = ({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const triggerRef = useRef<HTMLInputElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const isEdit = !!snippet;
 
   useEffect(() => {
+    // Capture previously focused element
+    previousActiveElement.current = document.activeElement as HTMLElement;
+
+    // Move focus into the modal
     triggerRef.current?.focus();
+
+    // Return cleanup function to restore focus
+    return () => {
+      previousActiveElement.current?.focus();
+    };
   }, []);
 
   useEffect(() => {
@@ -36,12 +47,43 @@ export const SnippetFormModal: React.FC<SnippetFormModalProps> = ({
       if (e.key === "Escape") {
         onClose();
       }
+
+      // Focus trapping for Tab and Shift+Tab
+      if (e.key === "Tab") {
+        const modal = modalRef.current;
+        if (!modal) return;
+
+        const focusableElements = modal.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        const focusableArray = Array.from(focusableElements);
+
+        if (focusableArray.length === 0) return;
+
+        const firstElement = focusableArray[0];
+        const lastElement = focusableArray[focusableArray.length - 1];
+
+        if (e.shiftKey) {
+          // Shift+Tab: if on first element, move to last
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab: if on last element, move to first
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
   const handleSave = async () => {
+    if (saving) return;
     const trimmedTrigger = trigger.trim();
     if (!trimmedTrigger) {
       setError(t("settings.snippets.errors.emptyTrigger"));
@@ -76,7 +118,8 @@ export const SnippetFormModal: React.FC<SnippetFormModalProps> = ({
     if (
       e.key === "Enter" &&
       !e.shiftKey &&
-      e.target instanceof HTMLInputElement
+      e.target instanceof HTMLInputElement &&
+      !saving
     ) {
       e.preventDefault();
       handleSave();
@@ -91,6 +134,7 @@ export const SnippetFormModal: React.FC<SnippetFormModalProps> = ({
       }}
     >
       <div
+        ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="snippetModalTitle"

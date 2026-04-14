@@ -1,5 +1,5 @@
 use anyhow::{anyhow, Result};
-use log::{debug, error, info};
+use log::{debug, info};
 use regex::Regex;
 use rusqlite::{params, Connection, OptionalExtension};
 use rusqlite_migration::{Migrations, M};

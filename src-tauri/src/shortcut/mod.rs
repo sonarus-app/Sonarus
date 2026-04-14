@@ -48,7 +48,9 @@ pub fn init_shortcuts(app: &AppHandle) {
                 // Update settings to persist the fallback so we don't retry HandyKeys on next launch
                 let mut settings = settings::get_settings(app);
                 settings.keyboard_implementation = KeyboardImplementation::Tauri;
-                settings::write_settings(app, settings)?;
+                if let Err(err) = settings::write_settings(app, settings) {
+                    log::error!("Failed to persist settings: {err}");
+                }
 
                 tauri_impl::init_shortcuts(app);
             }
@@ -439,7 +441,9 @@ fn register_all_shortcuts_for_implementation(
 
     // Save settings if any bindings were reset
     if !reset_bindings.is_empty() {
-        settings::write_settings(app, current_settings);
+        if let Err(e) = settings::write_settings(app, current_settings) {
+            error!("Failed to save settings after resetting bindings: {}", e);
+        }
     }
 
     reset_bindings

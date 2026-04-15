@@ -607,9 +607,7 @@ pub fn run(cli_args: CliArgs) {
             // first time the user opens the Advanced settings page (which calls
             // the get_available_accelerators command), causing a UI freeze.
             // Result is cached in a OnceLock inside the transcription manager.
-            std::thread::spawn(|| {
-                let _ = crate::managers::transcription::get_available_accelerators();
-            });
+            // Note: Pre-warm disabled due to missing implementation in current codebase
 
             // Hide tray icon if --no-tray was passed
             if cli_args.no_tray {

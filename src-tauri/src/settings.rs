@@ -923,9 +923,12 @@ pub fn write_settings(app: &AppHandle, settings: AppSettings) -> Result<(), Stri
         .store(crate::portable::store_path(SETTINGS_STORE_PATH))
         .map_err(|e| format!("Failed to initialize store: {}", e))?;
 
-    store
-        .set("settings", serde_json::to_value(&settings).map_err(|e| e.to_string())?)
-        .map_err(|e| e.to_string())?;
+    store.set(
+        "settings",
+        serde_json::to_value(&settings).map_err(|e| e.to_string())?,
+    );
+    // Persist the store to disk
+    store.save().map_err(|e| e.to_string())?;
 
     Ok(())
 }

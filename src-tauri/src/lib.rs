@@ -165,7 +165,10 @@ fn initialize_core_logic(app_handle: &AppHandle) {
             Some(Arc::new(manager))
         }
         Err(e) => {
-            log::error!("Failed to initialize snippet manager: {}. Snippet features will be unavailable.", e);
+            log::error!(
+                "Failed to initialize snippet manager: {}. Snippet features will be unavailable.",
+                e
+            );
             None
         }
     };

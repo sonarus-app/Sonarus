@@ -15,7 +15,8 @@
     "postProcessing": "후처리",
     "history": "히스토리",
     "debug": "디버그",
-    "about": "정보"
+    "about": "정보",
+    "snippets": "Snippets"
   },
   "onboarding": {
     "subtitle": "시작하려면 음성 인식 모델을 선택하세요",
@@ -545,6 +546,42 @@
           "description": "OpenAI의 Whisper 자동 음성 인식 모델의 고성능 추론",
           "details": "Handy는 빠르고 로컬 음성-텍스트 처리를 위해 Whisper.cpp를 사용합니다. Georgi Gerganov와 기여자들의 놀라운 작업에 감사드립니다."
         }
+      }
+    },
+    "snippets": {
+      "title": "Smart Snippets",
+      "listTitle": "Your Snippets",
+      "addButton": "Add Snippet",
+      "addTitle": "Add Snippet",
+      "editTitle": "Edit Snippet",
+      "enabledLabel": "Smart Snippets",
+      "enabledDescription": "Automatically expand trigger phrases to full text after transcription",
+      "triggerLabel": "Trigger Phrase",
+      "triggerPlaceholder": "e.g. addr",
+      "triggerHint": "Say this phrase during transcription to expand it",
+      "expansionLabel": "Expansion Text",
+      "expansionPlaceholder": "e.g. 123 Main Street, Springfield",
+      "loading": "Loading snippets...",
+      "empty": "No snippets yet",
+      "emptyHint": "Add a snippet to expand trigger phrases automatically",
+      "edit": "Edit snippet",
+      "delete": "Delete snippet",
+      "toggleEnable": "Enable snippet {{name}}",
+      "editSnippet": "Edit snippet {{name}}",
+      "deleteSnippet": "Delete snippet {{name}}",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "add": "Add Snippet",
+      "created": "Snippet created",
+      "updated": "Snippet updated",
+      "deleted": "Snippet deleted",
+      "errors": {
+        "emptyTrigger": "Trigger phrase cannot be empty",
+        "triggerTooLong": "Trigger phrase must be {{max}} characters or fewer",
+        "expansionTooLong": "Expansion must be {{max}} characters or fewer",
+        "toggleFailed": "Failed to update snippet",
+        "deleteFailed": "Failed to delete snippet"
       }
     }
   },

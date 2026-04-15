@@ -15,7 +15,8 @@
     "postProcessing": "עיבוד משלים",
     "history": "היסטוריה",
     "debug": "ניפוי שגיאות",
-    "about": "אודות"
+    "about": "אודות",
+    "snippets": "Snippets"
   },
   "onboarding": {
     "subtitle": "כדי להתחיל, בחר מודל תמלול",
@@ -545,6 +546,42 @@
           "description": "הסקה מהירה לביצועים גבוהים עבור מודל זיהוי הדיבור Whisper של OpenAI",
           "details": "Handy משתמש ב-Whisper.cpp לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
         }
+      }
+    },
+    "snippets": {
+      "title": "Smart Snippets",
+      "listTitle": "Your Snippets",
+      "addButton": "Add Snippet",
+      "addTitle": "Add Snippet",
+      "editTitle": "Edit Snippet",
+      "enabledLabel": "Smart Snippets",
+      "enabledDescription": "Automatically expand trigger phrases to full text after transcription",
+      "triggerLabel": "Trigger Phrase",
+      "triggerPlaceholder": "e.g. addr",
+      "triggerHint": "Say this phrase during transcription to expand it",
+      "expansionLabel": "Expansion Text",
+      "expansionPlaceholder": "e.g. 123 Main Street, Springfield",
+      "loading": "Loading snippets...",
+      "empty": "No snippets yet",
+      "emptyHint": "Add a snippet to expand trigger phrases automatically",
+      "edit": "Edit snippet",
+      "delete": "Delete snippet",
+      "toggleEnable": "Enable snippet {{name}}",
+      "editSnippet": "Edit snippet {{name}}",
+      "deleteSnippet": "Delete snippet {{name}}",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "add": "Add Snippet",
+      "created": "Snippet created",
+      "updated": "Snippet updated",
+      "deleted": "Snippet deleted",
+      "errors": {
+        "emptyTrigger": "Trigger phrase cannot be empty",
+        "triggerTooLong": "Trigger phrase must be {{max}} characters or fewer",
+        "expansionTooLong": "Expansion must be {{max}} characters or fewer",
+        "toggleFailed": "Failed to update snippet",
+        "deleteFailed": "Failed to delete snippet"
       }
     }
   },

@@ -15,7 +15,8 @@
     "postProcessing": "Post-traitement",
     "history": "Historique",
     "debug": "Débogage",
-    "about": "À propos"
+    "about": "À propos",
+    "snippets": "Snippets"
   },
   "onboarding": {
     "subtitle": "Pour commencer, choisissez un modèle de transcription",
@@ -545,6 +546,42 @@
           "description": "Inférence haute performance du modèle de reconnaissance vocale automatique Whisper d'OpenAI",
           "details": "Handy utilise Whisper.cpp pour un traitement rapide et local de la parole en texte. Merci au travail incroyable de Georgi Gerganov et des contributeurs."
         }
+      }
+    },
+    "snippets": {
+      "title": "Smart Snippets",
+      "listTitle": "Your Snippets",
+      "addButton": "Add Snippet",
+      "addTitle": "Add Snippet",
+      "editTitle": "Edit Snippet",
+      "enabledLabel": "Smart Snippets",
+      "enabledDescription": "Automatically expand trigger phrases to full text after transcription",
+      "triggerLabel": "Trigger Phrase",
+      "triggerPlaceholder": "e.g. addr",
+      "triggerHint": "Say this phrase during transcription to expand it",
+      "expansionLabel": "Expansion Text",
+      "expansionPlaceholder": "e.g. 123 Main Street, Springfield",
+      "loading": "Loading snippets...",
+      "empty": "No snippets yet",
+      "emptyHint": "Add a snippet to expand trigger phrases automatically",
+      "edit": "Edit snippet",
+      "delete": "Delete snippet",
+      "toggleEnable": "Enable snippet {{name}}",
+      "editSnippet": "Edit snippet {{name}}",
+      "deleteSnippet": "Delete snippet {{name}}",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "add": "Add Snippet",
+      "created": "Snippet created",
+      "updated": "Snippet updated",
+      "deleted": "Snippet deleted",
+      "errors": {
+        "emptyTrigger": "Trigger phrase cannot be empty",
+        "triggerTooLong": "Trigger phrase must be {{max}} characters or fewer",
+        "expansionTooLong": "Expansion must be {{max}} characters or fewer",
+        "toggleFailed": "Failed to update snippet",
+        "deleteFailed": "Failed to delete snippet"
       }
     }
   },

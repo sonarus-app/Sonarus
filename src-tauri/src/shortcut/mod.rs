@@ -48,7 +48,9 @@ pub fn init_shortcuts(app: &AppHandle) {
                 // Update settings to persist the fallback so we don't retry HandyKeys on next launch
                 let mut settings = settings::get_settings(app);
                 settings.keyboard_implementation = KeyboardImplementation::Tauri;
-                settings::write_settings(app, settings);
+                if let Err(err) = settings::write_settings(app, settings) {
+                    log::error!("Failed to persist settings: {err}");
+                }
 
                 tauri_impl::init_shortcuts(app);
             }
@@ -150,7 +152,7 @@ pub fn change_binding(
         if let Some(mut b) = settings.bindings.get(&id).cloned() {
             b.current_binding = binding;
             settings.bindings.insert(id.clone(), b.clone());
-            settings::write_settings(&app, settings);
+            settings::write_settings(&app, settings)?;
             return Ok(BindingResponse {
                 success: true,
                 binding: Some(b.clone()),
@@ -191,7 +193,7 @@ pub fn change_binding(
     settings.bindings.insert(id, updated_binding.clone());
 
     // Save the settings
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Return the updated binding
     Ok(BindingResponse {
@@ -281,7 +283,7 @@ pub fn change_keyboard_implementation_setting(
     // Update the setting
     let mut settings = settings::get_settings(&app);
     settings.keyboard_implementation = new_impl;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Initialize new implementation if needed (HandyKeys needs state)
     if new_impl == KeyboardImplementation::HandyKeys {
@@ -439,7 +441,9 @@ fn register_all_shortcuts_for_implementation(
 
     // Save settings if any bindings were reset
     if !reset_bindings.is_empty() {
-        settings::write_settings(app, current_settings);
+        if let Err(e) = settings::write_settings(app, current_settings) {
+            error!("Failed to save settings after resetting bindings: {}", e);
+        }
     }
 
     reset_bindings
@@ -456,7 +460,7 @@ fn initialize_handy_keys_with_rollback(app: &AppHandle) -> Result<bool, String> 
         // Rollback to Tauri
         let mut settings = settings::get_settings(app);
         settings.keyboard_implementation = KeyboardImplementation::Tauri;
-        settings::write_settings(app, settings);
+        settings::write_settings(app, settings)?;
         tauri_impl::init_shortcuts(app);
         return Err(format!(
             "Failed to initialize HandyKeys: {}. Reverted to Tauri.",
@@ -477,7 +481,7 @@ fn initialize_handy_keys_with_rollback(app: &AppHandle) -> Result<bool, String> 
 pub fn change_ptt_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.push_to_talk = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -486,7 +490,7 @@ pub fn change_ptt_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
 pub fn change_audio_feedback_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.audio_feedback = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -495,7 +499,7 @@ pub fn change_audio_feedback_setting(app: AppHandle, enabled: bool) -> Result<()
 pub fn change_audio_feedback_volume_setting(app: AppHandle, volume: f32) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.audio_feedback_volume = volume;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -513,7 +517,7 @@ pub fn change_sound_theme_setting(app: AppHandle, theme: String) -> Result<(), S
         }
     };
     settings.sound_theme = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -522,7 +526,7 @@ pub fn change_sound_theme_setting(app: AppHandle, theme: String) -> Result<(), S
 pub fn change_translate_to_english_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.translate_to_english = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -531,7 +535,7 @@ pub fn change_translate_to_english_setting(app: AppHandle, enabled: bool) -> Res
 pub fn change_selected_language_setting(app: AppHandle, language: String) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.selected_language = language;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -549,7 +553,7 @@ pub fn change_overlay_position_setting(app: AppHandle, position: String) -> Resu
         }
     };
     settings.overlay_position = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Update overlay position without recreating window
     crate::utils::update_overlay_position(&app);
@@ -562,7 +566,7 @@ pub fn change_overlay_position_setting(app: AppHandle, position: String) -> Resu
 pub fn change_debug_mode_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.debug_mode = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Emit event to notify frontend of debug mode change
     let _ = app.emit(
@@ -581,7 +585,7 @@ pub fn change_debug_mode_setting(app: AppHandle, enabled: bool) -> Result<(), St
 pub fn change_start_hidden_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.start_hidden = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Notify frontend
     let _ = app.emit(
@@ -600,7 +604,7 @@ pub fn change_start_hidden_setting(app: AppHandle, enabled: bool) -> Result<(), 
 pub fn change_autostart_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.autostart_enabled = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Apply the autostart setting immediately
     let autostart_manager = app.autolaunch();
@@ -627,7 +631,7 @@ pub fn change_autostart_setting(app: AppHandle, enabled: bool) -> Result<(), Str
 pub fn change_update_checks_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.update_checks_enabled = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     let _ = app.emit(
         "settings-changed",
@@ -645,7 +649,7 @@ pub fn change_update_checks_setting(app: AppHandle, enabled: bool) -> Result<(),
 pub fn update_custom_words(app: AppHandle, words: Vec<String>) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.custom_words = words;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -657,7 +661,7 @@ pub fn change_word_correction_threshold_setting(
 ) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.word_correction_threshold = threshold;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -666,7 +670,7 @@ pub fn change_word_correction_threshold_setting(
 pub fn change_extra_recording_buffer_setting(app: AppHandle, ms: u64) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.extra_recording_buffer_ms = ms;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -687,7 +691,7 @@ pub fn change_paste_method_setting(app: AppHandle, method: String) -> Result<(),
         }
     };
     settings.paste_method = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -721,7 +725,7 @@ pub fn change_typing_tool_setting(app: AppHandle, tool: String) -> Result<(), St
         }
     };
     settings.typing_tool = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -733,7 +737,7 @@ pub fn change_external_script_path_setting(
 ) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.external_script_path = path;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -753,7 +757,7 @@ pub fn change_clipboard_handling_setting(app: AppHandle, handling: String) -> Re
         }
     };
     settings.clipboard_handling = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -762,7 +766,7 @@ pub fn change_clipboard_handling_setting(app: AppHandle, handling: String) -> Re
 pub fn change_auto_submit_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.auto_submit = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -780,7 +784,7 @@ pub fn change_auto_submit_key_setting(app: AppHandle, key: String) -> Result<(),
         }
     };
     settings.auto_submit_key = parsed;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -812,7 +816,7 @@ pub fn change_post_process_enabled_setting(app: AppHandle, enabled: bool) -> Res
 pub fn change_experimental_enabled_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.experimental_enabled = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -841,7 +845,7 @@ pub fn change_post_process_base_url_setting(
     }
 
     provider.base_url = base_url;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -870,7 +874,7 @@ pub fn change_post_process_api_key_setting(
     let mut settings = settings::get_settings(&app);
     validate_provider_exists(&settings, &provider_id)?;
     settings.post_process_api_keys.insert(provider_id, api_key);
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -884,7 +888,7 @@ pub fn change_post_process_model_setting(
     let mut settings = settings::get_settings(&app);
     validate_provider_exists(&settings, &provider_id)?;
     settings.post_process_models.insert(provider_id, model);
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -894,7 +898,7 @@ pub fn set_post_process_provider(app: AppHandle, provider_id: String) -> Result<
     let mut settings = settings::get_settings(&app);
     validate_provider_exists(&settings, &provider_id)?;
     settings.post_process_provider_id = provider_id;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -917,7 +921,7 @@ pub fn add_post_process_prompt(
     };
 
     settings.post_process_prompts.push(new_prompt.clone());
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     Ok(new_prompt)
 }
@@ -939,7 +943,7 @@ pub fn update_post_process_prompt(
     {
         existing_prompt.name = name;
         existing_prompt.prompt = prompt;
-        settings::write_settings(&app, settings);
+        settings::write_settings(&app, settings)?;
         Ok(())
     } else {
         Err(format!("Prompt with id '{}' not found", id))
@@ -970,7 +974,7 @@ pub fn delete_post_process_prompt(app: AppHandle, id: String) -> Result<(), Stri
             settings.post_process_prompts.first().map(|p| p.id.clone());
     }
 
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -1030,7 +1034,7 @@ pub fn set_post_process_selected_prompt(app: AppHandle, id: String) -> Result<()
     }
 
     settings.post_process_selected_prompt_id = Some(id);
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -1039,7 +1043,7 @@ pub fn set_post_process_selected_prompt(app: AppHandle, id: String) -> Result<()
 pub fn change_mute_while_recording_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.mute_while_recording = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -1048,7 +1052,7 @@ pub fn change_mute_while_recording_setting(app: AppHandle, enabled: bool) -> Res
 pub fn change_append_trailing_space_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.append_trailing_space = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -1057,7 +1061,7 @@ pub fn change_append_trailing_space_setting(app: AppHandle, enabled: bool) -> Re
 pub fn change_lazy_stream_close_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.lazy_stream_close = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
     Ok(())
 }
 
@@ -1066,7 +1070,7 @@ pub fn change_lazy_stream_close_setting(app: AppHandle, enabled: bool) -> Result
 pub fn change_app_language_setting(app: AppHandle, language: String) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.app_language = language.clone();
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Refresh the tray menu with the new language
     tray::update_tray_menu(&app, &tray::TrayIconState::Idle, Some(&language));
@@ -1079,7 +1083,7 @@ pub fn change_app_language_setting(app: AppHandle, language: String) -> Result<(
 pub fn change_show_tray_icon_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
     let mut settings = settings::get_settings(&app);
     settings.show_tray_icon = enabled;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Apply change immediately
     tray::set_tray_visibility(&app, enabled);
@@ -1104,7 +1108,7 @@ pub fn change_transcribing_visualizer_setting(
     });
     let visualizer_value = valid_visualizer.as_str().to_string();
     settings.transcribing_visualizer = valid_visualizer;
-    settings::write_settings(&app, settings);
+    settings::write_settings(&app, settings)?;
 
     // Emit event to notify overlay of visualizer change
     let _ = app.emit(

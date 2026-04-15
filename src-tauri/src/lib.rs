@@ -30,6 +30,7 @@ use env_filter::Builder as EnvFilterBuilder;
 use managers::audio::AudioRecordingManager;
 use managers::history::HistoryManager;
 use managers::model::ModelManager;
+use managers::snippets::SnippetManager;
 use managers::transcription::TranscriptionManager;
 #[cfg(unix)]
 use signal_hook::consts::{SIGUSR1, SIGUSR2};
@@ -157,11 +158,31 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     let history_manager =
         Arc::new(HistoryManager::new(app_handle).expect("Failed to initialize history manager"));
 
+    // Initialize snippet manager, but continue if it fails
+    let snippet_manager = match SnippetManager::new(app_handle) {
+        Ok(manager) => {
+            log::info!("Snippet manager initialized successfully");
+            Some(Arc::new(manager))
+        }
+        Err(e) => {
+            log::error!(
+                "Failed to initialize snippet manager: {}. Snippet features will be unavailable.",
+                e
+            );
+            None
+        }
+    };
+
     // Add managers to Tauri's managed state
     app_handle.manage(recording_manager.clone());
     app_handle.manage(model_manager.clone());
     app_handle.manage(transcription_manager.clone());
     app_handle.manage(history_manager.clone());
+
+    // Only manage snippet manager if initialization succeeded
+    if let Some(manager) = snippet_manager {
+        app_handle.manage(manager);
+    }
 
     // Note: Shortcuts are NOT initialized here.
     // The frontend is responsible for calling the `initialize_shortcuts` command
@@ -450,6 +471,12 @@ pub fn run(cli_args: CliArgs) {
             commands::history::retry_history_entry_transcription,
             commands::history::update_history_limit,
             commands::history::update_recording_retention_period,
+            // Snippet Commands
+            commands::snippets::list_snippets,
+            commands::snippets::create_snippet,
+            commands::snippets::update_snippet,
+            commands::snippets::delete_snippet,
+            commands::snippets::set_snippets_enabled,
             // Helper Commands
             helpers::clamshell::is_laptop,
         ])

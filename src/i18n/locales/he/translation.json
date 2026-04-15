@@ -13,6 +13,7 @@
     "models": "מודלים",
     "advanced": "מתקדם",
     "postProcessing": "עיבוד משלים",
+    "snippets": "קטעי טקסט",
     "history": "היסטוריה",
     "debug": "ניפוי שגיאות",
     "about": "אודות"
@@ -416,6 +417,42 @@
         "createFirst": "לחץ על 'צור פרומפט חדש' למעלה כדי ליצור את פרומפט העיבוד הראשון שלך."
       }
     },
+    "snippets": {
+      "title": "קטעי טקסט חכמים",
+      "listTitle": "קטעי הטקסט שלך",
+      "addButton": "הוסף קטע טקסט",
+      "addTitle": "הוסף קטע טקסט",
+      "editTitle": "ערוך קטע טקסט",
+      "enabledLabel": "קטעי טקסט חכמים",
+      "enabledDescription": "הרחב אוטומטית ביטויי הפעלה לטקסט מלא לאחר התמלול",
+      "triggerLabel": "ביטוי הפעלה",
+      "triggerPlaceholder": "למשל: addr",
+      "triggerHint": "אמור את הביטוי הזה בזמן התמלול כדי להרחיב אותו",
+      "expansionLabel": "טקסט מורחב",
+      "expansionPlaceholder": "למשל: רחוב הרצל 1, תל אביב",
+      "loading": "טוען קטעי טקסט...",
+      "empty": "אין עדיין קטעי טקסט",
+      "emptyHint": "הוסף קטע טקסט כדי להרחיב ביטויי הפעלה באופן אוטומטי",
+      "edit": "ערוך קטע טקסט",
+      "delete": "מחק קטע טקסט",
+      "toggleEnable": "הפעל קטע טקסט {{name}}",
+      "editSnippet": "ערוך קטע טקסט {{name}}",
+      "deleteSnippet": "מחק קטע טקסט {{name}}",
+      "cancel": "ביטול",
+      "saving": "שומר...",
+      "saveChanges": "שמור שינויים",
+      "add": "הוסף קטע טקסט",
+      "created": "קטע טקסט נוצר",
+      "updated": "קטע טקסט עודכן",
+      "deleted": "קטע טקסט נמחק",
+      "errors": {
+        "emptyTrigger": "ביטוי ההפעלה לא יכול להיות ריק",
+        "triggerTooLong": "ביטוי ההפעלה חייב להיות באורך של {{max}} תווים לכל היותר",
+        "expansionTooLong": "הטקסט המורחב חייב להיות באורך של {{max}} תווים לכל היותר",
+        "toggleFailed": "עדכון קטע הטקסט נכשל",
+        "deleteFailed": "מחיקת קטע הטקסט נכשלה"
+      }
+    },
     "history": {
       "title": "היסטוריה",
       "openFolder": "פתח את תיקיית ההקלטות",
@@ -563,6 +600,7 @@
     "checkForUpdates": "בדוק עדכונים"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "טוען...",
     "save": "שמור",
     "cancel": "ביטול",

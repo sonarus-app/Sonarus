@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SonarusTextLogo = ({
   width,
@@ -9,6 +10,8 @@ const SonarusTextLogo = ({
   height?: number;
   className?: string;
 }) => {
+  const { t } = useTranslation();
+
   return (
     <svg
       width={width}
@@ -32,8 +35,7 @@ const SonarusTextLogo = ({
           letterSpacing: "-0.02em",
         }}
       >
-        {/* i18next-disable-line */}
-        Sonarus
+        {t("common.appName")}
       </text>
     </svg>
   );

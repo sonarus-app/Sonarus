@@ -66,7 +66,7 @@ export const AboutSettings: React.FC = () => {
           <Button
             variant="secondary"
             size="md"
-            onClick={() => openUrl("https://github.com/cjpais/Handy")}
+            onClick={() => openUrl("https://github.com/sonarus-app/Sonarus")}
           >
             {t("settings.about.sourceCode.button")}
           </Button>
@@ -93,17 +93,9 @@ export const AboutSettings: React.FC = () => {
           grouped={true}
           layout="stacked"
         >
-          <div className="text-sm text-mid-gray mb-2">
+          <div className="text-sm text-mid-gray">
             {t("settings.about.acknowledgments.handy.details")}
           </div>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => openUrl("https://github.com/cjpais/Handy")}
-          >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            View on GitHub
-          </Button>
         </SettingContainer>
       </SettingsGroup>
     </div>

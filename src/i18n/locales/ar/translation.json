@@ -31,11 +31,11 @@
     },
     "models": {
       "small": {
-        "name": "همس صغير",
+        "name": "Whisper Small",
         "description": ".سريع ودقيق إلى حد ما"
       },
       "medium": {
-        "name": "Whisper متوسط",
+        "name": "Whisper Medium",
         "description": ".دقة جيدة، سرعة متوسطة"
       },
       "turbo": {
@@ -55,7 +55,7 @@
         "description": ".سريع ودقيق"
       },
       "moonshine-base": {
-        "name": "قاعدة مونشاين",
+        "name": "Moonshine Base",
         "description": ".سريع جداً، الإنجليزية فقط. يتعامل جيداً مع اللهجات"
       },
       "moonshine-tiny-streaming-en": {
@@ -63,11 +63,11 @@
         "description": "سريع للغاية، الإنجليزية فقط"
       },
       "moonshine-small-streaming-en": {
-        "name": "Moonshine V2 صغير",
+        "name": "Moonshine V2 Small",
         "description": "سريع، الإنجليزية فقط. توازن جيد بين السرعة والدقة."
       },
       "moonshine-medium-streaming-en": {
-        "name": "Moonshine V2 متوسط",
+        "name": "Moonshine V2 Medium",
         "description": "الإنجليزية فقط. جودة عالية."
       },
       "breeze-asr": {
@@ -301,7 +301,7 @@
           "none": "بلا",
           "externalScript": "نص برمجي خارجي"
         },
-        "externalScriptPlaceholder": "/مسار/إلى/البرنامج_النصي_الخاص_بك.sh"
+        "externalScriptPlaceholder": "/path/to/your/script.sh"
       },
       "typingTool": {
         "title": "أداة الكتابة",
@@ -323,7 +323,7 @@
         "description": "إرسال مجموعة المفاتيح المحددة تلقائياً بعد إدراج النص. Cmd+Enter ينطبق على macOS، بينما يستخدم Windows/Linux مفتاح Super+Enter.",
         "options": {
           "off": "إيقاف",
-          "enter": "أدخل",
+          "enter": "Enter",
           "cmdEnter": "Cmd+Enter",
           "superEnter": "Super+Enter",
           "ctrlEnter": "Ctrl+Enter"
@@ -584,7 +584,7 @@
         },
         "handy": {
           "title": "عملي",
-          "description": "أكثر أداة لتحويل الكلام إلى نص قابليةً للتفريع",
+          "description": "أكثر أداة لتحويل الكلام إلى نص قابليةً للتفريغ",
           "details": "يستند Sonarus إلى الأساس الذي وضعه Handy. اطّلع على المشروع الأصلي لمزيد من التفاصيل."
         }
       }

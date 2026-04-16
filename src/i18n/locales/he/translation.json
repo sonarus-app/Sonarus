@@ -31,7 +31,7 @@
     },
     "models": {
       "small": {
-        "name": "לחישה קטנה",
+        "name": "Whisper Small",
         "description": "מהיר ודי מדויק."
       },
       "medium": {
@@ -55,7 +55,7 @@
         "description": "מהיר ומדויק"
       },
       "moonshine-base": {
-        "name": "בסיס מונשיין",
+        "name": "Moonshine Base",
         "description": "מהיר מאוד, אנגלית בלבד. מתמודד היטב עם מבטאים."
       },
       "moonshine-tiny-streaming-en": {
@@ -63,11 +63,11 @@
         "description": "מהיר במיוחד, אנגלית בלבד"
       },
       "moonshine-small-streaming-en": {
-        "name": "Moonshine V2 קטן",
+        "name": "Moonshine V2 Small",
         "description": "מהיר, אנגלית בלבד. איזון טוב בין מהירות לדיוק."
       },
       "moonshine-medium-streaming-en": {
-        "name": "Moonshine V2 בינוני",
+        "name": "Moonshine V2 Medium",
         "description": "אנגלית בלבד. איכות גבוהה."
       },
       "breeze-asr": {
@@ -323,10 +323,10 @@
         "description": "שלח אוטומטית את צירוף המקשים שנבחר אחרי הכנסת הטקסט. ב-macOS יופעל Cmd+Enter, וב-Windows/Linux יופעל Super+Enter.",
         "options": {
           "off": "כבוי",
-          "enter": "הזן",
-          "cmdEnter": "Cmd+Enter",
+          "enter": "אנטר",
+          "cmdEnter": "Cmd+אנטר",
           "superEnter": "סופר+אנטר",
-          "ctrlEnter": "Ctrl+Enter"
+          "ctrlEnter": "Ctrl+אנטר"
         }
       },
       "translateToEnglish": {
@@ -583,7 +583,7 @@
           "details": "Handy משתמש ב-Whisper.cpp לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
         },
         "handy": {
-          "title": "שימושי",
+          "title": "Handy",
           "description": "כלי הדיבור-לטקסט שהכי קל לעשות לו פורק",
           "details": "Sonarus נבנה על בסיס התשתית של Handy. לפרטים נוספים, אפשר לעיין בפרויקט המקורי."
         }

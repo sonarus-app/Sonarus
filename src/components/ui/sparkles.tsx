@@ -7,17 +7,44 @@ import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * Imperative handle for controlling SparklesIcon animations.
+ * @example
+ * ```tsx
+ * const ref = useRef<SparklesIconHandle>(null);
+ * ref.current?.startAnimation(); // Start animation
+ * ref.current?.stopAnimation(); // Stop animation
+ * ```
+ */
 export interface SparklesIconHandle {
   startAnimation: () => void;
   stopAnimation: () => void;
 }
 
 interface SparklesIconProps extends HTMLAttributes<HTMLDivElement> {
+  /** Size of the icon in pixels. Default: 28 */
   size?: number;
+  /**
+   * When true, disables automatic hover animations and enables imperative control via ref.
+   * When false, keeps automatic hover animations even if a ref is passed.
+   * When undefined, passing a ref automatically enables imperative control mode.
+   * @example
+   * ```tsx
+   * // Explicitly enable imperative control
+   * <SparklesIcon ref={ref} controlled={true} />
+   *
+   * // Pass ref for other reasons but keep hover animations
+   * <SparklesIcon ref={ref} controlled={false} />
+   *
+   * // Default: ref enables imperative control automatically
+   * <SparklesIcon ref={ref} />
+   * ```
+   */
+  controlled?: boolean;
 }
 
 const TRANSITION: Transition = {
-  duration: 0.6,
+  duration: 0.3,
   ease: "easeInOut",
 };
 
@@ -62,12 +89,18 @@ const CIRCLE_VARIANTS: Variants = {
 };
 
 const SparklesIcon = forwardRef<SparklesIconHandle, SparklesIconProps>(
-  ({ onMouseEnter, onMouseLeave, className, size = 28, ...props }, ref) => {
+  (
+    { onMouseEnter, onMouseLeave, className, size = 28, controlled, ...props },
+    ref,
+  ) => {
     const controls = useAnimation();
     const isControlledRef = useRef(false);
 
     useImperativeHandle(ref, () => {
-      isControlledRef.current = true;
+      // Only enable imperative control mode if controlled is not explicitly false
+      if (controlled !== false) {
+        isControlledRef.current = true;
+      }
 
       return {
         startAnimation: () => controls.start("animate"),
@@ -77,6 +110,8 @@ const SparklesIcon = forwardRef<SparklesIconHandle, SparklesIconProps>(
 
     const handleMouseEnter = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {
+        // In imperative control mode, defer to parent's onMouseEnter
+        // Otherwise, trigger animation on hover
         if (isControlledRef.current) {
           onMouseEnter?.(e);
         } else {
@@ -88,6 +123,8 @@ const SparklesIcon = forwardRef<SparklesIconHandle, SparklesIconProps>(
 
     const handleMouseLeave = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {
+        // In imperative control mode, defer to parent's onMouseLeave
+        // Otherwise, stop animation on hover end
         if (isControlledRef.current) {
           onMouseLeave?.(e);
         } else {

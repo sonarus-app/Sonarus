@@ -31,11 +31,11 @@
     },
     "models": {
       "small": {
-        "name": "Kleines Flüstern",
+        "name": "Whisper Small",
         "description": "Schnell und recht genau."
       },
       "medium": {
-        "name": "Flüstern Mittel",
+        "name": "Whisper Medium",
         "description": "Gute Genauigkeit, mittlere Geschwindigkeit"
       },
       "turbo": {
@@ -55,7 +55,7 @@
         "description": "Schnell und genau"
       },
       "moonshine-base": {
-        "name": "Moonshine-Basis",
+        "name": "Moonshine Base",
         "description": "Sehr schnell, nur Englisch. Verarbeitet Akzente gut."
       },
       "moonshine-tiny-streaming-en": {
@@ -63,7 +63,7 @@
         "description": "Ultraschnell, nur Englisch"
       },
       "moonshine-small-streaming-en": {
-        "name": "Moonshine V2 Klein",
+        "name": "Moonshine V2 Small",
         "description": "Schnell, nur Englisch. Gute Balance zwischen Geschwindigkeit und Genauigkeit."
       },
       "moonshine-medium-streaming-en": {
@@ -159,7 +159,7 @@
         "system": "System",
         "light": "Hell",
         "dark": "Dunkel",
-        "description": "Wählen Sie Ihr bevorzugtes Design"
+        "description": "Wähle dein bevorzugtes Design"
       },
       "shortcut": {
         "title": "Sonarus-Tastenkürzel",
@@ -330,8 +330,8 @@
           "off": "Aus",
           "enter": "Eingabe",
           "cmdEnter": "Cmd+Eingabe",
-          "superEnter": "Super+Eingabetaste",
-          "ctrlEnter": "Strg+Enter"
+          "superEnter": "Super+Eingabe",
+          "ctrlEnter": "Strg+Eingabe"
         }
       },
       "translateToEnglish": {
@@ -424,7 +424,7 @@
     },
     "snippets": {
       "title": "Intelligente Textbausteine",
-      "listTitle": "Ihre Snippets",
+      "listTitle": "Deine Snippets",
       "addButton": "Snippet hinzufügen",
       "addTitle": "Snippet hinzufügen",
       "editTitle": "Snippet bearbeiten",
@@ -432,7 +432,7 @@
       "enabledDescription": "Auslöserphrasen nach der Transkription automatisch zu vollständigem Text erweitern",
       "triggerLabel": "Auslösephrase",
       "triggerPlaceholder": "z. B. Adresse",
-      "triggerHint": "Sagen Sie diesen Ausdruck während der Transkription, um ihn zu erweitern",
+      "triggerHint": "Sage diesen Ausdruck während der Transkription, um ihn zu erweitern",
       "expansionLabel": "Erweiterungstext",
       "expansionPlaceholder": "z. B. Hauptstraße 123, Springfield",
       "loading": "Schnipsel werden geladen...",
@@ -539,7 +539,7 @@
       },
       "transcribingVisualizer": {
         "title": "Visualisierung beim Transkribieren",
-        "description": "Wählen Sie den Animationsstil für den Transkriptionsstatus im Overlay.",
+        "description": "Wähle den Animationsstil für den Transkriptionsstatus im Overlay.",
         "options": {
           "dots": "Punkte (Pulswelle)",
           "equalizer": "Mikro-Equalizer",
@@ -588,7 +588,7 @@
           "details": "Sonarus verwendet Whisper.cpp für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
         },
         "handy": {
-          "title": "Praktisch",
+          "title": "Handy",
           "description": "Das Speech-to-Text-Tool, das sich am einfachsten forken lässt",
           "details": "Sonarus baut auf dem Fundament von Handy auf. Weitere Details finden Sie im ursprünglichen Projekt."
         }

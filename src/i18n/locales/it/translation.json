@@ -31,7 +31,7 @@
     },
     "models": {
       "small": {
-        "name": "Whisper Piccolo",
+        "name": "Whisper Small",
         "description": "Veloce e abbastanza accurato."
       },
       "medium": {
@@ -55,7 +55,7 @@
         "description": "Veloce e accurato"
       },
       "moonshine-base": {
-        "name": "Base di chiaro di luna",
+        "name": "Moonshine Base",
         "description": "Molto veloce, solo inglese. Gestisce bene gli accenti."
       },
       "moonshine-tiny-streaming-en": {
@@ -584,8 +584,8 @@
         },
         "handy": {
           "title": "Handy",
-          "description": "The most forkable speech-to-text tool",
-          "details": "Sonarus builds on the Handy foundation. Check out the original project for more details."
+          "description": "Lo strumento di riconoscimento vocale più forkabile",
+          "details": "Sonarus si basa sul progetto Handy. Consulta il progetto originale per maggiori dettagli."
         }
       }
     }

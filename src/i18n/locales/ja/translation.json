@@ -584,8 +584,8 @@
         },
         "handy": {
           "title": "Handy",
-          "description": "The most forkable speech-to-text tool",
-          "details": "Sonarus builds on the Handy foundation. Check out the original project for more details."
+          "description": "最もフォーク可能な音声テキスト変換ツール",
+          "details": "SonarusはHandyを基盤として構築されています。詳細はオリジナルプロジェクトをご覧ください。"
         }
       }
     }

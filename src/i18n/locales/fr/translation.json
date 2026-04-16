@@ -31,7 +31,7 @@
     },
     "models": {
       "small": {
-        "name": "Petit murmure",
+        "name": "Whisper Small",
         "description": "Rapide et assez précis."
       },
       "medium": {
@@ -39,7 +39,7 @@
         "description": "Bonne précision, vitesse moyenne"
       },
       "turbo": {
-        "name": "Turbo silencieux",
+        "name": "Whisper Turbo",
         "description": "Équilibre entre précision et vitesse."
       },
       "large": {
@@ -55,7 +55,7 @@
         "description": "Rapide et précis"
       },
       "moonshine-base": {
-        "name": "Base de moonshine",
+        "name": "Moonshine Base",
         "description": "Très rapide, anglais uniquement. Gère bien les accents."
       },
       "moonshine-tiny-streaming-en": {
@@ -396,7 +396,7 @@
         }
       },
       "prompts": {
-        "title": "Invite",
+        "title": "Prompt",
         "selectedPrompt": {
           "title": "Prompt sélectionné",
           "description": "Sélectionnez un modèle pour affiner les transcriptions ou créez-en un nouveau. Utilisez ${output} dans le texte du prompt pour référencer la transcription capturée."
@@ -442,7 +442,7 @@
       "saving": "Enregistrement...",
       "saveChanges": "Enregistrer les modifications",
       "add": "Ajouter un extrait",
-      "created": "Snippet created",
+      "created": "Extrait créé",
       "updated": "Extrait mis à jour",
       "deleted": "Extrait supprimé",
       "errors": {
@@ -583,9 +583,9 @@
           "details": "Handy utilise Whisper.cpp pour un traitement rapide et local de la parole en texte. Merci au travail incroyable de Georgi Gerganov et des contributeurs."
         },
         "handy": {
-          "title": "Pratique",
-          "description": "L’outil de transcription vocale le plus facile à forker",
-          "details": "Sonarus s’appuie sur la base de Handy. Consultez le projet original pour plus de détails."
+          "title": "Handy",
+          "description": "L'outil de transcription vocale le plus facile à forker",
+          "details": "Sonarus s'appuie sur la base de Handy. Consultez le projet original pour plus de détails."
         }
       }
     }

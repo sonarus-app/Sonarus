@@ -1,0 +1,30 @@
+{
+  "$schema": "https://assets.gtx.dev/config-schema.json",
+  "defaultLocale": "en",
+  "locales": [
+    "ar",
+    "bg",
+    "cs",
+    "de",
+    "es",
+    "fr",
+    "he",
+    "it",
+    "ja",
+    "ko",
+    "pl",
+    "pt",
+    "ru",
+    "sv",
+    "tr",
+    "uk",
+    "vi",
+    "zh",
+    "zh-TW"
+  ],
+  "files": {
+    "json": {
+      "include": ["src/i18n/locales/"]
+    }
+  }
+}

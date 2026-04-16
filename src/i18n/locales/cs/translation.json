@@ -31,7 +31,7 @@
     },
     "models": {
       "small": {
-        "name": "Malý šepot",
+        "name": "Whisper Small",
         "description": "Rychlý a poměrně přesný."
       },
       "medium": {
@@ -55,7 +55,7 @@
         "description": "Rychlý a přesný"
       },
       "moonshine-base": {
-        "name": "Základ na pálenku",
+        "name": "Moonshine Base",
         "description": "Velmi rychlý, pouze angličtina. Dobře zvládá přízvuky."
       },
       "moonshine-tiny-streaming-en": {
@@ -583,7 +583,7 @@
           "details": "Handy používá Whisper.cpp pro rychlé lokální zpracování řeči na text. Díky skvělé práci Georgiho Gerganova a přispěvatelů."
         },
         "handy": {
-          "title": "Praktické",
+          "title": "Handy",
           "description": "Nástroj pro převod řeči na text, který se nejsnáze forkuje",
           "details": "Sonarus staví na základech Handy. Více podrobností najdete v původním projektu."
         }

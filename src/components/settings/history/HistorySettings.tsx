@@ -1,16 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { readFile } from "@tauri-apps/plugin-fs";
-import {
-  Check,
-  Copy,
-  FolderOpen,
-  Play,
-  RotateCcw,
-  Trash2,
-  Search,
-  X,
-} from "lucide-react";
+import { Check, FolderOpen, Play, RotateCcw, Search, X } from "lucide-react";
+import { Copy as CopyIcon } from "@/components/animate-ui/icons/copy";
+import { Trash2 as Trash2Icon } from "@/components/animate-ui/icons/trash-2";
 import AnimatedStar from "../../icons/AnimatedStar";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -584,7 +577,11 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             {showCopied ? (
               <Check width={16} height={16} />
             ) : (
-              <Copy width={16} height={16} />
+              <CopyIcon
+                size={16}
+                animation="default-loop"
+                animateOnHover={true}
+              />
             )}
           </IconButton>
           <IconButton
@@ -623,7 +620,11 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             disabled={retrying}
             title={t("settings.history.delete")}
           >
-            <Trash2 width={16} height={16} />
+            <Trash2Icon
+              size={16}
+              animation="default-loop"
+              animateOnHover={true}
+            />
           </IconButton>
         </div>
       </div>

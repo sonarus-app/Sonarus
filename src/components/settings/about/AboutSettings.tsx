@@ -87,6 +87,24 @@ export const AboutSettings: React.FC = () => {
             {t("settings.about.acknowledgments.whisper.details")}
           </div>
         </SettingContainer>
+        <SettingContainer
+          title={t("settings.about.acknowledgments.handy.title")}
+          description={t("settings.about.acknowledgments.handy.description")}
+          grouped={true}
+          layout="stacked"
+        >
+          <div className="text-sm text-mid-gray mb-2">
+            {t("settings.about.acknowledgments.handy.details")}
+          </div>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => openUrl("https://github.com/cjpais/Handy")}
+          >
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            View on GitHub
+          </Button>
+        </SettingContainer>
       </SettingsGroup>
     </div>
   );

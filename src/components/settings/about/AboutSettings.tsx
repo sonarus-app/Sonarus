@@ -66,7 +66,7 @@ export const AboutSettings: React.FC = () => {
           <Button
             variant="secondary"
             size="md"
-            onClick={() => openUrl("https://github.com/cjpais/Handy")}
+            onClick={() => openUrl("https://github.com/sonarus-app/Sonarus")}
           >
             {t("settings.about.sourceCode.button")}
           </Button>
@@ -85,6 +85,16 @@ export const AboutSettings: React.FC = () => {
         >
           <div className="text-sm text-mid-gray">
             {t("settings.about.acknowledgments.whisper.details")}
+          </div>
+        </SettingContainer>
+        <SettingContainer
+          title={t("settings.about.acknowledgments.handy.title")}
+          description={t("settings.about.acknowledgments.handy.description")}
+          grouped={true}
+          layout="stacked"
+        >
+          <div className="text-sm text-mid-gray">
+            {t("settings.about.acknowledgments.handy.details")}
           </div>
         </SettingContainer>
       </SettingsGroup>

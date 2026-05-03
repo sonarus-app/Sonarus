@@ -441,6 +441,8 @@ pub struct AppSettings {
     pub extra_recording_buffer_ms: u64,
     #[serde(default = "default_transcribing_visualizer")]
     pub transcribing_visualizer: TranscribingVisualizer,
+    #[serde(default)]
+    pub snippets_enabled: bool,
 }
 
 fn default_model() -> String {
@@ -600,6 +602,16 @@ fn default_post_process_providers() -> Vec<PostProcessProvider> {
         });
     }
 
+    // AWS Bedrock via Mantle (OpenAI-compatible endpoint)
+    providers.push(PostProcessProvider {
+        id: "bedrock_mantle".to_string(),
+        label: "AWS Bedrock (Mantle)".to_string(),
+        base_url: "https://bedrock-mantle.us-east-1.api.aws/v1".to_string(),
+        allow_base_url_edit: false,
+        models_endpoint: Some("/models".to_string()),
+        supports_structured_output: true,
+    });
+
     // Custom provider always comes last
     providers.push(PostProcessProvider {
         id: "custom".to_string(),
@@ -705,6 +717,39 @@ fn ensure_post_process_defaults(settings: &mut AppSettings) -> bool {
                     .insert(provider.id.clone(), default_model);
                 changed = true;
             }
+        }
+    }
+
+    // Ensure "custom" provider is always at the end of the list
+    // First, remove any duplicate "custom" providers (keep only the last one)
+    let custom_indices: Vec<usize> = settings
+        .post_process_providers
+        .iter()
+        .enumerate()
+        .filter(|(_, p)| p.id == "custom")
+        .map(|(i, _)| i)
+        .collect();
+
+    if custom_indices.len() > 1 {
+        // Remove all but the last custom provider
+        for idx in custom_indices.iter().rev().skip(1) {
+            settings.post_process_providers.remove(*idx);
+            changed = true;
+        }
+        debug!("Removed duplicate 'custom' providers");
+    }
+
+    // Then ensure the single "custom" provider is at the end
+    if let Some(custom_idx) = settings
+        .post_process_providers
+        .iter()
+        .position(|p| p.id == "custom")
+    {
+        if custom_idx != settings.post_process_providers.len() - 1 {
+            let custom_provider = settings.post_process_providers.remove(custom_idx);
+            settings.post_process_providers.push(custom_provider);
+            changed = true;
+            debug!("Moved 'custom' provider to the end of the list");
         }
     }
 
@@ -814,6 +859,7 @@ pub fn get_default_settings() -> AppSettings {
         force_cpu_transcription: true,
         extra_recording_buffer_ms: 0,
         transcribing_visualizer: default_transcribing_visualizer(),
+        snippets_enabled: false,
     }
 }
 
@@ -915,12 +961,19 @@ pub fn get_settings(app: &AppHandle) -> AppSettings {
     settings
 }
 
-pub fn write_settings(app: &AppHandle, settings: AppSettings) {
+pub fn write_settings(app: &AppHandle, settings: AppSettings) -> Result<(), String> {
     let store = app
         .store(crate::portable::store_path(SETTINGS_STORE_PATH))
-        .expect("Failed to initialize store");
+        .map_err(|e| format!("Failed to initialize store: {}", e))?;
 
-    store.set("settings", serde_json::to_value(&settings).unwrap());
+    store.set(
+        "settings",
+        serde_json::to_value(&settings).map_err(|e| e.to_string())?,
+    );
+    // Persist the store to disk
+    store.save().map_err(|e| e.to_string())?;
+
+    Ok(())
 }
 
 pub fn get_bindings(app: &AppHandle) -> HashMap<String, ShortcutBinding> {

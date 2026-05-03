@@ -13,8 +13,9 @@
     "models": "Modelle",
     "advanced": "Erweitert",
     "postProcessing": "Nachbearbeitung",
+    "snippets": "Schnipsel",
     "history": "Verlauf",
-    "debug": "Debug",
+    "debug": "Debuggen",
     "about": "Info"
   },
   "onboarding": {
@@ -96,14 +97,14 @@
     },
     "permissions": {
       "title": "Berechtigungen erforderlich",
-      "description": "Handy benötigt einige Berechtigungen, um richtig zu funktionieren.",
+      "description": "Sonarus benötigt einige Berechtigungen, um richtig zu funktionieren.",
       "microphone": {
         "title": "Mikrofonzugriff",
-        "description": "Erforderlich, um Ihre Stimme für die Transkription zu hören."
+        "description": "Erforderlich, um deine Stimme für die Transkription zu hören."
       },
       "accessibility": {
         "title": "Bedienungshilfen-Zugriff",
-        "description": "Erforderlich, um transkribierten Text in Ihre Anwendungen einzugeben."
+        "description": "Erforderlich, um transkribierten Text in deine Anwendungen einzugeben."
       },
       "grant": "Berechtigung erteilen",
       "granted": "Erteilt",
@@ -135,39 +136,21 @@
     "noModelDownloadRequired": "Kein Modell - Download erforderlich",
     "deleteModel": "{{modelName}} löschen",
     "downloadSpeed": "{{speed}} MB/s",
+    "cancel": "Abbrechen",
+    "cancelDownload": "Download abbrechen",
     "capabilities": {
       "languageSelection": "Unterstützt mehrere Eingabesprachen",
-      "multiLanguage": "Mehrsprachig",
-      "translation": "Kann ins Englische übersetzen",
-      "translate": "Ins Englische übersetzen",
       "singleLanguage": "Unterstützt nur diese Sprache",
-      "languageOnly": "Nur {{language}}"
-    },
-    "cancel": "Abbrechen",
-    "cancelDownload": "Download abbrechen"
+      "multiLanguage": "Mehrsprachig",
+      "languageOnly": "Nur {{language}}",
+      "translation": "Kann ins Englische übersetzen",
+      "translate": "Ins Englische übersetzen"
+    }
   },
   "settings": {
     "modelSettings": {
       "title": "{{model}}-Einstellungen",
       "noSettingsNeeded": "Dieses Modell funktioniert automatisch ohne Konfiguration."
-    },
-    "models": {
-      "title": "Transkriptionsmodelle",
-      "description": "Wähle ein Transkriptionsmodell aus oder lade zusätzliche Modelle herunter. Verschiedene Modelle bieten unterschiedliche Genauigkeits- und Geschwindigkeitsstufen.",
-      "downloaded": "Heruntergeladen",
-      "available": "Zum Download verfügbar",
-      "deleteConfirm": "Bist du sicher, dass du {{modelName}} löschen möchtest? Du musst es erneut herunterladen, um es zu verwenden.",
-      "deleteActiveConfirm": "{{modelName}} ist dein aktives Modell. Das Löschen stoppt Transkriptionen, bis du ein neues Modell auswählst. Bist du sicher?",
-      "deleteTitle": "Modell löschen",
-      "filters": {
-        "all": "Alle",
-        "multiLanguage": "Mehrsprachig",
-        "translation": "Übersetzung",
-        "allLanguages": "Alle Sprachen"
-      },
-      "noModelsMatch": "Keine Modelle entsprechen diesem Filter.",
-      "yourModels": "Heruntergeladene Modelle",
-      "availableModels": "Zum Download verfügbar"
     },
     "general": {
       "title": "Allgemein",
@@ -176,10 +159,10 @@
         "system": "System",
         "light": "Hell",
         "dark": "Dunkel",
-        "description": "Wählen Sie Ihr bevorzugtes Design"
+        "description": "Wähle dein bevorzugtes Design"
       },
       "shortcut": {
-        "title": "Handy-Tastenkürzel",
+        "title": "Sonarus-Tastenkürzel",
         "description": "Tastenkürzel für die Sprachaufnahme konfigurieren",
         "loading": "Tastenkürzel werden geladen...",
         "none": "Keine Tastenkürzel konfiguriert",
@@ -188,7 +171,7 @@
         "bindings": {
           "transcribe": {
             "name": "Transkriptions-Tastenkürzel",
-            "description": "Das Tastenkürzel zum Aufnehmen und Transkribieren Ihrer Stimme."
+            "description": "Das Tastenkürzel zum Aufnehmen und Transkribieren deiner Stimme."
           },
           "cancel": {
             "name": "Abbrechen-Tastenkürzel",
@@ -196,7 +179,7 @@
           },
           "transcribe_with_post_process": {
             "name": "Nachbearbeitungs-Tastenkürzel",
-            "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf Ihre Transkription anwendet."
+            "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf deine Transkription anwendet."
           }
         },
         "errors": {
@@ -217,6 +200,24 @@
         "label": "Push-to-Talk",
         "description": "Gedrückt halten zum Aufnehmen, loslassen zum Stoppen"
       }
+    },
+    "models": {
+      "title": "Transkriptionsmodelle",
+      "description": "Wähle ein Transkriptionsmodell aus oder lade zusätzliche Modelle herunter. Verschiedene Modelle bieten unterschiedliche Genauigkeits- und Geschwindigkeitsstufen.",
+      "yourModels": "Heruntergeladene Modelle",
+      "availableModels": "Zum Download verfügbar",
+      "downloaded": "Heruntergeladen",
+      "available": "Zum Download verfügbar",
+      "deleteConfirm": "Bist du sicher, dass du {{modelName}} löschen möchtest? Du musst es erneut herunterladen, um es zu verwenden.",
+      "deleteActiveConfirm": "{{modelName}} ist dein aktives Modell. Das Löschen stoppt Transkriptionen, bis du ein neues Modell auswählst. Bist du sicher?",
+      "deleteTitle": "Modell löschen",
+      "filters": {
+        "all": "Alle",
+        "multiLanguage": "Mehrsprachig",
+        "translation": "Übersetzung",
+        "allLanguages": "Alle Sprachen"
+      },
+      "noModelsMatch": "Keine Modelle entsprechen diesem Filter."
     },
     "sound": {
       "title": "Ton",
@@ -266,6 +267,11 @@
         "ort": {
           "title": "ONNX-Beschleunigung",
           "description": "Hardwarebeschleunigung für ONNX-Modelle (Parakeet, Canary, Moonshine usw.). DirectML unter Windows ist experimentell. Modelle können bei der Transkription fehlschlagen."
+        },
+        "gpuDevice": {
+          "title": "GPU-Gerät",
+          "description": "Wähle die GPU für die Whisper-Inferenz. Auto wählt die dedizierte GPU.",
+          "auto": "Auto"
         }
       },
       "startHidden": {
@@ -274,11 +280,11 @@
       },
       "autostart": {
         "label": "Beim Start ausführen",
-        "description": "Handy automatisch beim Anmelden starten."
+        "description": "Sonarus automatisch beim Anmelden starten."
       },
       "showTrayIcon": {
         "label": "Taskleistensymbol anzeigen",
-        "description": "Das Handy-Symbol in der Taskleiste anzeigen."
+        "description": "Das Sonarus-Symbol in der Taskleiste anzeigen."
       },
       "overlay": {
         "title": "Overlay-Position",
@@ -304,7 +310,7 @@
       },
       "typingTool": {
         "title": "Eingabetool",
-        "description": "Wählen Sie, welches Linux-Eingabetool für die Direkt-Einfügen-Methode verwendet werden soll. Auto erkennt und verwendet automatisch das beste verfügbare Tool für Ihr System.",
+        "description": "Wähle, welches Linux-Eingabetool für die Direkt-Einfügen-Methode verwendet werden soll. Auto erkennt und verwendet automatisch das beste verfügbare Tool für dein System.",
         "options": {
           "auto": "Auto (Empfohlen)"
         }
@@ -322,10 +328,10 @@
         "description": "Sendet nach dem Einfügen von Text automatisch die ausgewählte Tastenkombination. Cmd+Enter gilt für macOS, während Windows/Linux Super+Enter verwenden.",
         "options": {
           "off": "Aus",
-          "enter": "Enter",
-          "cmdEnter": "Cmd+Enter",
-          "superEnter": "Super+Enter",
-          "ctrlEnter": "Ctrl+Enter"
+          "enter": "Eingabe",
+          "cmdEnter": "Cmd+Eingabe",
+          "superEnter": "Super+Eingabe",
+          "ctrlEnter": "Strg+Eingabe"
         }
       },
       "translateToEnglish": {
@@ -395,7 +401,7 @@
         }
       },
       "prompts": {
-        "title": "Prompt",
+        "title": "Aufforderung",
         "selectedPrompt": {
           "title": "Ausgewählter Prompt",
           "description": "Wähle eine Vorlage zur Verfeinerung von Transkriptionen oder erstelle eine neue. Verwende ${output} im Prompt-Text, um auf das erfasste Transkript zu verweisen."
@@ -416,6 +422,42 @@
         "createFirst": "Klicke oben auf 'Neuen Prompt erstellen', um deinen ersten Nachbearbeitungs-Prompt zu erstellen."
       }
     },
+    "snippets": {
+      "title": "Intelligente Textbausteine",
+      "listTitle": "Deine Snippets",
+      "addButton": "Snippet hinzufügen",
+      "addTitle": "Snippet hinzufügen",
+      "editTitle": "Snippet bearbeiten",
+      "enabledLabel": "Intelligente Textbausteine",
+      "enabledDescription": "Auslöserphrasen nach der Transkription automatisch zu vollständigem Text erweitern",
+      "triggerLabel": "Auslösephrase",
+      "triggerPlaceholder": "z. B. Adresse",
+      "triggerHint": "Sage diesen Ausdruck während der Transkription, um ihn zu erweitern",
+      "expansionLabel": "Erweiterungstext",
+      "expansionPlaceholder": "z. B. Hauptstraße 123, Springfield",
+      "loading": "Schnipsel werden geladen...",
+      "empty": "Noch keine Snippets",
+      "emptyHint": "Ein Snippet hinzufügen, um Triggerphrasen automatisch zu erweitern",
+      "edit": "Snippet bearbeiten",
+      "delete": "Snippet löschen",
+      "toggleEnable": "Snippet {{name}} aktivieren",
+      "editSnippet": "Snippet {{name}} bearbeiten",
+      "deleteSnippet": "Snippet {{name}} löschen",
+      "cancel": "Abbrechen",
+      "saving": "Wird gespeichert...",
+      "saveChanges": "Änderungen speichern",
+      "add": "Snippet hinzufügen",
+      "created": "Snippet erstellt",
+      "updated": "Snippet aktualisiert",
+      "deleted": "Snippet gelöscht",
+      "errors": {
+        "emptyTrigger": "Auslösesatz darf nicht leer sein",
+        "triggerTooLong": "Die Auslösephrase darf höchstens {{max}} Zeichen lang sein",
+        "expansionTooLong": "Die Erweiterung darf höchstens {{max}} Zeichen lang sein",
+        "toggleFailed": "Snippet konnte nicht aktualisiert werden",
+        "deleteFailed": "Snippet konnte nicht gelöscht werden"
+      }
+    },
     "history": {
       "title": "Verlauf",
       "openFolder": "Aufnahmeordner öffnen",
@@ -434,7 +476,7 @@
       "transcriptionFailed": "Transkription fehlgeschlagen. Du kannst über das Wiederholen-Symbol erneut transkribieren."
     },
     "debug": {
-      "title": "Debug",
+      "title": "Debuggen",
       "logDirectory": {
         "title": "Log-Verzeichnis",
         "description": "Speicherort der Log-Dateien"
@@ -445,7 +487,7 @@
       },
       "updateChecks": {
         "label": "Nach Updates suchen",
-        "description": "Automatisch nach neuen Versionen von Handy suchen"
+        "description": "Automatisch nach neuen Versionen von Sonarus suchen"
       },
       "soundTheme": {
         "label": "Sound-Thema",
@@ -497,7 +539,7 @@
       },
       "transcribingVisualizer": {
         "title": "Visualisierung beim Transkribieren",
-        "description": "Wählen Sie den Animationsstil für den Transkriptionsstatus im Overlay.",
+        "description": "Wähle den Animationsstil für den Transkriptionsstatus im Overlay.",
         "options": {
           "dots": "Punkte (Pulswelle)",
           "equalizer": "Mikro-Equalizer",
@@ -511,22 +553,22 @@
       },
       "pasteDelay": {
         "title": "Einfügeverzögerung",
-        "description": "Verzögerung vor dem Senden des Einfüge-Tastendrucks (in Millisekunden). Erhöhen Sie den Wert, wenn falscher Text eingefügt wird."
+        "description": "Verzögerung vor dem Senden des Einfüge-Tastendrucks (in Millisekunden). Erhöhe den Wert, wenn falscher Text eingefügt wird."
       },
       "recordingBuffer": {
         "title": "Zusätzlicher Aufnahmepuffer",
-        "description": "Zusätzliche Zeit (in Millisekunden), um nach dem Loslassen der Taste weiterzuzeichnen, um nachlaufendes Audio aufzunehmen. 0 = kein zusätzlicher Puffer."
+        "description": "Zusätzliche Zeit (in Millisekunden), um nach dem Loslassen der Taste weiter aufzunehmen, um nachlaufendes Audio zu erfassen. 0 = kein zusätzlicher Puffer."
       }
     },
     "about": {
       "title": "Info",
       "version": {
         "title": "Version",
-        "description": "Aktuelle Version von Handy"
+        "description": "Aktuelle Version von Sonarus"
       },
       "appDataDirectory": {
         "title": "App-Datenverzeichnis",
-        "description": "Speicherort der Handy-Daten"
+        "description": "Speicherort der Sonarus-Daten"
       },
       "sourceCode": {
         "title": "Quellcode",
@@ -535,7 +577,7 @@
       },
       "supportDevelopment": {
         "title": "Entwicklung unterstützen",
-        "description": "Hilf uns, Handy weiterzuentwickeln",
+        "description": "Hilf uns, Sonarus weiterzuentwickeln",
         "button": "Spenden"
       },
       "acknowledgments": {
@@ -543,7 +585,12 @@
         "whisper": {
           "title": "Whisper.cpp",
           "description": "Hochleistungs-Inferenz des Whisper-Spracherkennungsmodells von OpenAI",
-          "details": "Handy verwendet Whisper.cpp für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
+          "details": "Sonarus verwendet Whisper.cpp für schnelle, lokale Sprach-zu-Text-Verarbeitung. Dank an Georgi Gerganov und die Mitwirkenden für ihre großartige Arbeit."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Das Speech-to-Text-Tool, das sich am einfachsten forken lässt",
+          "details": "Sonarus baut auf dem Fundament von Handy auf. Weitere Details finden Sie im ursprünglichen Projekt."
         }
       }
     }
@@ -560,9 +607,13 @@
     "downloading": "Wird heruntergeladen... {{progress}}%",
     "installing": "Wird installiert...",
     "preparing": "Wird vorbereitet...",
-    "checkForUpdates": "Nach Updates suchen"
+    "checkForUpdates": "Nach Updates suchen",
+    "portableUpdateTitle": "Manuelles Update erforderlich",
+    "portableUpdateMessage": "Portable Installationen können nicht automatisch aktualisiert werden. Zum Aktualisieren: Lade den neuesten NSIS-Installer von GitHub Releases herunter, installiere ihn im selben Ordner und kopiere dann deinen Data/-Ordner (Einstellungen, Modelle, Aufnahmen) von der alten Version in die neue.",
+    "portableUpdateButton": "GitHub Releases öffnen"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "Wird geladen...",
     "save": "Speichern",
     "cancel": "Abbrechen",
@@ -586,7 +637,7 @@
   },
   "accessibility": {
     "permissionsRequired": "Bedienungshilfen-Berechtigungen erforderlich",
-    "permissionsDescription": "Handy benötigt Bedienungshilfen-Berechtigungen, um transkribierten Text einzugeben.",
+    "permissionsDescription": "Sonarus benötigt Bedienungshilfen-Berechtigungen, um transkribierten Text einzugeben.",
     "openSettings": "Systemeinstellungen öffnen",
     "dismiss": "Schließen"
   },
@@ -594,13 +645,13 @@
     "loadDirectory": "Fehler beim Laden des Verzeichnisses: {{error}}",
     "micPermissionDeniedTitle": "Mikrofonzugriff verweigert",
     "micPermissionDenied": {
-      "generic": "Der Mikrofonzugriff wurde vom Betriebssystem verweigert. Bitte erteilen Sie die Mikrofonberechtigung in Ihren Systemeinstellungen.",
-      "windows": "Aktivieren Sie den Mikrofonzugriff unter Einstellungen → Datenschutz und Sicherheit → Mikrofon (einschließlich Desktop-App-Zugriff).",
-      "macos": "Erteilen Sie den Mikrofonzugriff in Systemeinstellungen → Datenschutz & Sicherheit → Mikrofon.",
-      "linux": "Erteilen Sie den Mikrofonzugriff in den Sound- oder Datenschutzeinstellungen Ihres Systems."
+      "generic": "Der Mikrofonzugriff wurde vom Betriebssystem verweigert. Bitte erteile die Mikrofonberechtigung in deinen Systemeinstellungen.",
+      "windows": "Aktiviere den Mikrofonzugriff unter Einstellungen → Datenschutz und Sicherheit → Mikrofon (einschließlich Desktop-App-Zugriff).",
+      "macos": "Erteile den Mikrofonzugriff in Systemeinstellungen → Datenschutz & Sicherheit → Mikrofon.",
+      "linux": "Erteile den Mikrofonzugriff in den Sound- oder Datenschutzeinstellungen deines Systems."
     },
     "noInputDeviceTitle": "Kein Mikrofon gefunden",
-    "noInputDevice": "Es wurde kein Audio-Eingabegerät erkannt. Bitte schließen Sie ein Mikrofon oder Headset an und versuchen Sie es erneut.",
+    "noInputDevice": "Es wurde kein Audio-Eingabegerät erkannt. Bitte schließe ein Mikrofon oder Headset an und versuche es erneut.",
     "recordingFailed": "Aufnahme konnte nicht gestartet werden: {{error}}",
     "modelLoadFailed": "Modell konnte nicht geladen werden: {{model}}",
     "modelLoadFailedUnknown": "unbekanntes Modell",
@@ -609,7 +660,7 @@
   },
   "appLanguage": {
     "title": "Anwendungssprache",
-    "description": "Sprache der Handy-Oberfläche ändern"
+    "description": "Sprache der Sonarus-Oberfläche ändern"
   },
   "overlay": {
     "transcribing": "Transkribiere...",

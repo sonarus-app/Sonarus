@@ -13,6 +13,7 @@
     "models": "Modelos",
     "advanced": "Avanzado",
     "postProcessing": "Post Proceso",
+    "snippets": "Fragmentos",
     "history": "Historial",
     "debug": "Depuración",
     "about": "Acerca de"
@@ -54,7 +55,7 @@
         "description": "Rápido y preciso"
       },
       "moonshine-base": {
-        "name": "Moonshine Base",
+        "name": "Base de alcohol ilegal",
         "description": "Muy rápido, solo inglés. Maneja bien los acentos."
       },
       "moonshine-tiny-streaming-en": {
@@ -135,39 +136,21 @@
     "noModelDownloadRequired": "Sin Modelo - Descarga Requerida",
     "deleteModel": "Eliminar {{modelName}}",
     "downloadSpeed": "{{speed}} MB/s",
+    "cancel": "Cancelar",
+    "cancelDownload": "Cancelar descarga",
     "capabilities": {
       "languageSelection": "Soporta múltiples idiomas de entrada",
-      "multiLanguage": "Multiidioma",
-      "translation": "Puede traducir al inglés",
-      "translate": "Traducir al inglés",
       "singleLanguage": "Solo admite este idioma",
-      "languageOnly": "Solo {{language}}"
-    },
-    "cancel": "Cancelar",
-    "cancelDownload": "Cancelar descarga"
+      "multiLanguage": "Multiidioma",
+      "languageOnly": "Solo {{language}}",
+      "translation": "Puede traducir al inglés",
+      "translate": "Traducir al inglés"
+    }
   },
   "settings": {
     "modelSettings": {
       "title": "Configuración de {{model}}",
       "noSettingsNeeded": "Este modelo funciona automáticamente sin necesidad de configuración."
-    },
-    "models": {
-      "title": "Modelos de Transcripción",
-      "description": "Selecciona un modelo de transcripción o descarga modelos adicionales. Diferentes modelos ofrecen distintos niveles de precisión y velocidad.",
-      "downloaded": "Descargados",
-      "available": "Disponibles para Descargar",
-      "deleteConfirm": "¿Estás seguro de que deseas eliminar {{modelName}}? Necesitarás descargarlo de nuevo para usarlo.",
-      "deleteActiveConfirm": "{{modelName}} es tu modelo activo. Eliminarlo detendrá las transcripciones hasta que selecciones un nuevo modelo. ¿Estás seguro?",
-      "deleteTitle": "Eliminar modelo",
-      "filters": {
-        "all": "Todos",
-        "multiLanguage": "Multiidioma",
-        "translation": "Traducción",
-        "allLanguages": "Todos los idiomas"
-      },
-      "noModelsMatch": "Ningún modelo coincide con este filtro.",
-      "yourModels": "Modelos descargados",
-      "availableModels": "Disponibles para descargar"
     },
     "general": {
       "title": "General",
@@ -217,6 +200,24 @@
         "label": "Presionar para Hablar",
         "description": "Mantén presionado para grabar, suelta para detener"
       }
+    },
+    "models": {
+      "title": "Modelos de Transcripción",
+      "description": "Selecciona un modelo de transcripción o descarga modelos adicionales. Diferentes modelos ofrecen distintos niveles de precisión y velocidad.",
+      "yourModels": "Modelos descargados",
+      "availableModels": "Disponibles para descargar",
+      "downloaded": "Descargados",
+      "available": "Disponibles para Descargar",
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar {{modelName}}? Necesitarás descargarlo de nuevo para usarlo.",
+      "deleteActiveConfirm": "{{modelName}} es tu modelo activo. Eliminarlo detendrá las transcripciones hasta que selecciones un nuevo modelo. ¿Estás seguro?",
+      "deleteTitle": "Eliminar modelo",
+      "filters": {
+        "all": "Todos",
+        "multiLanguage": "Multiidioma",
+        "translation": "Traducción",
+        "allLanguages": "Todos los idiomas"
+      },
+      "noModelsMatch": "Ningún modelo coincide con este filtro."
     },
     "sound": {
       "title": "Sonido",
@@ -322,10 +323,12 @@
         "description": "Envía automáticamente la combinación de teclas seleccionada después de insertar el texto. Cmd+Enter se aplica en macOS, mientras que Windows/Linux usan Super+Enter.",
         "options": {
           "off": "Desactivado",
-          "enter": "Enter",
-          "cmdEnter": "Cmd+Enter",
-          "superEnter": "Super+Enter",
-          "ctrlEnter": "Ctrl+Enter"
+          "off": "Desactivado",
+          "enter": "Intro",
+          "cmdEnter": "Cmd+Intro",
+          "cmdEnter": "Cmd+Intro",
+          "superEnter": "Super+Intro",
+          "ctrlEnter": "Ctrl+Intro"
         }
       },
       "translateToEnglish": {
@@ -414,6 +417,42 @@
         "cancel": "Cancelar",
         "selectToEdit": "Selecciona un prompt arriba para ver y editar sus detalles.",
         "createFirst": "Haz clic en 'Crear Nuevo Prompt' arriba para crear tu primer prompt de post procesamiento."
+      }
+    },
+    "snippets": {
+      "title": "Fragmentos inteligentes",
+      "listTitle": "Tus fragmentos",
+      "addButton": "Añadir fragmento",
+      "addTitle": "Añadir fragmento",
+      "editTitle": "Editar fragmento",
+      "enabledLabel": "Fragmentos inteligentes",
+      "enabledDescription": "Expandir automáticamente las frases activadoras a texto completo después de la transcripción",
+      "triggerLabel": "Frase activadora",
+      "triggerPlaceholder": "p. ej., dir.",
+      "triggerHint": "Di esta frase durante la transcripción para expandirla",
+      "expansionLabel": "Texto expandido",
+      "expansionPlaceholder": "p. ej. Calle Principal 123, Springfield",
+      "loading": "Cargando fragmentos...",
+      "empty": "Aún no hay fragmentos",
+      "emptyHint": "Añade un fragmento para expandir frases activadoras automáticamente",
+      "edit": "Editar fragmento",
+      "delete": "Eliminar fragmento",
+      "toggleEnable": "Habilitar fragmento {{name}}",
+      "editSnippet": "Editar fragmento {{name}}",
+      "deleteSnippet": "Eliminar fragmento {{name}}",
+      "cancel": "Cancelar",
+      "saving": "Guardando...",
+      "saveChanges": "Guardar cambios",
+      "add": "Añadir fragmento",
+      "created": "Fragmento creado",
+      "updated": "Fragmento actualizado",
+      "deleted": "Fragmento eliminado",
+      "errors": {
+        "emptyTrigger": "La frase activadora no puede estar vacía",
+        "triggerTooLong": "La frase activadora debe tener {{max}} caracteres o menos",
+        "expansionTooLong": "La expansión debe tener {{max}} caracteres o menos",
+        "toggleFailed": "No se pudo actualizar el fragmento",
+        "deleteFailed": "No se pudo eliminar el fragmento"
       }
     },
     "history": {
@@ -544,6 +583,11 @@
           "title": "Whisper.cpp",
           "description": "Inferencia de alto rendimiento del modelo de reconocimiento automático de voz Whisper de OpenAI",
           "details": "Handy usa Whisper.cpp para procesamiento de voz a texto rápido y local. Gracias al increíble trabajo de Georgi Gerganov y colaboradores."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "La herramienta de voz a texto más fácil para hacer fork",
+          "details": "Sonarus se basa en la base de Handy. Consulta el proyecto original para obtener más información."
         }
       }
     }
@@ -563,6 +607,7 @@
     "checkForUpdates": "Buscar actualizaciones"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "Cargando...",
     "save": "Guardar",
     "cancel": "Cancelar",

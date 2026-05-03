@@ -10,12 +10,13 @@
   },
   "sidebar": {
     "general": "عام",
+    "models": "النماذج",
     "advanced": "متقدم",
     "postProcessing": "معالجة لاحقة",
+    "snippets": "مقتطفات",
     "history": "السجل",
     "debug": "تصحيح الأخطاء",
-    "about": "حول",
-    "models": "النماذج"
+    "about": "حول"
   },
   "onboarding": {
     "subtitle": "للبدء، اختر نموذج التفريغ الصوتي",
@@ -118,6 +119,7 @@
   "modelSelector": {
     "custom": "مخصص",
     "active": "نشط",
+    "switching": "جارٍ التبديل...",
     "noModelsAvailable": "لا توجد نماذج متاحة",
     "verifying": "جارٍ التحقق من {{modelName}}...",
     "verifyingGeneric": "جارٍ التحقق...",
@@ -133,7 +135,6 @@
     "modelUnloaded": "تم إلغاء تحميل النموذج",
     "noModelDownloadRequired": "لا يوجد نموذج - التنزيل مطلوب",
     "deleteModel": "حذف {{modelName}}",
-    "switching": "جارٍ التبديل...",
     "downloadSpeed": "{{speed}} ميجابايت/ث",
     "cancel": "إلغاء",
     "cancelDownload": "إلغاء التنزيل",
@@ -147,6 +148,10 @@
     }
   },
   "settings": {
+    "modelSettings": {
+      "title": "إعدادات النموذج",
+      "noSettingsNeeded": "لا توجد إعدادات مطلوبة لهذا النموذج"
+    },
     "general": {
       "title": "عام",
       "theme": {
@@ -195,6 +200,24 @@
         "label": "اضغط للتحدث",
         "description": "استمر في الضغط للتسجيل، واترك للتوقف"
       }
+    },
+    "models": {
+      "title": "نماذج النسخ",
+      "description": "اختر نموذج نسخ أو قم بتنزيل نماذج إضافية. تقدم النماذج المختلفة مستويات متفاوتة من الدقة والسرعة.",
+      "yourModels": "النماذج المحمّلة",
+      "availableModels": "متاح للتنزيل",
+      "downloaded": "تم التنزيل",
+      "available": "متاح للتنزيل",
+      "deleteConfirm": "هل أنت متأكد أنك تريد حذف {{modelName}}؟ ستحتاج إلى تنزيله مرة أخرى لاستخدامه.",
+      "deleteActiveConfirm": "{{modelName}} هو النموذج النشط حاليًا. حذفه سيوقف النسخ حتى تختار نموذجًا جديدًا. هل أنت متأكد؟",
+      "deleteTitle": "حذف النموذج",
+      "filters": {
+        "all": "الكل",
+        "multiLanguage": "متعدد اللغات",
+        "translation": "ترجمة",
+        "allLanguages": "جميع اللغات"
+      },
+      "noModelsMatch": "لا توجد نماذج مطابقة لهذا الفلتر."
     },
     "sound": {
       "title": "الصوت",
@@ -394,6 +417,42 @@
         "createFirst": ".انقر على 'إنشاء مطالبة جديدة' أعلاه لإنشاء أول مطالبة معالجة لاحقة لك"
       }
     },
+    "snippets": {
+      "title": "المقتطفات الذكية",
+      "listTitle": "مقتطفاتك",
+      "addButton": "إضافة مقطع",
+      "addTitle": "إضافة مقطع",
+      "editTitle": "تحرير المقتطف",
+      "enabledLabel": "المقتطفات الذكية",
+      "enabledDescription": "توسيع عبارات التشغيل تلقائيًا إلى النص الكامل بعد النسخ",
+      "triggerLabel": "عبارة التفعيل",
+      "triggerPlaceholder": "مثلًا: العنوان",
+      "triggerHint": "قل هذه العبارة أثناء النسخ لتوسيعها",
+      "expansionLabel": "نص موسّع",
+      "expansionPlaceholder": "مثلاً: 123 الشارع الرئيسي، سبرينغفيلد",
+      "loading": "جارٍ تحميل المقتطفات...",
+      "empty": "لا توجد مقتطفات بعد",
+      "emptyHint": "أضف مقتطفًا لتوسيع عبارات التشغيل تلقائيًا",
+      "edit": "تعديل المقتطف",
+      "delete": "حذف المقتطف",
+      "toggleEnable": "فعّل المقتطف {{name}}",
+      "editSnippet": "حرّر المقتطف {{name}}",
+      "deleteSnippet": "حذف المقتطف {{name}}",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ...",
+      "saveChanges": "حفظ التغييرات",
+      "add": "إضافة مقطع",
+      "created": "تم إنشاء المقتطف",
+      "updated": "تم تحديث المقتطف",
+      "deleted": "تم حذف المقتطف",
+      "errors": {
+        "emptyTrigger": "لا يمكن أن تكون العبارة المشغِّلة فارغة",
+        "triggerTooLong": "يجب ألا تزيد العبارة المُحفِّزة على {{max}} حرفًا",
+        "expansionTooLong": "يجب ألا يزيد التوسيع عن {{max}} حرفًا",
+        "toggleFailed": "تعذّر تحديث المقتطف",
+        "deleteFailed": "فشل حذف المقتطف"
+      }
+    },
     "history": {
       "title": "السجل",
       "openFolder": "فتح مجلد التسجيلات",
@@ -522,30 +581,13 @@
           "title": "Whisper.cpp",
           "description": "استنتاج عالي الأداء لنموذج التعرف التلقائي على الكلام Whisper من OpenAI",
           "details": ".يستخدم Handy برنامج Whisper.cpp لمعالجة سريعة ومحلية لتحويل الكلام إلى نص. شكراً للعمل الرائع الذي قام به Georgi Gerganov والمساهمون"
+        },
+        "handy": {
+          "title": "عملي",
+          "description": "أكثر أداة لتحويل الكلام إلى نص قابليةً للتفريغ",
+          "details": "يستند Sonarus إلى الأساس الذي وضعه Handy. اطّلع على المشروع الأصلي لمزيد من التفاصيل."
         }
       }
-    },
-    "modelSettings": {
-      "title": "إعدادات النموذج",
-      "noSettingsNeeded": "لا توجد إعدادات مطلوبة لهذا النموذج"
-    },
-    "models": {
-      "title": "نماذج النسخ",
-      "description": "اختر نموذج نسخ أو قم بتنزيل نماذج إضافية. تقدم النماذج المختلفة مستويات متفاوتة من الدقة والسرعة.",
-      "yourModels": "النماذج المحمّلة",
-      "availableModels": "متاح للتنزيل",
-      "downloaded": "تم التنزيل",
-      "available": "متاح للتنزيل",
-      "deleteConfirm": "هل أنت متأكد أنك تريد حذف {{modelName}}؟ ستحتاج إلى تنزيله مرة أخرى لاستخدامه.",
-      "deleteActiveConfirm": "{{modelName}} هو النموذج النشط حاليًا. حذفه سيوقف النسخ حتى تختار نموذجًا جديدًا. هل أنت متأكد؟",
-      "deleteTitle": "حذف النموذج",
-      "filters": {
-        "all": "الكل",
-        "multiLanguage": "متعدد اللغات",
-        "translation": "ترجمة",
-        "allLanguages": "جميع اللغات"
-      },
-      "noModelsMatch": "لا توجد نماذج مطابقة لهذا الفلتر."
     }
   },
   "footer": {
@@ -563,6 +605,7 @@
     "checkForUpdates": "التحقق من وجود تحديثات"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "...جاري التحميل",
     "save": "حفظ",
     "cancel": "إلغاء",

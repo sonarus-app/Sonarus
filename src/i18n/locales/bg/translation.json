@@ -13,6 +13,7 @@
     "models": "Модели",
     "advanced": "Разширени",
     "postProcessing": "Постобработка",
+    "snippets": "Фрагменти",
     "history": "История",
     "debug": "Отстраняване",
     "about": "За приложението"
@@ -134,7 +135,7 @@
     "modelUnloaded": "Моделът е разтоварен",
     "noModelDownloadRequired": "Няма модел – необходимо е изтегляне",
     "deleteModel": "Изтриване на {{modelName}}",
-    "downloadSpeed": "{{speed}} MB/s",
+    "downloadSpeed": "{{speed}} МБ/с",
     "cancel": "Отказ",
     "cancelDownload": "Отказ на изтеглянето",
     "capabilities": {
@@ -322,7 +323,7 @@
         "description": "Автоматично изпращане на избраната клавишна комбинация след вмъкване на текста. Cmd+Enter важи за macOS, а Windows/Linux използват Super+Enter.",
         "options": {
           "off": "Изкл.",
-          "enter": "Enter",
+          "enter": "Въведете",
           "cmdEnter": "Cmd+Enter",
           "superEnter": "Super+Enter",
           "ctrlEnter": "Ctrl+Enter"
@@ -414,6 +415,42 @@
         "cancel": "Отказ",
         "selectToEdit": "Изберете подкана по-горе, за да видите и редактирате подробностите ѝ.",
         "createFirst": "Натиснете „Нова подкана“ по-горе, за да създадете първата си подкана за постобработка."
+      }
+    },
+    "snippets": {
+      "title": "Интелигентни откъси",
+      "listTitle": "Вашите откъси",
+      "addButton": "Добавяне на откъс",
+      "addTitle": "Добавяне на откъс",
+      "editTitle": "Редактиране на откъс",
+      "enabledLabel": "Интелигентни откъси",
+      "enabledDescription": "Автоматично разширявай задействащите фрази до пълен текст след транскрибиране",
+      "triggerLabel": "Задействаща фраза",
+      "triggerPlaceholder": "напр. адрес",
+      "triggerHint": "Кажете тази фраза по време на транскрипция, за да я разгънете",
+      "expansionLabel": "Разширен текст",
+      "expansionPlaceholder": "напр. Main Street 123, Springfield",
+      "loading": "Зареждане на откъси...",
+      "empty": "Все още няма откъси",
+      "emptyHint": "Добавете откъс, за да разширявате автоматично фразите за задействане",
+      "edit": "Редактиране на откъса",
+      "delete": "Изтриване на откъс",
+      "toggleEnable": "Активиране на откъса {{name}}",
+      "editSnippet": "Редактиране на откъса {{name}}",
+      "deleteSnippet": "Изтриване на откъс {{name}}",
+      "cancel": "Отказ",
+      "saving": "Запазване...",
+      "saveChanges": "Запазване на промените",
+      "add": "Добавяне на откъс",
+      "created": "Откъсът е създаден",
+      "updated": "Откъсът е актуализиран",
+      "deleted": "Откъсът е изтрит",
+      "errors": {
+        "emptyTrigger": "Фразата за задействане не може да бъде празна",
+        "triggerTooLong": "Фразата за задействане трябва да е до {{max}} знака",
+        "expansionTooLong": "Разширението трябва да е до {{max}} знака",
+        "toggleFailed": "Неуспешно обновяване на откъса",
+        "deleteFailed": "Изтриването на откъса не бе успешно"
       }
     },
     "history": {
@@ -544,6 +581,11 @@
           "title": "Whisper.cpp",
           "description": "Високопроизводително изпълнение на автоматичния модел за разпознаване на реч Whisper на OpenAI",
           "details": "Handy използва Whisper.cpp за бързо локално реч-към-текст. Благодарности на Georgi Gerganov и сътрудниците за отличната работа."
+        },
+        "handy": {
+          "title": "Удобен",
+          "description": "Най-лесният за форкване инструмент за преобразуване на реч в текст",
+          "details": "Sonarus е изграден върху основата на Handy. Разгледайте оригиналния проект за повече подробности."
         }
       }
     }
@@ -563,6 +605,7 @@
     "checkForUpdates": "Проверка за актуализации"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "Зареждане...",
     "save": "Запазване",
     "cancel": "Отказ",

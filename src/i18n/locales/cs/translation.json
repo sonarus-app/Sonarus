@@ -13,6 +13,7 @@
     "models": "Modely",
     "advanced": "Pokročilé",
     "postProcessing": "Následné zpracování",
+    "snippets": "Úryvky",
     "history": "Historie",
     "debug": "Ladění",
     "about": "O aplikaci"
@@ -118,6 +119,7 @@
   "modelSelector": {
     "custom": "Vlastní",
     "active": "Aktivní",
+    "switching": "Přepínání...",
     "noModelsAvailable": "Nejsou dostupné žádné modely",
     "verifying": "Ověřování {{modelName}}...",
     "verifyingGeneric": "Ověřování...",
@@ -133,41 +135,22 @@
     "modelUnloaded": "Model uvolněn",
     "noModelDownloadRequired": "Žádný model - je nutné stáhnout",
     "deleteModel": "Smazat {{modelName}}",
-    "switching": "Přepínání...",
     "downloadSpeed": "{{speed}} MB/s",
+    "cancel": "Zrušit",
+    "cancelDownload": "Zrušit stahování",
     "capabilities": {
       "languageSelection": "Podporuje více vstupních jazyků",
-      "multiLanguage": "Vícejazyčný",
-      "translation": "Umí překládat do angličtiny",
-      "translate": "Přeložit do angličtiny",
       "singleLanguage": "Podporuje pouze tento jazyk",
-      "languageOnly": "Pouze {{language}}"
-    },
-    "cancel": "Zrušit",
-    "cancelDownload": "Zrušit stahování"
+      "multiLanguage": "Vícejazyčný",
+      "languageOnly": "Pouze {{language}}",
+      "translation": "Umí překládat do angličtiny",
+      "translate": "Přeložit do angličtiny"
+    }
   },
   "settings": {
     "modelSettings": {
       "title": "Nastavení {{model}}",
       "noSettingsNeeded": "Tento model funguje automaticky bez nutnosti konfigurace."
-    },
-    "models": {
-      "title": "Modely přepisu",
-      "description": "Vyberte model přepisu nebo stáhněte další modely. Různé modely nabízejí různé úrovně přesnosti a rychlosti.",
-      "downloaded": "Staženo",
-      "available": "K dispozici ke stažení",
-      "deleteConfirm": "Opravdu chcete smazat {{modelName}}? Pro opětovné použití jej budete muset znovu stáhnout.",
-      "deleteActiveConfirm": "{{modelName}} je váš aktivní model. Jeho smazáním se zastaví přepisy, dokud nevyberete nový model. Opravdu chcete pokračovat?",
-      "deleteTitle": "Smazat model",
-      "filters": {
-        "all": "Vše",
-        "multiLanguage": "Vícejazyčný",
-        "translation": "Překlad",
-        "allLanguages": "Všechny jazyky"
-      },
-      "noModelsMatch": "Tomuto filtru neodpovídají žádné modely.",
-      "yourModels": "Stažené modely",
-      "availableModels": "Dostupné ke stažení"
     },
     "general": {
       "title": "Obecné",
@@ -217,6 +200,24 @@
         "label": "Stisk a mluv",
         "description": "Podržte pro nahrávání, uvolněte pro zastavení"
       }
+    },
+    "models": {
+      "title": "Modely přepisu",
+      "description": "Vyberte model přepisu nebo stáhněte další modely. Různé modely nabízejí různé úrovně přesnosti a rychlosti.",
+      "yourModels": "Stažené modely",
+      "availableModels": "Dostupné ke stažení",
+      "downloaded": "Staženo",
+      "available": "K dispozici ke stažení",
+      "deleteConfirm": "Opravdu chcete smazat {{modelName}}? Pro opětovné použití jej budete muset znovu stáhnout.",
+      "deleteActiveConfirm": "{{modelName}} je váš aktivní model. Jeho smazáním se zastaví přepisy, dokud nevyberete nový model. Opravdu chcete pokračovat?",
+      "deleteTitle": "Smazat model",
+      "filters": {
+        "all": "Vše",
+        "multiLanguage": "Vícejazyčný",
+        "translation": "Překlad",
+        "allLanguages": "Všechny jazyky"
+      },
+      "noModelsMatch": "Tomuto filtru neodpovídají žádné modely."
     },
     "sound": {
       "title": "Zvuk",
@@ -395,7 +396,7 @@
         }
       },
       "prompts": {
-        "title": "Prompt",
+        "title": "Zadání",
         "selectedPrompt": {
           "title": "Vybraný prompt",
           "description": "Vyberte šablonu pro zpřesnění přepisu nebo vytvořte novou. V textu promptu použijte ${output} pro vložení zachyceného přepisu."
@@ -414,6 +415,42 @@
         "cancel": "Zrušit",
         "selectToEdit": "Vyberte výše prompt, abyste zobrazili a upravili jeho podrobnosti.",
         "createFirst": "Klikněte nahoře na 'Vytvořit nový prompt' a vytvořte svůj první prompt pro následné zpracování."
+      }
+    },
+    "snippets": {
+      "title": "Chytré úryvky",
+      "listTitle": "Vaše úryvky",
+      "addButton": "Přidat úryvek",
+      "addTitle": "Přidat úryvek",
+      "editTitle": "Upravit úryvek",
+      "enabledLabel": "Chytré úryvky",
+      "enabledDescription": "Automaticky po přepisu rozbalit spouštěcí fráze na celý text",
+      "triggerLabel": "Spouštěcí fráze",
+      "triggerPlaceholder": "např. adr.",
+      "triggerHint": "Během přepisu vyslovte tuto frázi, aby se rozvinula",
+      "expansionLabel": "Rozšiřující text",
+      "expansionPlaceholder": "např. Hlavní 123, Springfield",
+      "loading": "Načítání úryvků...",
+      "empty": "Zatím žádné úryvky",
+      "emptyHint": "Přidejte úryvek pro automatické rozšíření spouštěcích frází",
+      "edit": "Upravit úryvek",
+      "delete": "Smazat úryvek",
+      "toggleEnable": "Povolit úryvek {{name}}",
+      "editSnippet": "Upravit úryvek {{name}}",
+      "deleteSnippet": "Smazat úryvek {{name}}",
+      "cancel": "Zrušit",
+      "saving": "Ukládání...",
+      "saveChanges": "Uložit změny",
+      "add": "Přidat úryvek",
+      "created": "Úryvek vytvořen",
+      "updated": "Úryvek byl aktualizován",
+      "deleted": "Úryvek odstraněn",
+      "errors": {
+        "emptyTrigger": "Spouštěcí fráze nemůže být prázdná",
+        "triggerTooLong": "Spouštěcí fráze musí mít nejvýše {{max}} znaků",
+        "expansionTooLong": "Rozšíření musí mít nejvýše {{max}} znaků",
+        "toggleFailed": "Nepodařilo se aktualizovat úryvek",
+        "deleteFailed": "Nepodařilo se odstranit úryvek"
       }
     },
     "history": {
@@ -544,6 +581,11 @@
           "title": "Whisper.cpp",
           "description": "Vysoce výkonné inferenční zpracování modelu automatického rozpoznávání řeči Whisper od OpenAI",
           "details": "Handy používá Whisper.cpp pro rychlé lokální zpracování řeči na text. Díky skvělé práci Georgiho Gerganova a přispěvatelů."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Nástroj pro převod řeči na text, který se nejsnáze forkuje",
+          "details": "Sonarus staví na základech Handy. Více podrobností najdete v původním projektu."
         }
       }
     }
@@ -563,6 +605,7 @@
     "checkForUpdates": "Zkontrolovat aktualizace"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "Načítání...",
     "save": "Uložit",
     "cancel": "Zrušit",

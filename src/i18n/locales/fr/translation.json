@@ -13,6 +13,7 @@
     "models": "Modèles",
     "advanced": "Avancé",
     "postProcessing": "Post-traitement",
+    "snippets": "Extraits",
     "history": "Historique",
     "debug": "Débogage",
     "about": "À propos"
@@ -62,7 +63,7 @@
         "description": "Ultra-rapide, anglais uniquement"
       },
       "moonshine-small-streaming-en": {
-        "name": "Moonshine V2 Small",
+        "name": "Moonshine V2 Petit",
         "description": "Rapide, anglais uniquement. Bon équilibre entre vitesse et précision."
       },
       "moonshine-medium-streaming-en": {
@@ -135,39 +136,21 @@
     "noModelDownloadRequired": "Aucun Modèle - Téléchargement Requis",
     "deleteModel": "Supprimer {{modelName}}",
     "downloadSpeed": "{{speed}} Mo/s",
+    "cancel": "Annuler",
+    "cancelDownload": "Annuler le téléchargement",
     "capabilities": {
       "languageSelection": "Prend en charge plusieurs langues d'entrée",
-      "multiLanguage": "Multilingue",
-      "translation": "Peut traduire en anglais",
-      "translate": "Traduire en anglais",
       "singleLanguage": "Prend en charge uniquement cette langue",
-      "languageOnly": "{{language}} uniquement"
-    },
-    "cancel": "Annuler",
-    "cancelDownload": "Annuler le téléchargement"
+      "multiLanguage": "Multilingue",
+      "languageOnly": "{{language}} uniquement",
+      "translation": "Peut traduire en anglais",
+      "translate": "Traduire en anglais"
+    }
   },
   "settings": {
     "modelSettings": {
       "title": "Paramètres de {{model}}",
       "noSettingsNeeded": "Ce modèle fonctionne automatiquement sans configuration nécessaire."
-    },
-    "models": {
-      "title": "Modèles de Transcription",
-      "description": "Sélectionnez un modèle de transcription ou téléchargez des modèles supplémentaires. Différents modèles offrent différents niveaux de précision et de vitesse.",
-      "downloaded": "Téléchargés",
-      "available": "Disponibles au Téléchargement",
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer {{modelName}} ? Vous devrez le télécharger à nouveau pour l'utiliser.",
-      "deleteActiveConfirm": "{{modelName}} est votre modèle actif. Le supprimer arrêtera les transcriptions jusqu'à ce que vous sélectionniez un nouveau modèle. Êtes-vous sûr ?",
-      "deleteTitle": "Supprimer le modèle",
-      "filters": {
-        "all": "Tous",
-        "multiLanguage": "Multilingue",
-        "translation": "Traduction",
-        "allLanguages": "Toutes les langues"
-      },
-      "noModelsMatch": "Aucun modèle ne correspond à ce filtre.",
-      "yourModels": "Modèles téléchargés",
-      "availableModels": "Disponibles au téléchargement"
     },
     "general": {
       "title": "Général",
@@ -217,6 +200,24 @@
         "label": "Appuyer pour parler",
         "description": "Maintenez pour enregistrer, relâchez pour arrêter"
       }
+    },
+    "models": {
+      "title": "Modèles de Transcription",
+      "description": "Sélectionnez un modèle de transcription ou téléchargez des modèles supplémentaires. Différents modèles offrent différents niveaux de précision et de vitesse.",
+      "yourModels": "Modèles téléchargés",
+      "availableModels": "Disponibles au téléchargement",
+      "downloaded": "Téléchargés",
+      "available": "Disponibles au Téléchargement",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer {{modelName}} ? Vous devrez le télécharger à nouveau pour l'utiliser.",
+      "deleteActiveConfirm": "{{modelName}} est votre modèle actif. Le supprimer arrêtera les transcriptions jusqu'à ce que vous sélectionniez un nouveau modèle. Êtes-vous sûr ?",
+      "deleteTitle": "Supprimer le modèle",
+      "filters": {
+        "all": "Tous",
+        "multiLanguage": "Multilingue",
+        "translation": "Traduction",
+        "allLanguages": "Toutes les langues"
+      },
+      "noModelsMatch": "Aucun modèle ne correspond à ce filtre."
     },
     "sound": {
       "title": "Son",
@@ -323,9 +324,9 @@
         "options": {
           "off": "Désactivé",
           "enter": "Entrée",
-          "cmdEnter": "Cmd+Enter",
-          "superEnter": "Super+Enter",
-          "ctrlEnter": "Ctrl+Enter"
+          "cmdEnter": "Cmd+Entrée",
+          "superEnter": "Super+Entrée",
+          "ctrlEnter": "Ctrl+Entrée"
         }
       },
       "translateToEnglish": {
@@ -414,6 +415,42 @@
         "cancel": "Annuler",
         "selectToEdit": "Sélectionnez un prompt ci-dessus pour voir et modifier ses détails.",
         "createFirst": "Cliquez sur 'Créer un nouveau prompt' ci-dessus pour créer votre premier prompt de post-traitement."
+      }
+    },
+    "snippets": {
+      "title": "Extraits intelligents",
+      "listTitle": "Vos extraits",
+      "addButton": "Ajouter un extrait",
+      "addTitle": "Ajouter un extrait",
+      "editTitle": "Modifier l’extrait",
+      "enabledLabel": "Extraits intelligents",
+      "enabledDescription": "Développer automatiquement les phrases de déclenchement en texte intégral après la transcription",
+      "triggerLabel": "Phrase déclencheuse",
+      "triggerPlaceholder": "p. ex. adr.",
+      "triggerHint": "Prononcez cette phrase pendant la transcription pour la développer",
+      "expansionLabel": "Texte d’expansion",
+      "expansionPlaceholder": "p. ex. 123, rue Principale, Springfield",
+      "loading": "Chargement des extraits...",
+      "empty": "Aucun extrait pour le moment",
+      "emptyHint": "Ajouter un extrait pour développer automatiquement les phrases déclencheuses",
+      "edit": "Modifier l’extrait",
+      "delete": "Supprimer l’extrait",
+      "toggleEnable": "Activer l’extrait {{name}}",
+      "editSnippet": "Modifier l’extrait {{name}}",
+      "deleteSnippet": "Supprimer l’extrait {{name}}",
+      "cancel": "Annuler",
+      "saving": "Enregistrement...",
+      "saveChanges": "Enregistrer les modifications",
+      "add": "Ajouter un extrait",
+      "created": "Extrait créé",
+      "updated": "Extrait mis à jour",
+      "deleted": "Extrait supprimé",
+      "errors": {
+        "emptyTrigger": "La phrase de déclenchement ne peut pas être vide",
+        "triggerTooLong": "La phrase de déclenchement doit comporter {{max}} caractères ou moins",
+        "expansionTooLong": "L’expansion doit comporter {{max}} caractères ou moins",
+        "toggleFailed": "Échec de la mise à jour de l’extrait",
+        "deleteFailed": "Échec de la suppression de l’extrait"
       }
     },
     "history": {
@@ -544,6 +581,11 @@
           "title": "Whisper.cpp",
           "description": "Inférence haute performance du modèle de reconnaissance vocale automatique Whisper d'OpenAI",
           "details": "Handy utilise Whisper.cpp pour un traitement rapide et local de la parole en texte. Merci au travail incroyable de Georgi Gerganov et des contributeurs."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "L'outil de transcription vocale le plus facile à forker",
+          "details": "Sonarus s'appuie sur la base de Handy. Consultez le projet original pour plus de détails."
         }
       }
     }
@@ -563,6 +605,7 @@
     "checkForUpdates": "Rechercher des mises à jour"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "Chargement...",
     "save": "Enregistrer",
     "cancel": "Annuler",

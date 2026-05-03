@@ -628,7 +628,11 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             {showCopied ? (
               <Check width={16} height={16} />
             ) : (
-              <Copy width={16} height={16} />
+              <CopyIcon
+                size={16}
+                animation="default-loop"
+                animateOnHover={true}
+              />
             )}
           </IconButton>
           <IconButton
@@ -667,7 +671,11 @@ const HistoryEntryComponent: React.FC<HistoryEntryProps> = ({
             disabled={retrying}
             title={t("settings.history.delete")}
           >
-            <Trash2 width={16} height={16} />
+            <Trash2Icon
+              size={16}
+              animation="default-loop"
+              animateOnHover={true}
+            />
           </IconButton>
         </div>
       </div>

@@ -13,6 +13,7 @@
     "models": "מודלים",
     "advanced": "מתקדם",
     "postProcessing": "עיבוד משלים",
+    "snippets": "קטעי טקסט",
     "history": "היסטוריה",
     "debug": "ניפוי שגיאות",
     "about": "אודות"
@@ -322,10 +323,10 @@
         "description": "שלח אוטומטית את צירוף המקשים שנבחר אחרי הכנסת הטקסט. ב-macOS יופעל Cmd+Enter, וב-Windows/Linux יופעל Super+Enter.",
         "options": {
           "off": "כבוי",
-          "enter": "Enter",
-          "cmdEnter": "Cmd+Enter",
-          "superEnter": "Super+Enter",
-          "ctrlEnter": "Ctrl+Enter"
+          "enter": "אנטר",
+          "cmdEnter": "Cmd+אנטר",
+          "superEnter": "סופר+אנטר",
+          "ctrlEnter": "Ctrl+אנטר"
         }
       },
       "translateToEnglish": {
@@ -374,7 +375,7 @@
           "unavailable": "Apple Intelligence לא זמין במכשיר הזה. נדרש Mac עם Apple Silicon שמריץ macOS Tahoe (26.0) ומעלה, עם Apple Intelligence מופעל בהגדרות המערכת."
         },
         "baseUrl": {
-          "title": "Base URL",
+          "title": "כתובת URL בסיסית",
           "description": "כתובת ה-API הבסיסית עבור הספק הנבחר. רק ספק מותאם אישית ניתן לעריכה.",
           "placeholder": "https://api.openai.com/v1"
         },
@@ -414,6 +415,42 @@
         "cancel": "ביטול",
         "selectToEdit": "בחר פרומפט למעלה כדי לצפות בפרטים שלו ולערוך אותם.",
         "createFirst": "לחץ על 'צור פרומפט חדש' למעלה כדי ליצור את פרומפט העיבוד הראשון שלך."
+      }
+    },
+    "snippets": {
+      "title": "קטעי טקסט חכמים",
+      "listTitle": "קטעי הטקסט שלך",
+      "addButton": "הוסף קטע טקסט",
+      "addTitle": "הוסף קטע טקסט",
+      "editTitle": "ערוך קטע טקסט",
+      "enabledLabel": "קטעי טקסט חכמים",
+      "enabledDescription": "הרחב אוטומטית ביטויי הפעלה לטקסט מלא לאחר התמלול",
+      "triggerLabel": "ביטוי הפעלה",
+      "triggerPlaceholder": "למשל: addr",
+      "triggerHint": "אמור את הביטוי הזה בזמן התמלול כדי להרחיב אותו",
+      "expansionLabel": "טקסט מורחב",
+      "expansionPlaceholder": "למשל: רחוב הרצל 1, תל אביב",
+      "loading": "טוען קטעי טקסט...",
+      "empty": "אין עדיין קטעי טקסט",
+      "emptyHint": "הוסף קטע טקסט כדי להרחיב ביטויי הפעלה באופן אוטומטי",
+      "edit": "ערוך קטע טקסט",
+      "delete": "מחק קטע טקסט",
+      "toggleEnable": "הפעל קטע טקסט {{name}}",
+      "editSnippet": "ערוך קטע טקסט {{name}}",
+      "deleteSnippet": "מחק קטע טקסט {{name}}",
+      "cancel": "ביטול",
+      "saving": "שומר...",
+      "saveChanges": "שמור שינויים",
+      "add": "הוסף קטע טקסט",
+      "created": "קטע טקסט נוצר",
+      "updated": "קטע טקסט עודכן",
+      "deleted": "קטע טקסט נמחק",
+      "errors": {
+        "emptyTrigger": "ביטוי ההפעלה לא יכול להיות ריק",
+        "triggerTooLong": "ביטוי ההפעלה חייב להיות באורך של {{max}} תווים לכל היותר",
+        "expansionTooLong": "הטקסט המורחב חייב להיות באורך של {{max}} תווים לכל היותר",
+        "toggleFailed": "עדכון קטע הטקסט נכשל",
+        "deleteFailed": "מחיקת קטע הטקסט נכשלה"
       }
     },
     "history": {
@@ -544,6 +581,11 @@
           "title": "Whisper.cpp",
           "description": "הסקה מהירה לביצועים גבוהים עבור מודל זיהוי הדיבור Whisper של OpenAI",
           "details": "Handy משתמש ב-Whisper.cpp לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "כלי הדיבור-לטקסט שהכי קל לעשות לו פורק",
+          "details": "Sonarus נבנה על בסיס התשתית של Handy. לפרטים נוספים, אפשר לעיין בפרויקט המקורי."
         }
       }
     }
@@ -563,6 +605,7 @@
     "checkForUpdates": "בדוק עדכונים"
   },
   "common": {
+    "appName": "Sonarus",
     "loading": "טוען...",
     "save": "שמור",
     "cancel": "ביטול",

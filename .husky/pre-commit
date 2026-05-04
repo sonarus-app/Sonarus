@@ -1,7 +1,6 @@
-bun run format:frontend
-bun run format:backend
+bun run format
 
 # Sync nix files when bun.lock changes (cross-platform)
 bun scripts/pre-commit-nix-sync.ts
 
-git add -A
+bun run lint

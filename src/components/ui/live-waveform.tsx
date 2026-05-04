@@ -12,7 +12,8 @@ export interface LiveWaveformRef {
   setLevels: (levels: number[]) => void;
 }
 
-export interface LiveWaveformProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LiveWaveformProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   active?: boolean;
   processing?: boolean;
   barWidth?: number;

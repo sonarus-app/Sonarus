@@ -270,7 +270,8 @@ export const TranscriptViewerWords: React.FC<TranscriptViewerWordsProps> = ({
 };
 
 // Play/Pause button
-interface TranscriptViewerPlayPauseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TranscriptViewerPlayPauseButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: number;
 }
 
